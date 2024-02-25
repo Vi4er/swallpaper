@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		CE73BA0F2B8A98D200AFC334 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA0E2B8A98D200AFC334 /* main.m */; };
+		CE73BA1B2B8A993500AFC334 /* renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA1A2B8A993500AFC334 /* renderer.m */; };
+		CE73BA1E2B8A99BD00AFC334 /* videoRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA1D2B8A99BD00AFC334 /* videoRenderer.m */; };
+		CE73BA222B8A99F400AFC334 /* videoDecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA212B8A99F400AFC334 /* videoDecoder.c */; };
+		CE73BA2B2B8A9B4100AFC334 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA242B8A9B4100AFC334 /* libswresample.a */; };
+		CE73BA2C2B8A9B4100AFC334 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA252B8A9B4100AFC334 /* libavfilter.a */; };
+		CE73BA2D2B8A9B4100AFC334 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA262B8A9B4100AFC334 /* libavdevice.a */; };
+		CE73BA2E2B8A9B4100AFC334 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA272B8A9B4100AFC334 /* libavformat.a */; };
+		CE73BA2F2B8A9B4100AFC334 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA282B8A9B4100AFC334 /* libavcodec.a */; };
+		CE73BA302B8A9B4100AFC334 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA292B8A9B4100AFC334 /* libswscale.a */; };
+		CE73BA312B8A9B4100AFC334 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA2A2B8A9B4100AFC334 /* libavutil.a */; };
+		CE73BA332B8A9B4C00AFC334 /* libbz2_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA322B8A9B4C00AFC334 /* libbz2_static.a */; };
+		CE73BA352B8A9B5500AFC334 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA342B8A9B5500AFC334 /* libz.a */; };
+		CE73BA372B8A9B8700AFC334 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA362B8A9B8700AFC334 /* MetalKit.framework */; };
+		CE73BA392B8A9C1E00AFC334 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA382B8A9C1E00AFC334 /* AudioToolbox.framework */; };
+		CE73BA3B2B8A9C2300AFC334 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3A2B8A9C2300AFC334 /* VideoToolbox.framework */; };
+		CE73BA3D2B8A9C3700AFC334 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */; };
+		CE73BA3F2B8A9C4E00AFC334 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */; };
+		CE73BA422B8A9CEC00AFC334 /* hwvideo.metal in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +43,27 @@
 /* Begin PBXFileReference section */
 		CE73BA0B2B8A98D200AFC334 /* swallpaper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swallpaper; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE73BA0E2B8A98D200AFC334 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE73BA1A2B8A993500AFC334 /* renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = renderer.m; sourceTree = "<group>"; };
+		CE73BA1C2B8A996F00AFC334 /* renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
+		CE73BA1D2B8A99BD00AFC334 /* videoRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoRenderer.m; sourceTree = "<group>"; };
+		CE73BA1F2B8A99D100AFC334 /* videoRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = videoRenderer.h; sourceTree = "<group>"; };
+		CE73BA202B8A99E100AFC334 /* videoDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = videoDecoder.h; sourceTree = "<group>"; };
+		CE73BA212B8A99F400AFC334 /* videoDecoder.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = videoDecoder.c; sourceTree = "<group>"; };
+		CE73BA242B8A9B4100AFC334 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = dependencies/ffmpeg/lib/libswresample.a; sourceTree = "<group>"; };
+		CE73BA252B8A9B4100AFC334 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = dependencies/ffmpeg/lib/libavfilter.a; sourceTree = "<group>"; };
+		CE73BA262B8A9B4100AFC334 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = dependencies/ffmpeg/lib/libavdevice.a; sourceTree = "<group>"; };
+		CE73BA272B8A9B4100AFC334 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = dependencies/ffmpeg/lib/libavformat.a; sourceTree = "<group>"; };
+		CE73BA282B8A9B4100AFC334 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = dependencies/ffmpeg/lib/libavcodec.a; sourceTree = "<group>"; };
+		CE73BA292B8A9B4100AFC334 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = dependencies/ffmpeg/lib/libswscale.a; sourceTree = "<group>"; };
+		CE73BA2A2B8A9B4100AFC334 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = dependencies/ffmpeg/lib/libavutil.a; sourceTree = "<group>"; };
+		CE73BA322B8A9B4C00AFC334 /* libbz2_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbz2_static.a; path = dependencies/bzip2/lib/libbz2_static.a; sourceTree = "<group>"; };
+		CE73BA342B8A9B5500AFC334 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = dependencies/zlib/lib/libz.a; sourceTree = "<group>"; };
+		CE73BA362B8A9B8700AFC334 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		CE73BA382B8A9C1E00AFC334 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CE73BA3A2B8A9C2300AFC334 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = hwvideo.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +71,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE73BA3F2B8A9C4E00AFC334 /* libiconv.tbd in Frameworks */,
+				CE73BA3D2B8A9C3700AFC334 /* CoreMedia.framework in Frameworks */,
+				CE73BA3B2B8A9C2300AFC334 /* VideoToolbox.framework in Frameworks */,
+				CE73BA392B8A9C1E00AFC334 /* AudioToolbox.framework in Frameworks */,
+				CE73BA372B8A9B8700AFC334 /* MetalKit.framework in Frameworks */,
+				CE73BA352B8A9B5500AFC334 /* libz.a in Frameworks */,
+				CE73BA332B8A9B4C00AFC334 /* libbz2_static.a in Frameworks */,
+				CE73BA2E2B8A9B4100AFC334 /* libavformat.a in Frameworks */,
+				CE73BA2F2B8A9B4100AFC334 /* libavcodec.a in Frameworks */,
+				CE73BA2B2B8A9B4100AFC334 /* libswresample.a in Frameworks */,
+				CE73BA302B8A9B4100AFC334 /* libswscale.a in Frameworks */,
+				CE73BA312B8A9B4100AFC334 /* libavutil.a in Frameworks */,
+				CE73BA2C2B8A9B4100AFC334 /* libavfilter.a in Frameworks */,
+				CE73BA2D2B8A9B4100AFC334 /* libavdevice.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +96,7 @@
 			children = (
 				CE73BA0D2B8A98D200AFC334 /* swallpaper */,
 				CE73BA0C2B8A98D200AFC334 /* Products */,
+				CE73BA232B8A9B4000AFC334 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +111,77 @@
 		CE73BA0D2B8A98D200AFC334 /* swallpaper */ = {
 			isa = PBXGroup;
 			children = (
+				CE73BA402B8A9CDD00AFC334 /* shaders */,
+				CE73BA172B8A991500AFC334 /* include */,
+				CE73BA152B8A98FC00AFC334 /* src */,
 				CE73BA0E2B8A98D200AFC334 /* main.m */,
 			);
 			path = swallpaper;
+			sourceTree = "<group>";
+		};
+		CE73BA152B8A98FC00AFC334 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				CE73BA192B8A992700AFC334 /* rendering */,
+				CE73BA212B8A99F400AFC334 /* videoDecoder.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		CE73BA172B8A991500AFC334 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CE73BA182B8A991F00AFC334 /* rendering */,
+				CE73BA202B8A99E100AFC334 /* videoDecoder.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		CE73BA182B8A991F00AFC334 /* rendering */ = {
+			isa = PBXGroup;
+			children = (
+				CE73BA1C2B8A996F00AFC334 /* renderer.h */,
+				CE73BA1F2B8A99D100AFC334 /* videoRenderer.h */,
+			);
+			path = rendering;
+			sourceTree = "<group>";
+		};
+		CE73BA192B8A992700AFC334 /* rendering */ = {
+			isa = PBXGroup;
+			children = (
+				CE73BA1A2B8A993500AFC334 /* renderer.m */,
+				CE73BA1D2B8A99BD00AFC334 /* videoRenderer.m */,
+			);
+			path = rendering;
+			sourceTree = "<group>";
+		};
+		CE73BA232B8A9B4000AFC334 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */,
+				CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */,
+				CE73BA3A2B8A9C2300AFC334 /* VideoToolbox.framework */,
+				CE73BA382B8A9C1E00AFC334 /* AudioToolbox.framework */,
+				CE73BA362B8A9B8700AFC334 /* MetalKit.framework */,
+				CE73BA342B8A9B5500AFC334 /* libz.a */,
+				CE73BA322B8A9B4C00AFC334 /* libbz2_static.a */,
+				CE73BA282B8A9B4100AFC334 /* libavcodec.a */,
+				CE73BA262B8A9B4100AFC334 /* libavdevice.a */,
+				CE73BA252B8A9B4100AFC334 /* libavfilter.a */,
+				CE73BA272B8A9B4100AFC334 /* libavformat.a */,
+				CE73BA2A2B8A9B4100AFC334 /* libavutil.a */,
+				CE73BA242B8A9B4100AFC334 /* libswresample.a */,
+				CE73BA292B8A9B4100AFC334 /* libswscale.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE73BA402B8A9CDD00AFC334 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */,
+			);
+			path = shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +241,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE73BA222B8A99F400AFC334 /* videoDecoder.c in Sources */,
+				CE73BA422B8A9CEC00AFC334 /* hwvideo.metal in Sources */,
+				CE73BA1E2B8A99BD00AFC334 /* videoRenderer.m in Sources */,
+				CE73BA1B2B8A993500AFC334 /* renderer.m in Sources */,
 				CE73BA0F2B8A98D200AFC334 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +304,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					swallpaper/include,
+					"dependencies/**",
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -233,6 +363,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					swallpaper/include,
+					"dependencies/**",
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -245,6 +379,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dependencies/ffmpeg/lib",
+					"$(PROJECT_DIR)/dependencies/bzip2/lib",
+					"$(PROJECT_DIR)/dependencies/zlib/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -253,6 +393,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dependencies/ffmpeg/lib",
+					"$(PROJECT_DIR)/dependencies/bzip2/lib",
+					"$(PROJECT_DIR)/dependencies/zlib/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
