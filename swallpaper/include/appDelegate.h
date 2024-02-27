@@ -1,12 +1,11 @@
-//
-//  appDelegate.h
-//  swallpaper
-//
-//  Created by Caleb Boatcallie on 2/27/24.
-//
+#pragma once
+#import <rendering/renderer.h>
+#import <AppKit/AppKit.h>
 
-#ifndef appDelegate_h
-#define appDelegate_h
+@interface ApplicationDelegate : NSObject<NSApplicationDelegate>
 
+@property Renderer* renderer;
 
-#endif /* appDelegate_h */
+- (void)mainLoop;
+
+@end

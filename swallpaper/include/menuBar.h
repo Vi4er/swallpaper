@@ -6,7 +6,8 @@
 
 @interface MenuBarWindow : NSWindow
 
-@property const MenuBarHandler* menuBarHandler;
+- (CGFloat)getMenuBarHeight;
+- (void)updatePositionAndSize: (CGRect*)rect;
 
 - (instancetype)initWithMenuBarHandler: (MenuBarHandler*)handler;
 + (instancetype)newWithMenuBarHandler: (MenuBarHandler*)handler;

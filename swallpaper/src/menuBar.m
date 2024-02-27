@@ -3,34 +3,43 @@
 
 @implementation MenuBarWindow
 
+- (CGFloat)getMenuBarHeight {
+    return self.screen.frame.size.height - self.screen.visibleFrame.size.height - (self.screen.visibleFrame.origin.y - self.screen.frame.origin.y) - 1;
+}
+
+- (void)updatePositionAndSize:(CGRect*)rect {
+    CGFloat menuBarHeight = [self getMenuBarHeight];
+    CGFloat height = menuBarHeight / 1.75;
+    
+    [self setFrame: CGRectMake(rect->origin.x, self.screen.frame.size.height - menuBarHeight + (menuBarHeight - height) / 2, rect->size.width, height) display:YES];
+}
+
 - (NSRect)constrainFrameRect:(NSRect)frameRect toScreen:(NSScreen *)screen {
     return frameRect;
 }
 
-- (instancetype)initWithMenuBarHandler: (MenuBarHandler*)handler {
+- (instancetype)initWithMenuBarHandler:(MenuBarHandler*)handler {
     self = [super init];
     
     if (self) {
-        self.menuBarHandler = handler;
-        
-        CGRect leftMenuBarRect = [handler getLeftMenuBarRect];
-        
         self.styleMask = NSWindowStyleMaskBorderless;
         self.backingType = NSBackingStoreBuffered;
-        self.level = CGWindowLevelForKey(kCGMaximumWindowLevelKey);
+        self.level = kCGMaximumWindowLevel;
         self.ignoresMouseEvents = YES;
-        self.backgroundColor = [NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:0.5];
-        [self setContentSize: leftMenuBarRect.size];
-        [self setFrameOrigin: CGPointMake(leftMenuBarRect.origin.x, self.screen.frame.size.height - 34)];
+        self.backgroundColor = [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0.5];
+        self.hasShadow = NO;
+
+        CGRect leftMenuBarRect = [handler getLeftMenuBarRect];
+        [self updatePositionAndSize: &leftMenuBarRect];
         [self orderFront: self];
-        
-        [self.menuBarHandler.windows addObject: self];
+
+        [handler.windows addObject: self];
     }
     
     return self;
 }
 
-+ (instancetype)newWithMenuBarHandler: (MenuBarHandler*)handler {
++ (instancetype)newWithMenuBarHandler:(MenuBarHandler*)handler {
     return [[self alloc] initWithMenuBarHandler:handler];
 }
 
@@ -56,56 +65,46 @@
     AXUIElementRef appMenuBar;
 
     if (AXUIElementCopyAttributeValue(AXUIElementCreateApplication(frontApp.processIdentifier), kAXMenuBarAttribute, (CFTypeRef*)&appMenuBar) == kAXErrorSuccess) {
-        CFIndex itemCount;
-        AXUIElementGetAttributeValueCount(appMenuBar, kAXChildrenAttribute, &itemCount);
-
         CFArrayRef objectChildren;
         AXUIElementCopyAttributeValue(appMenuBar, kAXChildrenAttribute, (CFTypeRef*)&objectChildren);
 
-        CGFloat width = 0.0;
-
-        for (CFIndex i = 0; i < itemCount; ++i) {
-            AXUIElementRef menuItem = CFArrayGetValueAtIndex(objectChildren, i);
-            
-            if (menuItem) {
-                AXValueRef sizeRef;
-                AXUIElementCopyAttributeValue(menuItem, kAXSizeAttribute, (CFTypeRef*)&sizeRef);
-
-                if (sizeRef) {
-                    CGSize size;
-
-                    if (AXValueGetValue(sizeRef, kAXValueCGSizeType, &size)) {
-                        width += size.width;
-                    }
-
-                    CFRelease(sizeRef);
-                }
-            }
-        }
+        AXValueRef valueRef;
+        CGSize rightSize;
+        CGPoint leftPos, rightPos;
 
         AXUIElementRef menuItem = CFArrayGetValueAtIndex(objectChildren, 0);
-        AXValueRef posRef;
-        AXUIElementCopyAttributeValue(menuItem, kAXPositionAttribute, (CFTypeRef*)&posRef);
+        
+        if (menuItem && AXUIElementCopyAttributeValue(menuItem, kAXPositionAttribute, (CFTypeRef*)&valueRef) == kAXErrorSuccess) {
+            AXValueGetValue(valueRef, kAXValueCGPointType, &leftPos);
+            CFRelease(valueRef);
+        }
+        
+        menuItem = CFArrayGetValueAtIndex(objectChildren, CFArrayGetCount(objectChildren) - 1);
+        
+        if (menuItem && AXUIElementCopyAttributeValue(menuItem, kAXPositionAttribute, (CFTypeRef*)&valueRef) == kAXErrorSuccess) {
+            AXValueGetValue(valueRef, kAXValueCGPointType, &rightPos);
+            CFRelease(valueRef);
 
-        CGPoint pos;
-        AXValueGetValue(posRef, kAXValueCGPointType, &pos);
-
+            if (AXUIElementCopyAttributeValue(menuItem, kAXSizeAttribute, (CFTypeRef*)&valueRef) == kAXErrorSuccess) {
+                AXValueGetValue(valueRef, kAXValueCGSizeType, &rightSize);
+                CFRelease(valueRef);
+            }
+        }
+        
         CFRelease(objectChildren);
         CFRelease(appMenuBar);
-        
-        return CGRectMake(pos.x, 0, width, 25); // TODO: Get menu bar height automatically
+
+        return CGRectMake(leftPos.x, 0, rightPos.x - leftPos.x + rightSize.width, 0);
     }
 
     return CGRectMake(0, 0, 0, 0);
 }
 
 - (void)appDidActivate:(NSNotification *)notification {
+    CGRect leftMenuBarRect = [self getLeftMenuBarRect];
+
     for (int i = 0; i < self.windows.count; ++i) {
-        MenuBarWindow* window = self.windows[i];
-        
-        CGRect leftMenuBarRect = [self getLeftMenuBarRect];
-        [window setContentSize: leftMenuBarRect.size];
-        [window setFrameOrigin: CGPointMake(leftMenuBarRect.origin.x, window.screen.frame.size.height - 34)];
+        [self.windows[i] updatePositionAndSize:&leftMenuBarRect];
     }
 }
 

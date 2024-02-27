@@ -1,8 +1,19 @@
-//
-//  appDelegate.m
-//  swallpaper
-//
-//  Created by Caleb Boatcallie on 2/27/24.
-//
+#import <appDelegate.h>
 
-#import <Foundation/Foundation.h>
+@implementation ApplicationDelegate
+- (void)mainLoop {
+    video_decoder_decode_next_frame(self.renderer.videoDecoder);
+    [self.renderer render];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification*)notification {
+    NSTimeInterval targetTime = 1.0 / 120.0;
+    NSTimer *timer = [NSTimer timerWithTimeInterval:targetTime
+                                                 target:self
+                                               selector:@selector(mainLoop)
+                                               userInfo:nil
+                                                repeats:YES];
+
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+@end

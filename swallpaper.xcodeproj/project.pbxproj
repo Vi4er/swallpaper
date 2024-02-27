@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE4FDEB82B8E54E400770C5E /* appDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4FDEB72B8E54E400770C5E /* appDelegate.m */; };
 		CE73BA0F2B8A98D200AFC334 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA0E2B8A98D200AFC334 /* main.m */; };
 		CE73BA1B2B8A993500AFC334 /* renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA1A2B8A993500AFC334 /* renderer.m */; };
 		CE73BA1E2B8A99BD00AFC334 /* videoRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA1D2B8A99BD00AFC334 /* videoRenderer.m */; };
@@ -42,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE4FDEB62B8E54BF00770C5E /* appDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = appDelegate.h; sourceTree = "<group>"; };
+		CE4FDEB72B8E54E400770C5E /* appDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = appDelegate.m; sourceTree = "<group>"; };
 		CE73BA0B2B8A98D200AFC334 /* swallpaper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swallpaper; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE73BA0E2B8A98D200AFC334 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE73BA1A2B8A993500AFC334 /* renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = renderer.m; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 				CE73BA192B8A992700AFC334 /* rendering */,
 				CE73BA212B8A99F400AFC334 /* videoDecoder.c */,
 				CEE51C802B8D6A290019851F /* menuBar.m */,
+				CE4FDEB72B8E54E400770C5E /* appDelegate.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -138,6 +142,7 @@
 				CE73BA182B8A991F00AFC334 /* rendering */,
 				CE73BA202B8A99E100AFC334 /* videoDecoder.h */,
 				CEE51C822B8D6A350019851F /* menuBar.h */,
+				CE4FDEB62B8E54BF00770C5E /* appDelegate.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4FDEB82B8E54E400770C5E /* appDelegate.m in Sources */,
 				CEE51C812B8D6A290019851F /* menuBar.m in Sources */,
 				CE73BA222B8A99F400AFC334 /* videoDecoder.c in Sources */,
 				CE73BA422B8A9CEC00AFC334 /* hwvideo.metal in Sources */,
