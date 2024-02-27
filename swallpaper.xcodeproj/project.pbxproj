@@ -26,6 +26,7 @@
 		CE73BA3D2B8A9C3700AFC334 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */; };
 		CE73BA3F2B8A9C4E00AFC334 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */; };
 		CE73BA422B8A9CEC00AFC334 /* hwvideo.metal in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */; };
+		CEE51C812B8D6A290019851F /* menuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE51C802B8D6A290019851F /* menuBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,8 @@
 		CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = hwvideo.metal; sourceTree = "<group>"; };
+		CEE51C802B8D6A290019851F /* menuBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menuBar.m; sourceTree = "<group>"; };
+		CEE51C822B8D6A350019851F /* menuBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menuBar.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,7 @@
 			children = (
 				CE73BA192B8A992700AFC334 /* rendering */,
 				CE73BA212B8A99F400AFC334 /* videoDecoder.c */,
+				CEE51C802B8D6A290019851F /* menuBar.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -133,6 +137,7 @@
 			children = (
 				CE73BA182B8A991F00AFC334 /* rendering */,
 				CE73BA202B8A99E100AFC334 /* videoDecoder.h */,
+				CEE51C822B8D6A350019851F /* menuBar.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE51C812B8D6A290019851F /* menuBar.m in Sources */,
 				CE73BA222B8A99F400AFC334 /* videoDecoder.c in Sources */,
 				CE73BA422B8A9CEC00AFC334 /* hwvideo.metal in Sources */,
 				CE73BA1E2B8A99BD00AFC334 /* videoRenderer.m in Sources */,
@@ -379,6 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RD9S3523V8;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dependencies/ffmpeg/lib",
@@ -393,6 +400,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RD9S3523V8;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dependencies/ffmpeg/lib",

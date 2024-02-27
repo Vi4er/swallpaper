@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <rendering/renderer.h>
+#include <QuartzCore/QuartzCore.h>
 #import <rendering/videoRenderer.h>
 
 @implementation Renderer

@@ -79,7 +79,7 @@ typedef struct {
     
     MTLTextureDescriptor* luminanceTextureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm
                                                                                                           width:decoder->frame->width
-                                                                                                         height:decoder->frame->height
+                                                                                                        height:decoder->frame->height
                                                                                                       mipmapped:NO];
     luminanceTextureDescriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageRenderTarget;
     

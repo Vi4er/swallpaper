@@ -1,12 +1,24 @@
-//
-//  menuBar.h
-//  swallpaper
-//
-//  Created by Caleb Boatcallie on 2/26/24.
-//
+#pragma once
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-#ifndef menuBar_h
-#define menuBar_h
+@class MenuBarHandler;
 
+@interface MenuBarWindow : NSWindow
 
-#endif /* menuBar_h */
+@property const MenuBarHandler* menuBarHandler;
+
+- (instancetype)initWithMenuBarHandler: (MenuBarHandler*)handler;
++ (instancetype)newWithMenuBarHandler: (MenuBarHandler*)handler;
+
+@end
+
+@interface MenuBarHandler : NSObject
+
+@property NSMutableArray<MenuBarWindow*>* windows;
+
+- (CGRect)getLeftMenuBarRect;
+ 
+- (void)appDidActivate:(NSNotification* )notification;
+
+@end
