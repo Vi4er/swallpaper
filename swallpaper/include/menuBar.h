@@ -4,13 +4,16 @@
 
 @class MenuBarHandler;
 
-@interface MenuBarWindow : NSWindow
+@interface NonConstrainedNSWindow : NSWindow
+@end
+
+@interface MenuBarWindow : NonConstrainedNSWindow
 
 - (CGFloat)getMenuBarHeight;
-- (void)updatePositionAndSize: (CGRect*)rect;
+- (void)updatePositionAndSize: (CGRect*)leftRect rightRect:(CGRect*)rightRect;
 
-- (instancetype)initWithMenuBarHandler: (MenuBarHandler*)handler;
-+ (instancetype)newWithMenuBarHandler: (MenuBarHandler*)handler;
+- (instancetype)initWithMenuBarHandler: (MenuBarHandler*)handler screen: (NSScreen*)screen;
++ (instancetype)newWithMenuBarHandler: (MenuBarHandler*)handler screen: (NSScreen*)screen;
 
 @end
 
@@ -18,7 +21,9 @@
 
 @property NSMutableArray<MenuBarWindow*>* windows;
 
+// TOOD: Return only 2 floats, wasting space using 4
 - (CGRect)getLeftMenuBarRect;
+- (CGRect)getRightMenuBarRect;
  
 - (void)appDidActivate:(NSNotification* )notification;
 

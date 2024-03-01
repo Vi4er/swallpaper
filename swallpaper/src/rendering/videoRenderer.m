@@ -67,7 +67,7 @@ typedef struct {
     return vertexBuffer;
 }
 
-+ (void)renderWithVideoDecoder: (VideoDecoder*)decoder encoder: (id<MTLRenderCommandEncoder>)encoder {
++ (void)renderWithVideoDecoder: (VideoDecoder*)decoder encoder: (id<MTLRenderCommandEncoder>)encoder menuBarEncoder: (id<MTLRenderCommandEncoder>)menuBarEncoder {
     // Create Texture
 
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)decoder->frame->data[3];
@@ -88,19 +88,34 @@ typedef struct {
                                                                                                            height:decoder->frame->height / 2
                                                                                                         mipmapped:NO];
     chrominanceTextureDescriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageRenderTarget;
-    
-    // Reuse textures in the future to reduce cpu usage
-    
+
     id<MTLTexture> luminanceTexture = [[Renderer device] newTextureWithDescriptor:luminanceTextureDescriptor iosurface:surface plane:0];
     id<MTLTexture> chrominanceTexture = [[Renderer device] newTextureWithDescriptor:chrominanceTextureDescriptor iosurface:surface plane:1];
     
     // Render
-    
+
     [encoder setRenderPipelineState:[VideoRenderer pipelineState]];
     [encoder setVertexBuffer:[VideoRenderer vertexBuffer] offset:0 atIndex:0];
     [encoder setFragmentTexture:luminanceTexture atIndex:0];
     [encoder setFragmentTexture:chrominanceTexture atIndex:1];
     [encoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
+    
+    // TODO: Cleanup all new code relating to menu bar and take in info about screen or window to scale properly based on screen
+    MTLViewport viewport = {
+        0, 0,
+        [NSScreen mainScreen].frame.size.width,
+        [NSScreen mainScreen].frame.size.height,
+        -1.0,
+        1.0
+    };
+    
+    [menuBarEncoder setViewport:viewport];
+    [menuBarEncoder setRenderPipelineState:[VideoRenderer pipelineState]];
+    [menuBarEncoder setVertexBuffer:[VideoRenderer vertexBuffer] offset:0 atIndex:0];
+    [menuBarEncoder setFragmentTexture:luminanceTexture atIndex:0];
+    [menuBarEncoder setFragmentTexture:chrominanceTexture atIndex:1];
+    [menuBarEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
 }
 
 @end
+ 

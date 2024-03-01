@@ -6,6 +6,6 @@
 + (id<MTLRenderPipelineState>)pipelineState;
 + (id<MTLBuffer>)vertexBuffer;
 
-+ (void)renderWithVideoDecoder: (VideoDecoder*)decoder encoder: (id<MTLRenderCommandEncoder>)encoder;
++ (void)renderWithVideoDecoder: (VideoDecoder*)decoder encoder: (id<MTLRenderCommandEncoder>)encoder menuBarEncoder: (id<MTLRenderCommandEncoder>)menuBarEncoder;
 
 @end

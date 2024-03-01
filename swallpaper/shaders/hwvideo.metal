@@ -15,6 +15,7 @@ vertex VertexOut hwvideoVertex(VertexIn in [[stage_in]]) {
     VertexOut out;
     out.position = float4(in.position.xy, 0, 1);
     out.texCoord = in.texCoord;
+
     return out;
 }
 
