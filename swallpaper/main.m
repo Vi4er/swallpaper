@@ -9,8 +9,8 @@ int main(int argc, const char* argv[]) {
 
         ApplicationDelegate* appDelegate = [[ApplicationDelegate alloc] init];
         appDelegate.renderer = [Renderer newWithScreen:screen];
-        appDelegate.renderer.videoDecoder = video_decoder_new("/Users/user/Downloads/traditional-japanese-house-sunny-day-moewalls-com.mp4", 1);
-
+        appDelegate.renderer.videoDecoder = video_decoder_new("/Users/user/Downloads/video.mp4", 1);
+        
         [application setDelegate: appDelegate];
         [application run];
         

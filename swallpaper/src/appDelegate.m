@@ -7,7 +7,7 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification {
-    NSTimeInterval targetTime = 1.0 / 60.0;
+    NSTimeInterval targetTime = 1.0 / 30.0;
     NSTimer *timer = [NSTimer timerWithTimeInterval:targetTime
                                                  target:self
                                                selector:@selector(mainLoop)

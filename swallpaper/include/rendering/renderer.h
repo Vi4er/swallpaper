@@ -8,11 +8,12 @@ extern NSString* RendererDevice;
 
 @interface RendererInfo : NSObject
 
-@property (nonatomic, strong) NSWindow* window;
-@property (nonatomic, strong) CAMetalLayer* layer;
-@property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
-@property (nonatomic, strong) MTLRenderPassDescriptor* renderPassDescriptor;
-@property (nonatomic, strong) MTLRenderPassColorAttachmentDescriptor* colorAttachmentDescriptor;
+@property NSWindow* window;
+@property CAMetalLayer* layer;
+@property id<MTLCommandQueue> commandQueue;
+@property MTLRenderPassDescriptor* renderPassDescriptor;
+@property MTLRenderPassColorAttachmentDescriptor* colorAttachmentDescriptor;
+@property id<MTLRenderCommandEncoder> encoder;
 
 - (instancetype)initWithWindow: (NSWindow*)window;
 + (instancetype)newWithWindow: (NSWindow*)window;

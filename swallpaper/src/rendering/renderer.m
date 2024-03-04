@@ -18,10 +18,10 @@
         self.window = window;
         self.window.contentView.wantsLayer = YES;
         self.window.contentView.layer = self.layer;
-
+        
         self.commandQueue = [[Renderer device] newCommandQueue];
         self.renderPassDescriptor = [[MTLRenderPassDescriptor alloc] init];
-
+        
         self.colorAttachmentDescriptor = [[self.renderPassDescriptor colorAttachments] objectAtIndexedSubscript:0];
         self.colorAttachmentDescriptor.clearColor = MTLClearColorMake(0, 0, 0, 1);
         self.colorAttachmentDescriptor.loadAction = MTLLoadActionClear;
@@ -41,9 +41,13 @@
 
 - (instancetype)initWithScreen:(NSScreen*) screen {
     self = [super init];
-
+    
     if (self) {
-        NSWindow* window = [[NonConstrainedNSWindow alloc] initWithContentRect: screen.frame styleMask: NSWindowStyleMaskBorderless backing: NSBackingStoreBuffered defer: NO screen:screen];
+        NSWindow* window = [[NonConstrainedNSWindow alloc] initWithContentRect: screen.frame
+                                                                     styleMask: NSWindowStyleMaskBorderless
+                                                                       backing: NSBackingStoreBuffered
+                                                                         defer: NO
+                                                                        screen: screen];
         window.hasShadow = NO;
         window.level = kCGDesktopWindowLevel;
         self.info = [RendererInfo newWithWindow:window];
@@ -54,13 +58,13 @@
         MenuBarHandler* handler = [Renderer menuBarHandler];
         CGRect leftMenuBarRect = [handler getLeftMenuBarRect];
         CGRect rightMenuBarRect = [handler getRightMenuBarRect];
-
+        
         [menuBarWindow updatePositionAndSize: &leftMenuBarRect rightRect:&rightMenuBarRect];
         
         [window orderFront: window];
         
     }
-
+    
     return self;
 }
 
@@ -91,30 +95,29 @@
 - (void)render {
     id<CAMetalDrawable> drawable = [self.info.layer nextDrawable];
     id<CAMetalDrawable> menuBarDrawable = [self.menuBarInfo.layer nextDrawable];
-
+    
     if (!drawable || !menuBarDrawable) {
         return;
     }
     
     self.info.colorAttachmentDescriptor.texture = drawable.texture;
-    self.menuBarInfo.colorAttachmentDescriptor.texture = menuBarDrawable.texture;
-    
     id<MTLCommandBuffer> commandBuffer = [self.info.commandQueue commandBuffer];
-    id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor: self.info.renderPassDescriptor];
+    self.info.encoder = [commandBuffer renderCommandEncoderWithDescriptor: self.info.renderPassDescriptor];
     
+    self.menuBarInfo.colorAttachmentDescriptor.texture = menuBarDrawable.texture;
     id<MTLCommandBuffer> menuBarCommandBuffer = [self.menuBarInfo.commandQueue commandBuffer];
-    id<MTLRenderCommandEncoder> menuBarEncoder = [menuBarCommandBuffer renderCommandEncoderWithDescriptor: self.menuBarInfo.renderPassDescriptor];
+    self.menuBarInfo.encoder = [menuBarCommandBuffer renderCommandEncoderWithDescriptor: self.menuBarInfo.renderPassDescriptor];
     
     if (self.videoDecoder != nil) {
         video_decoder_decode_next_frame(self.videoDecoder);
-        [VideoRenderer renderWithVideoDecoder:self.videoDecoder encoder:encoder menuBarEncoder:menuBarEncoder];
+        [VideoRenderer render:self];
     }
-
-    [encoder endEncoding];
+    
+    [self.info.encoder endEncoding];
     [commandBuffer commit];
     [commandBuffer waitUntilScheduled];
-
-    [menuBarEncoder endEncoding];
+    
+    [self.menuBarInfo.encoder endEncoding];
     [menuBarCommandBuffer commit];
     [menuBarCommandBuffer waitUntilScheduled];
     

@@ -204,6 +204,7 @@
 				CE73BA072B8A98D200AFC334 /* Sources */,
 				CE73BA082B8A98D200AFC334 /* Frameworks */,
 				CE73BA092B8A98D200AFC334 /* CopyFiles */,
+				CEEE0BED2B915A4F00933EF6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -245,6 +246,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEEE0BED2B915A4F00933EF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE73BA072B8A98D200AFC334 /* Sources */ = {
@@ -391,13 +402,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RD9S3523V8;
+				INFOPLIST_FILE = "$(SRCROOT)/swallpaper/info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dependencies/ffmpeg/lib",
 					"$(PROJECT_DIR)/dependencies/bzip2/lib",
 					"$(PROJECT_DIR)/dependencies/zlib/lib",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = swallpaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -406,13 +420,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RD9S3523V8;
+				INFOPLIST_FILE = "$(SRCROOT)/swallpaper/info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dependencies/ffmpeg/lib",
 					"$(PROJECT_DIR)/dependencies/bzip2/lib",
 					"$(PROJECT_DIR)/dependencies/zlib/lib",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = swallpaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

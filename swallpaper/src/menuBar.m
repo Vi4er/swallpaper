@@ -16,9 +16,9 @@
     return self.screen.frame.size.height - self.screen.visibleFrame.size.height - (self.screen.visibleFrame.origin.y - self.screen.frame.origin.y) - 1;
 }
 
-- (void)updatePositionAndSize:(CGRect*)leftRect rightRect:(CGRect*)rightRect {
+- (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
+    // TODO: Rearrange setFrame to be at the end so the updated mask is drawn faster
     CGFloat menuBarHeight = [self getMenuBarHeight];
-    [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
 
     CGFloat capsuleHeight = menuBarHeight / 1.75;
     CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
@@ -28,11 +28,11 @@
                                                          yRadius:capsuleHeight / 2];
 
     [path appendBezierPath: [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(rightRect->origin.x, centerY, rightRect->size.width, capsuleHeight)
-                                                             xRadius:capsuleHeight / 2
-                                                             yRadius:capsuleHeight / 2]];
+                                                            xRadius:capsuleHeight / 2
+                                                            yRadius:capsuleHeight / 2]];
 
     CAShapeLayer* maskLayer = [CAShapeLayer layer];
-    maskLayer.path = [[NSBezierPath bezierPathWithRect: NSMakeRect(0, 0, self.frame.size.width, menuBarHeight)] CGPath];
+    maskLayer.path = [[NSBezierPath bezierPathWithRect: NSMakeRect(0, 0, self.screen.frame.size.width, menuBarHeight)] CGPath];
     
     CAShapeLayer* bezierLayer = [CAShapeLayer layer];
     bezierLayer.path = [path CGPath];
@@ -40,6 +40,8 @@
     [maskLayer addSublayer: bezierLayer];
 
     self.contentView.layer.mask = maskLayer;
+    
+    [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
 }
 
 - (instancetype)initWithMenuBarHandler:(MenuBarHandler*)handler screen:(NSScreen*)screen {
@@ -50,10 +52,9 @@
         self.ignoresMouseEvents = YES;
         self.backgroundColor = [NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:0];
         self.hasShadow = NO;
-        self.opaque = NO;
 
-        CGRect leftMenuBarRect = [handler getLeftMenuBarRect];
-        CGRect rightMenuBarRect = [handler getRightMenuBarRect];
+        NSRect leftMenuBarRect = [handler getLeftMenuBarRect];
+        NSRect rightMenuBarRect = [handler getRightMenuBarRect];
         [self updatePositionAndSize: &leftMenuBarRect rightRect:&rightMenuBarRect];
         [self orderFront: self];
 
@@ -91,7 +92,8 @@
     return self;
 }
 
-- (CGRect)getLeftMenuBarRect {
+- (NSRect)getLeftMenuBarRect {
+    // TODO: Fix lagging and rendering freezing when calling this method
     NSRunningApplication* frontApp = [NSWorkspace.sharedWorkspace frontmostApplication];
     AXUIElementRef appMenuBar;
 
@@ -111,7 +113,7 @@
         }
         
         menuItem = CFArrayGetValueAtIndex(objectChildren, CFArrayGetCount(objectChildren) - 1);
-        
+
         if (menuItem && AXUIElementCopyAttributeValue(menuItem, kAXPositionAttribute, (CFTypeRef*)&valueRef) == kAXErrorSuccess) {
             AXValueGetValue(valueRef, kAXValueCGPointType, &rightPos);
             CFRelease(valueRef);
@@ -125,13 +127,13 @@
         CFRelease(objectChildren);
         CFRelease(appMenuBar);
 
-        return CGRectMake(leftPos.x, 0, rightPos.x - leftPos.x + rightSize.width, 0);
+        return NSMakeRect(leftPos.x, 0, rightPos.x - leftPos.x + rightSize.width, 0);
     }
 
-    return CGRectMake(-1, -1, -1, -1);
+    return NSMakeRect(-1, -1, -1, -1);
 }
 
-- (CGRect)getRightMenuBarRect {
+- (NSRect)getRightMenuBarRect {
     CFArrayRef windowList = CGWindowListCreate(kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements, kCGNullWindowID);
     CFArrayRef windowInfoArray = CGWindowListCreateDescriptionFromArray(windowList);
     
@@ -162,12 +164,12 @@
         }
     }
     
-    return CGRectMake(leftX, 0, rightX - leftX - 10, 0);
+    return NSMakeRect(leftX, 0, rightX - leftX - 10, 0);
 }
 
 - (void)appDidActivate:(NSNotification *)notification {
-    CGRect leftMenuBarRect = [self getLeftMenuBarRect];
-    CGRect rightMenuBarRect = [self getRightMenuBarRect];
+    NSRect leftMenuBarRect = [self getLeftMenuBarRect];
+    NSRect rightMenuBarRect = [self getRightMenuBarRect];
 
     if (leftMenuBarRect.origin.x == -1) {
         return;
