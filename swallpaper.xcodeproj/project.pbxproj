@@ -21,13 +21,18 @@
 		CE73BA312B8A9B4100AFC334 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA2A2B8A9B4100AFC334 /* libavutil.a */; };
 		CE73BA332B8A9B4C00AFC334 /* libbz2_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA322B8A9B4C00AFC334 /* libbz2_static.a */; };
 		CE73BA352B8A9B5500AFC334 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA342B8A9B5500AFC334 /* libz.a */; };
-		CE73BA372B8A9B8700AFC334 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA362B8A9B8700AFC334 /* MetalKit.framework */; };
 		CE73BA392B8A9C1E00AFC334 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA382B8A9C1E00AFC334 /* AudioToolbox.framework */; };
 		CE73BA3B2B8A9C2300AFC334 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3A2B8A9C2300AFC334 /* VideoToolbox.framework */; };
 		CE73BA3D2B8A9C3700AFC334 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */; };
 		CE73BA3F2B8A9C4E00AFC334 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */; };
 		CE73BA422B8A9CEC00AFC334 /* hwvideo.metal in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */; };
 		CEE51C812B8D6A290019851F /* menuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE51C802B8D6A290019851F /* menuBar.m */; };
+		CEF629EB2B96B5DC00046894 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF629EA2B96B5DC00046894 /* CoreVideo.framework */; };
+		CEF629ED2B96B60900046894 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF629EC2B96B60900046894 /* ApplicationServices.framework */; };
+		CEF629EF2B96B63600046894 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF629EE2B96B63600046894 /* AppKit.framework */; };
+		CEF629F12B96B64D00046894 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF629F02B96B64D00046894 /* Metal.framework */; };
+		CEF629F32B96B66400046894 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF629F22B96B66400046894 /* QuartzCore.framework */; };
+		CEF629F52B96B68300046894 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF629F42B96B68300046894 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +75,12 @@
 		CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = hwvideo.metal; sourceTree = "<group>"; };
 		CEE51C802B8D6A290019851F /* menuBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menuBar.m; sourceTree = "<group>"; };
 		CEE51C822B8D6A350019851F /* menuBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menuBar.h; sourceTree = "<group>"; };
+		CEF629EA2B96B5DC00046894 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		CEF629EC2B96B60900046894 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		CEF629EE2B96B63600046894 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		CEF629F02B96B64D00046894 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		CEF629F22B96B66400046894 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CEF629F42B96B68300046894 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +89,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE73BA3F2B8A9C4E00AFC334 /* libiconv.tbd in Frameworks */,
-				CE73BA3D2B8A9C3700AFC334 /* CoreMedia.framework in Frameworks */,
-				CE73BA3B2B8A9C2300AFC334 /* VideoToolbox.framework in Frameworks */,
-				CE73BA392B8A9C1E00AFC334 /* AudioToolbox.framework in Frameworks */,
-				CE73BA372B8A9B8700AFC334 /* MetalKit.framework in Frameworks */,
 				CE73BA352B8A9B5500AFC334 /* libz.a in Frameworks */,
 				CE73BA332B8A9B4C00AFC334 /* libbz2_static.a in Frameworks */,
 				CE73BA2E2B8A9B4100AFC334 /* libavformat.a in Frameworks */,
@@ -91,6 +98,15 @@
 				CE73BA312B8A9B4100AFC334 /* libavutil.a in Frameworks */,
 				CE73BA2C2B8A9B4100AFC334 /* libavfilter.a in Frameworks */,
 				CE73BA2D2B8A9B4100AFC334 /* libavdevice.a in Frameworks */,
+				CEF629EF2B96B63600046894 /* AppKit.framework in Frameworks */,
+				CEF629ED2B96B60900046894 /* ApplicationServices.framework in Frameworks */,
+				CE73BA3D2B8A9C3700AFC334 /* CoreMedia.framework in Frameworks */,
+				CE73BA3B2B8A9C2300AFC334 /* VideoToolbox.framework in Frameworks */,
+				CE73BA392B8A9C1E00AFC334 /* AudioToolbox.framework in Frameworks */,
+				CEF629F12B96B64D00046894 /* Metal.framework in Frameworks */,
+				CEF629EB2B96B5DC00046894 /* CoreVideo.framework in Frameworks */,
+				CEF629F32B96B66400046894 /* QuartzCore.framework in Frameworks */,
+				CEF629F52B96B68300046894 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +184,12 @@
 		CE73BA232B8A9B4000AFC334 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEF629F42B96B68300046894 /* Security.framework */,
+				CEF629F22B96B66400046894 /* QuartzCore.framework */,
+				CEF629F02B96B64D00046894 /* Metal.framework */,
+				CEF629EE2B96B63600046894 /* AppKit.framework */,
+				CEF629EC2B96B60900046894 /* ApplicationServices.framework */,
+				CEF629EA2B96B5DC00046894 /* CoreVideo.framework */,
 				CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */,
 				CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */,
 				CE73BA3A2B8A9C2300AFC334 /* VideoToolbox.framework */,
@@ -401,9 +423,13 @@
 		CE73BA132B8A98D200AFC334 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RD9S3523V8;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = "$(SRCROOT)/swallpaper/info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -419,9 +445,13 @@
 		CE73BA142B8A98D200AFC334 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RD9S3523V8;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = "$(SRCROOT)/swallpaper/info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
