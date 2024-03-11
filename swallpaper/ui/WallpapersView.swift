@@ -1,0 +1,8 @@
+//
+//  WallpapersView.swift
+//  swallpaper
+//
+//  Created by Caleb Boatcallie on 3/10/24.
+//
+
+import Foundation
