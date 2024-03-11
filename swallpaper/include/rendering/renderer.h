@@ -14,6 +14,7 @@ extern NSString* RendererDevice;
 @property MTLRenderPassDescriptor* renderPassDescriptor;
 @property MTLRenderPassColorAttachmentDescriptor* colorAttachmentDescriptor;
 @property id<MTLRenderCommandEncoder> encoder;
+@property MTLViewport viewport;
 
 - (instancetype)initWithWindow: (NSWindow*)window;
 + (instancetype)newWithWindow: (NSWindow*)window;

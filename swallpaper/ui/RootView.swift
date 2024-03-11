@@ -7,19 +7,21 @@
 
 import SwiftUI
 
-struct Sidebar: View {
-    @State private var isDefaultItemActive = true
+struct RootView: View {  
+    @State var selectedItem: Tab = .wallpapers
     
     var body: some View {
-        List {
-            NavigationLink(destination: Text("LOL"), isActive: $isDefaultItemActive) {
-                Label("Console", systemImage: "message")
-            }
-            // ...
-        }.listStyle(SidebarListStyle())
+        NavigationSplitView {
+            SidebarView(selectedItem: $selectedItem)
+        } detail: {
+            AnyView(selectedItem.content)
+                .navigationTitle(selectedItem.name)
+        }
     }
 }
 
+
+
 #Preview {
-    Sidebar()
+    RootView()
 }

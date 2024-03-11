@@ -11,6 +11,7 @@
 
 - (CGFloat)getMenuBarHeight;
 - (void)updatePositionAndSize: (NSRect*)leftRect rightRect:(NSRect*)rightRect;
+- (void)setGradient: (NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
 - (instancetype)initWithMenuBarHandler: (MenuBarHandler*)handler screen: (NSScreen*)screen;
 + (instancetype)newWithMenuBarHandler: (MenuBarHandler*)handler screen: (NSScreen*)screen;

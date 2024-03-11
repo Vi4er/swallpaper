@@ -1,8 +1,12 @@
-//
-//  WallpapersView.swift
-//  swallpaper
-//
-//  Created by Caleb Boatcallie on 3/10/24.
-//
-
 import Foundation
+import SwiftUI
+
+struct WallpapersView: View {
+    var body: some View {
+        Text("???")
+    }
+}
+
+#Preview {
+    WallpapersView()
+}

@@ -17,7 +17,6 @@
 }
 
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
-    // TODO: Rearrange setFrame to be at the end so the updated mask is drawn faster
     CGFloat menuBarHeight = [self getMenuBarHeight];
 
     CGFloat capsuleHeight = menuBarHeight / 1.75;
@@ -39,9 +38,16 @@
     bezierLayer.compositingFilter = @"xor";
     [maskLayer addSublayer: bezierLayer];
 
-    self.contentView.layer.mask = maskLayer;
+    self.contentView.layer.sublayers[0].mask = maskLayer;
     
     [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
+}
+
+- (void)setGradient: (NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    CAGradientLayer* layer = (CAGradientLayer*)self.contentView.layer;
+    layer.startPoint = startPoint;
+    layer.endPoint = endPoint;
+    layer.colors = colors;
 }
 
 - (instancetype)initWithMenuBarHandler:(MenuBarHandler*)handler screen:(NSScreen*)screen {
@@ -50,8 +56,10 @@
     if (self) {
         self.level = kCGMaximumWindowLevel;
         self.ignoresMouseEvents = YES;
-        self.backgroundColor = [NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:0];
+        self.backgroundColor = [NSColor clearColor];
         self.hasShadow = NO;
+
+        self.contentView.layer = [CAGradientLayer layer];
 
         NSRect leftMenuBarRect = [handler getLeftMenuBarRect];
         NSRect rightMenuBarRect = [handler getRightMenuBarRect];
@@ -93,7 +101,6 @@
 }
 
 - (NSRect)getLeftMenuBarRect {
-    // TODO: Fix lagging and rendering freezing when calling this method
     NSRunningApplication* frontApp = [NSWorkspace.sharedWorkspace frontmostApplication];
     AXUIElementRef appMenuBar;
 

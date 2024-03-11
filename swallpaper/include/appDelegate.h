@@ -5,6 +5,7 @@
 @interface ApplicationDelegate : NSObject<NSApplicationDelegate>
 
 @property Renderer* renderer;
+@property NSThread* renderThread;
 
 - (void)mainLoop;
 

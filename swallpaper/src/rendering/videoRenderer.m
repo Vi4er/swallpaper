@@ -67,8 +67,8 @@ typedef struct {
     return vertexBuffer;
 }
 
-+ (void)drawTextureWithEncoder:(id<MTLRenderCommandEncoder>)encoder luminanceTexture:(id<MTLTexture>)luminanceTexture chrominanceTexture:(id<MTLTexture>)chrominanceTexture viewport:(MTLViewport*)viewport {
-    [encoder setViewport:*viewport];
++ (void)drawTextureWithEncoder:(id<MTLRenderCommandEncoder>)encoder luminanceTexture:(id<MTLTexture>)luminanceTexture chrominanceTexture:(id<MTLTexture>)chrominanceTexture viewport:(MTLViewport)viewport {
+    [encoder setViewport:viewport];
     [encoder setRenderPipelineState:[VideoRenderer pipelineState]];
     [encoder setVertexBuffer:[VideoRenderer vertexBuffer] offset:0 atIndex:0];
     [encoder setFragmentTexture:luminanceTexture atIndex:0];
@@ -99,16 +99,8 @@ typedef struct {
     id<MTLTexture> luminanceTexture = [[Renderer device] newTextureWithDescriptor:luminanceTextureDescriptor iosurface:surface plane:0];
     id<MTLTexture> chrominanceTexture = [[Renderer device] newTextureWithDescriptor:chrominanceTextureDescriptor iosurface:surface plane:1];
     
-    MTLViewport viewport = {
-        0, 0,
-        renderer.info.window.screen.frame.size.width,
-        renderer.info.window.screen.frame.size.height,
-        -1.0,
-        1.0
-    };
-    
-    [self drawTextureWithEncoder:renderer.info.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:&viewport];
-    [self drawTextureWithEncoder:renderer.menuBarInfo.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:&viewport];
+    [self drawTextureWithEncoder:renderer.info.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.info.viewport];
+    [self drawTextureWithEncoder:renderer.menuBarInfo.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.info.viewport];
 }
 
 @end

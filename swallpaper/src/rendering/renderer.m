@@ -16,8 +16,15 @@
         self.layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
         
         self.window = window;
-        self.window.contentView.wantsLayer = YES;
-        self.window.contentView.layer = self.layer;
+        
+        if (self.window.contentView.layer != nil) {
+            self.layer.frame = self.window.contentView.layer.frame;
+            [self.window.contentView.layer addSublayer: self.layer];
+        }
+        else {
+            self.window.contentView.wantsLayer = YES;
+            self.window.contentView.layer = self.layer;
+        }
         
         self.commandQueue = [[Renderer device] newCommandQueue];
         self.renderPassDescriptor = [[MTLRenderPassDescriptor alloc] init];
@@ -26,6 +33,16 @@
         self.colorAttachmentDescriptor.clearColor = MTLClearColorMake(0, 0, 0, 1);
         self.colorAttachmentDescriptor.loadAction = MTLLoadActionClear;
         self.colorAttachmentDescriptor.storeAction = MTLStoreActionStore;
+        
+        MTLViewport viewport = {
+            0, 0,
+            self.window.frame.size.width,
+            self.window.frame.size.height,
+            -1.0,
+            1.0
+        };
+
+        self.viewport = viewport;
     }
     
     return self;
@@ -60,6 +77,14 @@
         CGRect rightMenuBarRect = [handler getRightMenuBarRect];
         
         [menuBarWindow updatePositionAndSize: &leftMenuBarRect rightRect:&rightMenuBarRect];
+        
+        // Gradient test
+        NSColor* startColor = [NSColor colorWithCalibratedRed:1 green:0 blue:1 alpha:0.5];
+        NSColor* endColor = [NSColor colorWithCalibratedRed:0 green:1 blue:1 alpha:0.5];
+        NSArray* colors = @[(id)[startColor CGColor], (id)[endColor CGColor]];
+        CGPoint startPoint = CGPointMake(0, 0);
+        CGPoint endPoint = CGPointMake(1, 0);
+        [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];
         
         [window orderFront: window];
         
