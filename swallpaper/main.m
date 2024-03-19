@@ -13,6 +13,7 @@ int main(int argc, const char* argv[]) {
         [ui show];
 
         ApplicationDelegate* appDelegate = [[ApplicationDelegate alloc] init];
+        appDelegate.uiWindow = ui.window;
         [application setDelegate: appDelegate];
         [application run];
         

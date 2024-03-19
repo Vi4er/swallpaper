@@ -31,16 +31,22 @@
 		CE5DFB7D2B9A3E5C005B6F2B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */; };
 		CE5DFB7E2B9A3E64005B6F2B /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */; };
 		CE5DFB7F2B9A3E81005B6F2B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE73BA382B8A9C1E00AFC334 /* AudioToolbox.framework */; };
-		CE5DFB902B9A45B4005B6F2B /* app.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DFB8F2B9A45B4005B6F2B /* app.swift */; };
+		CE5DFB902B9A45B4005B6F2B /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DFB8F2B9A45B4005B6F2B /* UI.swift */; };
 		CE5DFB932B9A48E1005B6F2B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE5DFB922B9A48E1005B6F2B /* SnapKit */; };
 		CE5DFB952B9A9E7A005B6F2B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DFB942B9A9E7A005B6F2B /* RootView.swift */; };
+		CE6638F52BA8B87700E29F39 /* OnboardingSignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6638F42BA8B87700E29F39 /* OnboardingSignInScreen.swift */; };
+		CE6638F82BA8B9B700E29F39 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6638F72BA8B9B700E29F39 /* Button.swift */; };
+		CE6B96AA2BA2727A00C66D2F /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B96A92BA2727A00C66D2F /* View+Extension.swift */; };
+		CE7403D22BA2B8E8004E00BC /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7403D12BA2B8E8004E00BC /* MenuBarView.swift */; };
 		CE74EBCA2B9E72B200A35AA0 /* WallpapersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74EBC92B9E72B200A35AA0 /* WallpapersView.swift */; };
 		CE8296EA2B9AD4DD000B6EBD /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8296E92B9AD4DD000B6EBD /* SidebarView.swift */; };
 		CEB7E6DF2B9D7A1800081A68 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CEB7E6DE2B9D7A1800081A68 /* video.mp4 */; };
+		CED7D3022BA906F4001CA8DC /* SystemColors in Frameworks */ = {isa = PBXBuildFile; productRef = CED7D3012BA906F4001CA8DC /* SystemColors */; };
+		CEFEDD5C2BA8AE5B001589E1 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEDD5B2BA8AE5B001589E1 /* OnboardingScreen.swift */; };
+		CEFEDD5F2BA8B0E0001589E1 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEDD5E2BA8B0E0001589E1 /* Styling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE103C252B9A39E4006C25C2 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		CE103C422B9A3C5C006C25C2 /* swallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE103C4A2B9A3C5C006C25C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE103C4F2B9A3C5C006C25C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,8 +55,11 @@
 		CE4FDEB72B8E54E400770C5E /* appDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = appDelegate.m; sourceTree = "<group>"; };
 		CE5DFB792B9A3E4B005B6F2B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		CE5DFB8E2B9A45B3005B6F2B /* swallpaper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "swallpaper-Bridging-Header.h"; sourceTree = "<group>"; };
-		CE5DFB8F2B9A45B4005B6F2B /* app.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = app.swift; sourceTree = "<group>"; };
+		CE5DFB8F2B9A45B4005B6F2B /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		CE5DFB942B9A9E7A005B6F2B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		CE6638F42BA8B87700E29F39 /* OnboardingSignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSignInScreen.swift; sourceTree = "<group>"; };
+		CE6638F72BA8B9B700E29F39 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		CE6B96A92BA2727A00C66D2F /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		CE73BA1A2B8A993500AFC334 /* renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = renderer.m; sourceTree = "<group>"; };
 		CE73BA1C2B8A996F00AFC334 /* renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
 		CE73BA1D2B8A99BD00AFC334 /* videoRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoRenderer.m; sourceTree = "<group>"; };
@@ -72,6 +81,7 @@
 		CE73BA3C2B8A9C3700AFC334 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CE73BA3E2B8A9C4E00AFC334 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		CE73BA412B8A9CEC00AFC334 /* hwvideo.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = hwvideo.metal; sourceTree = "<group>"; };
+		CE7403D12BA2B8E8004E00BC /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		CE74EBC92B9E72B200A35AA0 /* WallpapersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpapersView.swift; sourceTree = "<group>"; };
 		CE8296E92B9AD4DD000B6EBD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		CEB7E6DE2B9D7A1800081A68 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
@@ -83,6 +93,8 @@
 		CEF629F02B96B64D00046894 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		CEF629F22B96B66400046894 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEF629F42B96B68300046894 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CEFEDD5B2BA8AE5B001589E1 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		CEFEDD5E2BA8B0E0001589E1 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +117,7 @@
 				CE5DFB7F2B9A3E81005B6F2B /* AudioToolbox.framework in Frameworks */,
 				CE5DFB752B9A3E33005B6F2B /* libswresample.a in Frameworks */,
 				CE5DFB702B9A3E33005B6F2B /* libavcodec.a in Frameworks */,
+				CED7D3022BA906F4001CA8DC /* SystemColors in Frameworks */,
 				CE5DFB7B2B9A3E50005B6F2B /* Metal.framework in Frameworks */,
 				CE5DFB782B9A3E47005B6F2B /* CoreVideo.framework in Frameworks */,
 			);
@@ -117,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				CEB7E6DE2B9D7A1800081A68 /* video.mp4 */,
-				CE103C252B9A39E4006C25C2 /* info.plist */,
 				CEEA682E2B9A34B400A8AEE6 /* ui */,
 				CE73BA402B8A9CDD00AFC334 /* shaders */,
 				CE73BA172B8A991500AFC334 /* include */,
@@ -127,6 +139,23 @@
 				CE103C512B9A3C5C006C25C2 /* swallpaper.entitlements */,
 			);
 			path = swallpaper;
+			sourceTree = "<group>";
+		};
+		CE6638F62BA8B96000E29F39 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				CE6638F72BA8B9B700E29F39 /* Button.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		CE6B96A82BA2727200C66D2F /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE6B96A92BA2727A00C66D2F /* View+Extension.swift */,
+				CEFEDD5E2BA8B0E0001589E1 /* Styling.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 		CE73BA022B8A98D200AFC334 = {
@@ -225,13 +254,26 @@
 		CEEA682E2B9A34B400A8AEE6 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				CE5DFB8F2B9A45B4005B6F2B /* app.swift */,
+				CE6638F62BA8B96000E29F39 /* components */,
+				CEFEDD5D2BA8AE5E001589E1 /* screens */,
+				CE6B96A82BA2727200C66D2F /* utils */,
+				CE5DFB8F2B9A45B4005B6F2B /* UI.swift */,
 				CE5DFB8E2B9A45B3005B6F2B /* swallpaper-Bridging-Header.h */,
 				CE5DFB942B9A9E7A005B6F2B /* RootView.swift */,
 				CE8296E92B9AD4DD000B6EBD /* SidebarView.swift */,
 				CE74EBC92B9E72B200A35AA0 /* WallpapersView.swift */,
+				CE7403D12BA2B8E8004E00BC /* MenuBarView.swift */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		CEFEDD5D2BA8AE5E001589E1 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEDD5B2BA8AE5B001589E1 /* OnboardingScreen.swift */,
+				CE6638F42BA8B87700E29F39 /* OnboardingSignInScreen.swift */,
+			);
+			path = screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +294,7 @@
 			name = swallpaper;
 			packageProductDependencies = (
 				CE5DFB922B9A48E1005B6F2B /* SnapKit */,
+				CED7D3012BA906F4001CA8DC /* SystemColors */,
 			);
 			productName = swallpaper;
 			productReference = CE103C422B9A3C5C006C25C2 /* swallpaper.app */;
@@ -284,6 +327,7 @@
 			mainGroup = CE73BA022B8A98D200AFC334;
 			packageReferences = (
 				CE5DFB912B9A48E1005B6F2B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CED7D3002BA906F4001CA8DC /* XCRemoteSwiftPackageReference "swiftui-system-colors" */,
 			);
 			productRefGroup = CE73BA0C2B8A98D200AFC334 /* Products */;
 			projectDirPath = "";
@@ -311,7 +355,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5DFB902B9A45B4005B6F2B /* app.swift in Sources */,
+				CEFEDD5F2BA8B0E0001589E1 /* Styling.swift in Sources */,
+				CE5DFB902B9A45B4005B6F2B /* UI.swift in Sources */,
+				CE6638F52BA8B87700E29F39 /* OnboardingSignInScreen.swift in Sources */,
+				CE7403D22BA2B8E8004E00BC /* MenuBarView.swift in Sources */,
 				CE5DFB6E2B9A3E13005B6F2B /* hwvideo.metal in Sources */,
 				CE5DFB682B9A3DFD005B6F2B /* main.m in Sources */,
 				CE5DFB692B9A3E08005B6F2B /* videoDecoder.c in Sources */,
@@ -320,8 +367,11 @@
 				CE5DFB6C2B9A3E10005B6F2B /* renderer.m in Sources */,
 				CE74EBCA2B9E72B200A35AA0 /* WallpapersView.swift in Sources */,
 				CE8296EA2B9AD4DD000B6EBD /* SidebarView.swift in Sources */,
+				CEFEDD5C2BA8AE5B001589E1 /* OnboardingScreen.swift in Sources */,
 				CE5DFB952B9A9E7A005B6F2B /* RootView.swift in Sources */,
+				CE6B96AA2BA2727A00C66D2F /* View+Extension.swift in Sources */,
 				CE5DFB6D2B9A3E10005B6F2B /* videoRenderer.m in Sources */,
+				CE6638F82BA8B9B700E29F39 /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = swallpaper/swallpaper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -342,6 +393,8 @@
 				DEVELOPMENT_TEAM = RD9S3523V8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Swallpaper;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -371,6 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = swallpaper/swallpaper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -380,6 +434,8 @@
 				DEVELOPMENT_TEAM = RD9S3523V8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Swallpaper;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -560,6 +616,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		CED7D3002BA906F4001CA8DC /* XCRemoteSwiftPackageReference "swiftui-system-colors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/diniska/swiftui-system-colors";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -567,6 +631,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE5DFB912B9A48E1005B6F2B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		CED7D3012BA906F4001CA8DC /* SystemColors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CED7D3002BA906F4001CA8DC /* XCRemoteSwiftPackageReference "swiftui-system-colors" */;
+			productName = SystemColors;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

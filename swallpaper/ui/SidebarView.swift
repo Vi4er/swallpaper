@@ -51,7 +51,7 @@ enum Tab: String, Hashable, CaseIterable {
     var content: any View {
         switch self {
         case .wallpapers:
-            Text("LOL")
+            WallpapersView()
         default: Text(rawValue)
         }
     }
@@ -71,12 +71,19 @@ struct SidebarView: View {
                     }
                 }
             }
-            
-            NavigationLink(value: Tab.settings) {
-                Label("Settings", systemImage: "gearshape")
-            }
         }
+//        .safeAreaInset(edge: .bottom) {
+//            Button {
+//                
+//            } label: {
+//                Label("Settings", systemImage: "gearshape")
+//            }
+//            .buttonStyle(.bordered)
+//            .tint(.accentColor)
+//            .padding()
+//        }
         .listStyle(.sidebar)
+        .frame(width: 200)
     }
 }
 

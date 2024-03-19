@@ -63,7 +63,7 @@
 
         NSRect leftMenuBarRect = [handler getLeftMenuBarRect];
         NSRect rightMenuBarRect = [handler getRightMenuBarRect];
-        [self updatePositionAndSize: &leftMenuBarRect rightRect:&rightMenuBarRect];
+        [self updatePositionAndSize: &leftMenuBarRect rightRect: &rightMenuBarRect];
         [self orderFront: self];
 
         [handler.windows addObject: self];

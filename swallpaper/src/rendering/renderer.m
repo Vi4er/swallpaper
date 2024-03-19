@@ -67,6 +67,7 @@
                                                                         screen: screen];
         window.hasShadow = NO;
         window.level = kCGDesktopWindowLevel;
+        window.backgroundColor = [NSColor clearColor];
         self.info = [RendererInfo newWithWindow:window];
         
         MenuBarWindow* menuBarWindow = [MenuBarWindow newWithMenuBarHandler:[Renderer menuBarHandler] screen:screen];
@@ -84,8 +85,17 @@
         NSArray* colors = @[(id)[startColor CGColor], (id)[endColor CGColor]];
         CGPoint startPoint = CGPointMake(0, 0);
         CGPoint endPoint = CGPointMake(1, 0);
-        [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];
+//        [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];
         
+        // Fade in
+        
+        window.alphaValue = menuBarWindow.alphaValue = 0;
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext* context) {
+            [context setDuration:0.75];
+            [[window animator] setAlphaValue:1];
+            [[menuBarWindow animator] setAlphaValue:1];
+        } completionHandler:nil];
+    
         [window orderFront: window];
         
     }

@@ -1,4 +1,5 @@
 #import <appDelegate.h>
+#import "swallpaper-Swift.h"
 
 @implementation ApplicationDelegate
 
@@ -32,6 +33,14 @@
 
     self.renderThread = [[NSThread alloc] initWithTarget:self selector:@selector(renderThreadEntryPoint:) object:nil];
     [self.renderThread start];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {
+    if (self.uiWindow) {
+        [self.uiWindow deminiaturize: self];
+    }
+    
+    return true;
 }
 
 @end

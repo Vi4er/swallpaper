@@ -4,6 +4,7 @@
 
 @interface ApplicationDelegate : NSObject<NSApplicationDelegate>
 
+@property NSWindow* uiWindow;
 @property Renderer* renderer;
 @property NSThread* renderThread;
 
