@@ -1,4 +1,4 @@
-#import <appDelegate.h>
+#import <SWApplicationDelegate.h>
 #import <menuBar.h>
 #import "swallpaper-Swift.h"
 
@@ -8,16 +8,16 @@ int main(int argc, const char* argv[]) {
     @autoreleasepool {
         NSApplication* application = [NSApplication sharedApplication];
         NSApp.activationPolicy = NSApplicationActivationPolicyAccessory;
-        
+
         UI* ui = [[UI alloc] init];
         [ui show];
 
-        ApplicationDelegate* appDelegate = [[ApplicationDelegate alloc] init];
+        SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
         appDelegate.uiWindow = ui.window;
         [application setDelegate: appDelegate];
         [application run];
         
-        video_decoder_free(appDelegate.renderer.videoDecoder);
+        // video_decoder_free(appDelegate.renderer.videoDecoder);
     }
     
     return 0;

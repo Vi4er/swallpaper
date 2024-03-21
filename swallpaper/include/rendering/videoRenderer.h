@@ -1,5 +1,5 @@
-#import <videoDecoder.h>
-#import <rendering/renderer.h>
+#import <decoding/videoDecoder.h>
+#import <rendering/SWRenderer.h>
 #import <MetalKit/MetalKit.h>
 
 @interface VideoRenderer : NSObject
@@ -9,6 +9,6 @@
 
 + (void)drawTextureWithEncoder: (id<MTLRenderCommandEncoder>)encoder luminanceTexture:(id<MTLTexture>)luminanceTexture chrominanceTexture:(id<MTLTexture>)chrominanceTexture viewport:(MTLViewport)viewport;
 
-+ (void)render:(Renderer*)renderer;
++ (void)render:(SWRenderer*)renderer;
 
 @end

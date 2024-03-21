@@ -1,5 +1,5 @@
 #import <rendering/videoRenderer.h>
-#import <rendering/renderer.h>
+#import <rendering/SWRenderer.h>
 
 typedef struct {
     simd_packed_float2 position;
@@ -13,7 +13,7 @@ typedef struct {
     
     if (pipelineState == nil) {
         NSError* error;
-        id<MTLLibrary> library = [[Renderer device] newDefaultLibrary];
+        id<MTLLibrary> library = [[SWRenderer device] newDefaultLibrary];
         
         if (error) {
             NSLog(@"Failed to load shaders %@\n", error);
@@ -39,7 +39,7 @@ typedef struct {
         
         pipelineDescriptor.vertexDescriptor = vertexDescriptor;
         
-        pipelineState = [[Renderer device] newRenderPipelineStateWithDescriptor: pipelineDescriptor error:&error];
+        pipelineState = [[SWRenderer device] newRenderPipelineStateWithDescriptor: pipelineDescriptor error:&error];
         
         if (error != nil) {
             NSLog(@"%@", error);
@@ -61,7 +61,7 @@ typedef struct {
             {{ 1.0, -1.0}, {1.0, 1.0}},
         };
         
-        vertexBuffer = [[Renderer device] newBufferWithBytes:vertices length:sizeof(vertices) options:MTLResourceStorageModeShared];
+        vertexBuffer = [[SWRenderer device] newBufferWithBytes:vertices length:sizeof(vertices) options:MTLResourceStorageModeShared];
     }
     
     return vertexBuffer;
@@ -76,7 +76,7 @@ typedef struct {
     [encoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
 }
 
-+ (void)render:(Renderer*)renderer {
++ (void)render:(SWRenderer*)renderer {
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)renderer.videoDecoder->frame->data[3];
     IOSurfaceRef surface = CVPixelBufferGetIOSurface(pixelBuffer);
     
@@ -96,8 +96,8 @@ typedef struct {
                                                                                                         mipmapped:NO];
     chrominanceTextureDescriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageRenderTarget;
     
-    id<MTLTexture> luminanceTexture = [[Renderer device] newTextureWithDescriptor:luminanceTextureDescriptor iosurface:surface plane:0];
-    id<MTLTexture> chrominanceTexture = [[Renderer device] newTextureWithDescriptor:chrominanceTextureDescriptor iosurface:surface plane:1];
+    id<MTLTexture> luminanceTexture = [[SWRenderer device] newTextureWithDescriptor:luminanceTextureDescriptor iosurface:surface plane:0];
+    id<MTLTexture> chrominanceTexture = [[SWRenderer device] newTextureWithDescriptor:chrominanceTextureDescriptor iosurface:surface plane:1];
     
     [self drawTextureWithEncoder:renderer.info.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.info.viewport];
     [self drawTextureWithEncoder:renderer.menuBarInfo.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.info.viewport];

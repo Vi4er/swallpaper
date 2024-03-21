@@ -1,17 +1,17 @@
 #import <Foundation/Foundation.h>
-#import <rendering/renderer.h>
+#import <rendering/SWRenderer.h>
 #import <QuartzCore/QuartzCore.h>
 #import <rendering/videoRenderer.h>
 #import <SWGradientLayer.h>
 
-@implementation RendererInfo
+@implementation SWRendererInfo
 
 - (instancetype)initWithWindow: (NSWindow*)window {
     self = [super init];
     
     if (self) {
         self.layer = [[CAMetalLayer alloc] init];
-        self.layer.device = [Renderer device];
+        self.layer.device = [SWRenderer device];
         self.layer.drawableSize = window.frame.size;
         self.layer.presentsWithTransaction = YES;
         self.layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
@@ -27,7 +27,7 @@
             self.window.contentView.layer = self.layer;
         }
         
-        self.commandQueue = [[Renderer device] newCommandQueue];
+        self.commandQueue = [[SWRenderer device] newCommandQueue];
         self.renderPassDescriptor = [[MTLRenderPassDescriptor alloc] init];
         
         self.colorAttachmentDescriptor = [[self.renderPassDescriptor colorAttachments] objectAtIndexedSubscript:0];
@@ -55,7 +55,7 @@
 
 @end
 
-@implementation Renderer
+@implementation SWRenderer
 
 - (instancetype)initWithScreen:(NSScreen*) screen {
     self = [super init];
@@ -69,12 +69,12 @@
         window.hasShadow = NO;
         window.level = kCGDesktopWindowLevel;
         window.backgroundColor = [NSColor clearColor];
-        self.info = [RendererInfo newWithWindow:window];
+        self.info = [SWRendererInfo newWithWindow:window];
         
-        MenuBarWindow* menuBarWindow = [MenuBarWindow newWithMenuBarHandler:[Renderer menuBarHandler] screen:screen];
-        self.menuBarInfo = [RendererInfo newWithWindow:menuBarWindow];
+        MenuBarWindow* menuBarWindow = [MenuBarWindow newWithMenuBarHandler:[SWRenderer menuBarHandler] screen:screen];
+        self.menuBarInfo = [SWRendererInfo newWithWindow:menuBarWindow];
         
-        MenuBarHandler* handler = [Renderer menuBarHandler];
+        MenuBarHandler* handler = [SWRenderer menuBarHandler];
         CGRect leftMenuBarRect = [handler getLeftMenuBarRect];
         CGRect rightMenuBarRect = [handler getRightMenuBarRect];
         
@@ -82,11 +82,19 @@
         
         // Gradient test
 
-        NSArray* colors = @[(id)[[[NSColor grayColor] colorWithAlphaComponent:0.5] CGColor],
-                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor whiteColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor]];
+//        NSArray* colors = @[(id)[[[NSColor grayColor] colorWithAlphaComponent:0.5] CGColor],
+//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
+//                                (id)[[[NSColor whiteColor] colorWithAlphaComponent: 0.5] CGColor],
+//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
+//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor]];
+        NSArray* colors = @[(id)[[[NSColor redColor] colorWithAlphaComponent:0.5] CGColor],
+                                (id)[[[NSColor orangeColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor yellowColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor greenColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor blueColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor purpleColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[NSColor colorWithCalibratedRed:75/255.0 green:130/255.0 blue:130/255.0 alpha:0.5] CGColor],
+                                (id)[[[NSColor blueColor] colorWithAlphaComponent: 0.5] CGColor]];
         CGPoint startPoint = CGPointMake(0, 0);
         CGPoint endPoint = CGPointMake(1, 0);
         [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];

@@ -1,12 +1,12 @@
 #pragma once
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
-#import <videoDecoder.h>
+#import <decoding/videoDecoder.h>
 #include <menuBar.h>
 
 extern NSString* RendererDevice;
 
-@interface RendererInfo : NSObject
+@interface SWRendererInfo : NSObject
 
 @property NSWindow* window;
 @property CAMetalLayer* layer;
@@ -21,10 +21,10 @@ extern NSString* RendererDevice;
 
 @end
 
-@interface Renderer : NSObject
+@interface SWRenderer : NSObject
 
-@property RendererInfo* info;
-@property RendererInfo* menuBarInfo;
+@property SWRendererInfo* info;
+@property SWRendererInfo* menuBarInfo;
 @property (nonatomic) VideoDecoder* videoDecoder;
 
 - (instancetype)initWithScreen: (NSScreen*)screen;
