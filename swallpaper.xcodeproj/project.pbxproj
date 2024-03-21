@@ -40,8 +40,10 @@
 		CE7403D22BA2B8E8004E00BC /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7403D12BA2B8E8004E00BC /* MenuBarView.swift */; };
 		CE74EBCA2B9E72B200A35AA0 /* WallpapersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74EBC92B9E72B200A35AA0 /* WallpapersView.swift */; };
 		CE8296EA2B9AD4DD000B6EBD /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8296E92B9AD4DD000B6EBD /* SidebarView.swift */; };
+		CE85C8582BAC2FD80056466B /* SWGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85C8572BAC2FD80056466B /* SWGradientLayer.m */; };
 		CEB7E6DF2B9D7A1800081A68 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CEB7E6DE2B9D7A1800081A68 /* video.mp4 */; };
 		CED7D3022BA906F4001CA8DC /* SystemColors in Frameworks */ = {isa = PBXBuildFile; productRef = CED7D3012BA906F4001CA8DC /* SystemColors */; };
+		CEE594E72BAA9B6B0058165B /* ultrawide.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CEE594E62BAA9B6B0058165B /* ultrawide.mp4 */; };
 		CEFEDD5C2BA8AE5B001589E1 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEDD5B2BA8AE5B001589E1 /* OnboardingScreen.swift */; };
 		CEFEDD5F2BA8B0E0001589E1 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEDD5E2BA8B0E0001589E1 /* Styling.swift */; };
 /* End PBXBuildFile section */
@@ -84,9 +86,13 @@
 		CE7403D12BA2B8E8004E00BC /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		CE74EBC92B9E72B200A35AA0 /* WallpapersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpapersView.swift; sourceTree = "<group>"; };
 		CE8296E92B9AD4DD000B6EBD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		CE85C8562BAC2FAF0056466B /* SWGradientLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGradientLayer.h; sourceTree = "<group>"; };
+		CE85C8572BAC2FD80056466B /* SWGradientLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGradientLayer.m; sourceTree = "<group>"; };
 		CEB7E6DE2B9D7A1800081A68 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		CEB849C82BAC2A0600A1A139 /* menuBarEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menuBarEffects.h; sourceTree = "<group>"; };
 		CEE51C802B8D6A290019851F /* menuBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menuBar.m; sourceTree = "<group>"; };
 		CEE51C822B8D6A350019851F /* menuBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menuBar.h; sourceTree = "<group>"; };
+		CEE594E62BAA9B6B0058165B /* ultrawide.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ultrawide.mp4; sourceTree = "<group>"; };
 		CEF629EA2B96B5DC00046894 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CEF629EC2B96B60900046894 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		CEF629EE2B96B63600046894 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -129,6 +135,7 @@
 		CE103C432B9A3C5C006C25C2 /* swallpaper */ = {
 			isa = PBXGroup;
 			children = (
+				CEE594E62BAA9B6B0058165B /* ultrawide.mp4 */,
 				CEB7E6DE2B9D7A1800081A68 /* video.mp4 */,
 				CEEA682E2B9A34B400A8AEE6 /* ui */,
 				CE73BA402B8A9CDD00AFC334 /* shaders */,
@@ -182,6 +189,7 @@
 				CE73BA212B8A99F400AFC334 /* videoDecoder.c */,
 				CEE51C802B8D6A290019851F /* menuBar.m */,
 				CE4FDEB72B8E54E400770C5E /* appDelegate.m */,
+				CE85C8572BAC2FD80056466B /* SWGradientLayer.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -193,6 +201,8 @@
 				CE73BA202B8A99E100AFC334 /* videoDecoder.h */,
 				CEE51C822B8D6A350019851F /* menuBar.h */,
 				CE4FDEB62B8E54BF00770C5E /* appDelegate.h */,
+				CEB849C82BAC2A0600A1A139 /* menuBarEffects.h */,
+				CE85C8562BAC2FAF0056466B /* SWGradientLayer.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -345,6 +355,7 @@
 			files = (
 				CEB7E6DF2B9D7A1800081A68 /* video.mp4 in Resources */,
 				CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */,
+				CEE594E72BAA9B6B0058165B /* ultrawide.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEFEDD5F2BA8B0E0001589E1 /* Styling.swift in Sources */,
+				CE85C8582BAC2FD80056466B /* SWGradientLayer.m in Sources */,
 				CE5DFB902B9A45B4005B6F2B /* UI.swift in Sources */,
 				CE6638F52BA8B87700E29F39 /* OnboardingSignInScreen.swift in Sources */,
 				CE7403D22BA2B8E8004E00BC /* MenuBarView.swift in Sources */,

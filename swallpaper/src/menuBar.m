@@ -1,6 +1,7 @@
 #import <menuBar.h>
 #import <AppKit/AppKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <SWGradientLayer.h>
 
 @implementation NonConstrainedNSWindow
 
@@ -19,7 +20,7 @@
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
     CGFloat menuBarHeight = [self getMenuBarHeight];
 
-    CGFloat capsuleHeight = menuBarHeight / 1.75;
+    CGFloat capsuleHeight = menuBarHeight * 0.8; // menuBarHeight / 1.75;
     CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight)
@@ -44,7 +45,7 @@
 }
 
 - (void)setGradient: (NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
-    CAGradientLayer* layer = (CAGradientLayer*)self.contentView.layer;
+    SWGradientLayer* layer = (SWGradientLayer*)self.contentView.layer;
     layer.startPoint = startPoint;
     layer.endPoint = endPoint;
     layer.colors = colors;
@@ -59,7 +60,7 @@
         self.backgroundColor = [NSColor clearColor];
         self.hasShadow = NO;
 
-        self.contentView.layer = [CAGradientLayer layer];
+        self.contentView.layer = [SWGradientLayer layer];
 
         NSRect leftMenuBarRect = [handler getLeftMenuBarRect];
         NSRect rightMenuBarRect = [handler getRightMenuBarRect];

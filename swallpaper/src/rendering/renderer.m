@@ -2,6 +2,7 @@
 #import <rendering/renderer.h>
 #import <QuartzCore/QuartzCore.h>
 #import <rendering/videoRenderer.h>
+#import <SWGradientLayer.h>
 
 @implementation RendererInfo
 
@@ -80,13 +81,17 @@
         [menuBarWindow updatePositionAndSize: &leftMenuBarRect rightRect:&rightMenuBarRect];
         
         // Gradient test
-        NSColor* startColor = [NSColor colorWithCalibratedRed:1 green:0 blue:1 alpha:0.5];
-        NSColor* endColor = [NSColor colorWithCalibratedRed:0 green:1 blue:1 alpha:0.5];
-        NSArray* colors = @[(id)[startColor CGColor], (id)[endColor CGColor]];
+
+        NSArray* colors = @[(id)[[[NSColor grayColor] colorWithAlphaComponent:0.5] CGColor],
+                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor whiteColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
+                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor]];
         CGPoint startPoint = CGPointMake(0, 0);
         CGPoint endPoint = CGPointMake(1, 0);
-//        [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];
-        
+        [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];
+        [(SWGradientLayer*)menuBarWindow.contentView.layer setEffect: kSWGradientEffectWave];
+
         // Fade in
         
         window.alphaValue = menuBarWindow.alphaValue = 0;
