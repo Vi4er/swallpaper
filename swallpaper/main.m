@@ -1,5 +1,4 @@
 #import <SWApplicationDelegate.h>
-#import <menuBar.h>
 #import "swallpaper-Swift.h"
 
 @class UI;

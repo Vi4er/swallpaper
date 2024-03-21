@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <rendering/SWRenderer.h>
 #import <QuartzCore/QuartzCore.h>
-#import <rendering/videoRenderer.h>
+#import <rendering/SWVideoRenderer.h>
 #import <SWGradientLayer.h>
 
 @implementation SWRendererInfo
@@ -57,67 +57,20 @@
 
 @implementation SWRenderer
 
-- (instancetype)initWithScreen:(NSScreen*) screen {
+- (instancetype)initWithWallpaper:(SWWallpaper*)wallpaper {
     self = [super init];
     
     if (self) {
-        NSWindow* window = [[NonConstrainedNSWindow alloc] initWithContentRect: screen.frame
-                                                                     styleMask: NSWindowStyleMaskBorderless
-                                                                       backing: NSBackingStoreBuffered
-                                                                         defer: NO
-                                                                        screen: screen];
-        window.hasShadow = NO;
-        window.level = kCGDesktopWindowLevel;
-        window.backgroundColor = [NSColor clearColor];
-        self.info = [SWRendererInfo newWithWindow:window];
         
-        MenuBarWindow* menuBarWindow = [MenuBarWindow newWithMenuBarHandler:[SWRenderer menuBarHandler] screen:screen];
-        self.menuBarInfo = [SWRendererInfo newWithWindow:menuBarWindow];
-        
-        MenuBarHandler* handler = [SWRenderer menuBarHandler];
-        CGRect leftMenuBarRect = [handler getLeftMenuBarRect];
-        CGRect rightMenuBarRect = [handler getRightMenuBarRect];
-        
-        [menuBarWindow updatePositionAndSize: &leftMenuBarRect rightRect:&rightMenuBarRect];
-        
-        // Gradient test
-
-//        NSArray* colors = @[(id)[[[NSColor grayColor] colorWithAlphaComponent:0.5] CGColor],
-//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-//                                (id)[[[NSColor whiteColor] colorWithAlphaComponent: 0.5] CGColor],
-//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor]];
-        NSArray* colors = @[(id)[[[NSColor redColor] colorWithAlphaComponent:0.5] CGColor],
-                                (id)[[[NSColor orangeColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor yellowColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor greenColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor blueColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor purpleColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[NSColor colorWithCalibratedRed:75/255.0 green:130/255.0 blue:130/255.0 alpha:0.5] CGColor],
-                                (id)[[[NSColor blueColor] colorWithAlphaComponent: 0.5] CGColor]];
-        CGPoint startPoint = CGPointMake(0, 0);
-        CGPoint endPoint = CGPointMake(1, 0);
-        [menuBarWindow setGradient: colors startPoint:startPoint endPoint:endPoint];
-        [(SWGradientLayer*)menuBarWindow.contentView.layer setEffect: kSWGradientEffectWave];
-
-        // Fade in
-        
-        window.alphaValue = menuBarWindow.alphaValue = 0;
-        [NSAnimationContext runAnimationGroup:^(NSAnimationContext* context) {
-            [context setDuration:0.75];
-            [[window animator] setAlphaValue:1];
-            [[menuBarWindow animator] setAlphaValue:1];
-        } completionHandler:nil];
-    
-        [window orderFront: window];
-        
+        self.info = [SWRendererInfo newWithWindow:wallpaper.window];
+        self.menuBarInfo = [SWRendererInfo newWithWindow:wallpaper.menuBar];
     }
     
     return self;
 }
 
-+ (instancetype)newWithScreen:(NSScreen*) screen {
-    return [[self alloc] initWithScreen:screen];
++ (instancetype)newWithWallpaper:(SWWallpaper*)wallpaper {
+    return [[self alloc] initWithWallpaper:wallpaper];
 }
 
 + (id<MTLDevice>)device {
@@ -128,16 +81,6 @@
     }
     
     return device;
-}
-
-+ (MenuBarHandler*)menuBarHandler {
-    static MenuBarHandler* handler = nil;
-    
-    if (handler == nil) {
-        handler = [[MenuBarHandler alloc] init];
-    }
-    
-    return handler;
 }
 
 - (void)render {
@@ -158,7 +101,7 @@
     
     if (self.videoDecoder != nil) {
         video_decoder_decode_next_frame(self.videoDecoder);
-        [VideoRenderer render:self];
+        [SWVideoRenderer render:self];
     }
     
     [self.info.encoder endEncoding];

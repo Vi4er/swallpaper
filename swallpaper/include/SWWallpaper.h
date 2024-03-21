@@ -1,9 +1,13 @@
 #pragma once
 #import <AppKit/AppKit.h>
+#import <SWNonConstrainedWindow.h>
+#import <SWMenuBar.h>
 
 @interface SWWallpaper : NSObject
 
 @property (readonly) NSScreen* screen;
+@property (readonly) SWNonConstrainedWindow* window;
+@property (readonly) SWMenuBar* menuBar;
 
 - (void)setVideo: (NSString*)path;
 - (void)start;

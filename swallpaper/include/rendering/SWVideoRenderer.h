@@ -2,7 +2,7 @@
 #import <rendering/SWRenderer.h>
 #import <MetalKit/MetalKit.h>
 
-@interface VideoRenderer : NSObject
+@interface SWVideoRenderer : NSObject
 
 + (id<MTLRenderPipelineState>)pipelineState;
 + (id<MTLBuffer>)vertexBuffer;

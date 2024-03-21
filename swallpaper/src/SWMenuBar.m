@@ -1,17 +1,9 @@
-#import <menuBar.h>
+#import <SWMenuBar.h>
 #import <AppKit/AppKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import <SWGradientLayer.h>
 
-@implementation NonConstrainedNSWindow
-
-- (NSRect)constrainFrameRect:(NSRect)frameRect toScreen:(NSScreen*)screen {
-    return frameRect;
-}
-
-@end
-
-@implementation MenuBarWindow
+@implementation SWMenuBar
 
 - (CGFloat)getMenuBarHeight {
     return self.screen.frame.size.height - self.screen.visibleFrame.size.height - (self.screen.visibleFrame.origin.y - self.screen.frame.origin.y) - 1;
@@ -20,7 +12,7 @@
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
     CGFloat menuBarHeight = [self getMenuBarHeight];
 
-    CGFloat capsuleHeight = menuBarHeight * 0.8; // menuBarHeight / 1.75;
+    CGFloat capsuleHeight = menuBarHeight / 1.75;
     CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight)
@@ -51,7 +43,7 @@
     layer.colors = colors;
 }
 
-- (instancetype)initWithMenuBarHandler:(MenuBarHandler*)handler screen:(NSScreen*)screen {
+- (instancetype)initWithScreen:(NSScreen*)screen {
     self = [super initWithContentRect:NSMakeRect(0, 0, screen.frame.size.width, 1) styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO screen:screen];
     
     if (self) {
@@ -62,46 +54,20 @@
 
         self.contentView.layer = [SWGradientLayer layer];
 
-        NSRect leftMenuBarRect = [handler getLeftMenuBarRect];
-        NSRect rightMenuBarRect = [handler getRightMenuBarRect];
+        NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
+        NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
         [self updatePositionAndSize: &leftMenuBarRect rightRect: &rightMenuBarRect];
         [self orderFront: self];
-
-        [handler.windows addObject: self];
     }
     
     return self;
 }
 
-+ (instancetype)newWithMenuBarHandler:(MenuBarHandler*)handler screen:(NSScreen*)screen {
-    return [[self alloc] initWithMenuBarHandler:handler screen:screen];
++ (instancetype)newWithScreen:(NSScreen*)screen {
+    return [[self alloc] initWithScreen:screen];
 }
 
-@end
-
-@implementation MenuBarHandler
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        NSNotificationCenter* notificationCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
-
-        [notificationCenter addObserver:self
-                                selector:@selector(appDidActivate:)
-                                name:NSWorkspaceDidActivateApplicationNotification
-                                object:nil];
-        
-        [notificationCenter addObserver:self
-                                selector:@selector(appDidActivate:)
-                                name:NSWorkspaceDidLaunchApplicationNotification
-                                object:nil];
-        
-        self.windows = [[NSMutableArray alloc] init];
-    }
-    return self;
-}
-
-- (NSRect)getLeftMenuBarRect {
++ (NSRect)getLeftMenuBarRect {
     NSRunningApplication* frontApp = [NSWorkspace.sharedWorkspace frontmostApplication];
     AXUIElementRef appMenuBar;
 
@@ -141,7 +107,7 @@
     return NSMakeRect(-1, -1, -1, -1);
 }
 
-- (NSRect)getRightMenuBarRect {
++ (NSRect)getRightMenuBarRect {
     CFArrayRef windowList = CGWindowListCreate(kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements, kCGNullWindowID);
     CFArrayRef windowInfoArray = CGWindowListCreateDescriptionFromArray(windowList);
     
@@ -173,23 +139,6 @@
     }
     
     return NSMakeRect(leftX, 0, rightX - leftX - 10, 0);
-}
-
-- (void)appDidActivate:(NSNotification *)notification {
-    NSRect leftMenuBarRect = [self getLeftMenuBarRect];
-    NSRect rightMenuBarRect = [self getRightMenuBarRect];
-
-    if (leftMenuBarRect.origin.x == -1) {
-        return;
-    }
-
-    for (int i = 0; i < self.windows.count; ++i) {
-        [self.windows[i] updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
-    }
-}
-
-- (void)dealloc {
-    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 }
 
 @end

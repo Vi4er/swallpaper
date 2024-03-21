@@ -2,7 +2,7 @@
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 #import <decoding/videoDecoder.h>
-#include <menuBar.h>
+#import <SWWallpaper.h>
 
 extern NSString* RendererDevice;
 
@@ -27,11 +27,10 @@ extern NSString* RendererDevice;
 @property SWRendererInfo* menuBarInfo;
 @property (nonatomic) VideoDecoder* videoDecoder;
 
-- (instancetype)initWithScreen: (NSScreen*)screen;
-+ (instancetype)newWithScreen: (NSScreen*)screen;
+- (instancetype)initWithWallpaper: (SWWallpaper*)wallpaper;
++ (instancetype)newWithWallpaper: (SWWallpaper*)wallpaper;
 
 + (id<MTLDevice>)device;
-+ (MenuBarHandler*)menuBarHandler;
 
 - (void)render;
 

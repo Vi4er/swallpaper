@@ -1,4 +1,4 @@
-#import <rendering/videoRenderer.h>
+#import <rendering/SWVideoRenderer.h>
 #import <rendering/SWRenderer.h>
 
 typedef struct {
@@ -6,7 +6,7 @@ typedef struct {
     simd_packed_float2 texCoord;
 } VertexIn;
 
-@implementation VideoRenderer
+@implementation SWVideoRenderer
 
 + (id<MTLRenderPipelineState>)pipelineState {
     static id<MTLRenderPipelineState> pipelineState = nil;
@@ -69,8 +69,8 @@ typedef struct {
 
 + (void)drawTextureWithEncoder:(id<MTLRenderCommandEncoder>)encoder luminanceTexture:(id<MTLTexture>)luminanceTexture chrominanceTexture:(id<MTLTexture>)chrominanceTexture viewport:(MTLViewport)viewport {
     [encoder setViewport:viewport];
-    [encoder setRenderPipelineState:[VideoRenderer pipelineState]];
-    [encoder setVertexBuffer:[VideoRenderer vertexBuffer] offset:0 atIndex:0];
+    [encoder setRenderPipelineState:[SWVideoRenderer pipelineState]];
+    [encoder setVertexBuffer:[SWVideoRenderer vertexBuffer] offset:0 atIndex:0];
     [encoder setFragmentTexture:luminanceTexture atIndex:0];
     [encoder setFragmentTexture:chrominanceTexture atIndex:1];
     [encoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
