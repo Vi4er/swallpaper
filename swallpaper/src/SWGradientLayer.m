@@ -5,28 +5,18 @@
 NSArray* effectColors;
 NSArray* effectLocations;
 
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        effectColors = [NSMutableArray array];
-    }
-    
-    return self;
-}
-
 - (NSArray*)colors {
-    return effectColors;
+    return effectColors == nil ? super.colors : effectColors;
 }
 
 - (NSArray<NSNumber*>*)locations {
-    return effectLocations;
+    return effectLocations == nil ? super.locations : effectLocations;
 }
 
 - (void)waveEffect {
     [self removeAllAnimations];
     NSArray* colors = super.colors;
-    
+
     for (int i = 0; i < 2; ++i) {
         for (id color in colors) {
             [(NSMutableArray*)effectColors addObject:color];
@@ -55,6 +45,10 @@ NSArray* effectLocations;
 }
 
 - (void)setEffect: (SWGradientEffect)effect {
+    if (effect != kSWGradientEffectNone) {
+        effectColors = [NSMutableArray array];
+    }
+    
     switch (effect) {
         case kSWGradientEffectNone: {
             effectColors = super.colors;

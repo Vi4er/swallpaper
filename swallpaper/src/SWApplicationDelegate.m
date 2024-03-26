@@ -9,18 +9,6 @@
     SWWallpaper* wallpaper = [SWWallpaper newWithScreen: [NSScreen mainScreen]];
     [wallpaper setScene: @"/users/user/desktop/scene.swal"];
     [wallpaper start];
-    
-    // Gradient test
-
-    NSArray* colors = @[(id)[[[NSColor grayColor] colorWithAlphaComponent:0.5] CGColor],
-                            (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-                            (id)[[[NSColor whiteColor] colorWithAlphaComponent: 0.5] CGColor],
-                            (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-                            (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor]];
-    CGPoint startPoint = CGPointMake(0, 0);
-    CGPoint endPoint = CGPointMake(1, 0);
-    [wallpaper.menuBar setGradient: colors startPoint:startPoint endPoint:endPoint];
-    [(SWGradientLayer*)wallpaper.menuBar.contentView.layer setEffect: kSWGradientEffectWave];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {

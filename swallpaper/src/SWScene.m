@@ -3,7 +3,7 @@
 @implementation SWDataReader
 
 #define READ_TYPE(type) type result; \
-type size = sizeof(result); \
+int size = sizeof(result); \
 if (self.location + size > self.data.length) { return 0; } \
 [self.data getBytes:&result range:NSMakeRange(self.location, size)]; \
 _location += size; \
@@ -70,7 +70,8 @@ return result;
 
 - (NSColor*)readNextColor {
     unsigned int color = [self readNextUInt];
-    return [NSColor colorWithCalibratedRed: (color >> 24) & 0xFF green:(color >> 16) & 0xFF blue: (color >> 8) & 0xFF alpha: color & 0xFF];
+    NSLog(@"%x\n", color >> 24);
+    return [NSColor colorWithCalibratedRed:((color >> 24) & 0xFF) / 255.0 green:((color >> 16) & 0xFF) / 255.0 blue:((color >> 8) & 0xFF) / 255.0 alpha:(color & 0xFF) / 255.0];
 }
 
 @end
@@ -110,7 +111,8 @@ return result;
 
 - (void)writeColor:(NSColor*)color {
     color = [color colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
-    [self writeInt: ((int)color.redComponent << 24) | ((int)color.greenComponent << 16) | ((int)color.blueComponent << 8) | (int)color.alphaComponent];
+    NSLog(@"%x\n", (int)(color.redComponent * 255) << 24);
+    [self writeUInt: ((int)(color.redComponent * 255) << 24) | ((int)(color.greenComponent * 255) << 16) | ((int)(color.blueComponent * 255) << 8) | (int)(color.alphaComponent * 255)];
 }
 
 @end
@@ -148,6 +150,7 @@ return result;
     if ((video.dataLength = [reader readNextUInt])) {
         video.filePath = [path cStringUsingEncoding: NSUTF8StringEncoding];
         video.dataLocation = reader.location;
+        [reader skip:video.dataLength];
         video.fps = [reader readNextUInt];
         video.playbackSpeed = [reader readNextFloat];
     }
@@ -159,7 +162,7 @@ return result;
     SWSceneMenuBarInfo menuBarInfo;
     menuBarInfo.enabled = [reader readNextInt];
     
-    int colorsLength = [reader readNextInt];
+    int colorsLength = [reader readNextUInt];
     NSMutableArray* colors = [NSMutableArray array];
     
     for (int i = 0; i < colorsLength; ++i) {
@@ -213,7 +216,7 @@ return result;
     // Write menu bar info
     
     [writer writeInt:self.menuBarInfo.enabled];
-    [writer writeInt:(int)self.menuBarInfo.colors.count];
+    [writer writeUInt:(int)self.menuBarInfo.colors.count];
     
     for (NSColor* color in self.menuBarInfo.colors) {
         [writer writeColor: color];

@@ -23,6 +23,21 @@ NSTimer* timer;
     
     SWScene* scene = [SWScene import:path];
     renderer.videoDecoder = video_decoder_new(scene_aviocontext_new([path cStringUsingEncoding:NSUTF8StringEncoding], scene.video.dataLocation, scene.video.dataLength), 1);
+    [self setFps: scene.video.fps];
+
+    if (scene.menuBarInfo.enabled) {
+        NSMutableArray* colors = [NSMutableArray array];
+        for (NSColor* color in scene.menuBarInfo.colors) {
+            [colors addObject:(id)[color colorWithAlphaComponent:0.5].CGColor];
+        }
+
+        [self.menuBar setGradient:(NSArray*)colors startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
+        [(SWGradientLayer*)self.menuBar.contentView.layer setEffect: scene.menuBarInfo.effect];
+    }
+    else {
+        [self.menuBar setGradient:@[(id)NSColor.clearColor] startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
+        [(SWGradientLayer*)self.menuBar.contentView.layer setEffect: kSWGradientEffectNone];
+    }
 }
 
 - (void)renderLoop {
