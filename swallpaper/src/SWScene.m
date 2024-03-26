@@ -70,7 +70,6 @@ return result;
 
 - (NSColor*)readNextColor {
     unsigned int color = [self readNextUInt];
-    NSLog(@"%x\n", color >> 24);
     return [NSColor colorWithCalibratedRed:((color >> 24) & 0xFF) / 255.0 green:((color >> 16) & 0xFF) / 255.0 blue:((color >> 8) & 0xFF) / 255.0 alpha:(color & 0xFF) / 255.0];
 }
 
@@ -111,7 +110,6 @@ return result;
 
 - (void)writeColor:(NSColor*)color {
     color = [color colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
-    NSLog(@"%x\n", (int)(color.redComponent * 255) << 24);
     [self writeUInt: ((int)(color.redComponent * 255) << 24) | ((int)(color.greenComponent * 255) << 16) | ((int)(color.blueComponent * 255) << 8) | (int)(color.alphaComponent * 255)];
 }
 
