@@ -38,35 +38,27 @@ class WindowDelegate : NSObject, NSWindowDelegate {
         let statusMenu = NSMenu(title: "Swallpaper")
         statusItem.menu = statusMenu
 
-//
-//        let logoIcon = statusMenu.addItem(
-//            withTitle: "Swallpaper",
-//            action: #selector(showWindow(_:)),
-//            keyEquivalent: ""
-//        )
-//
-//        logoIcon.image = .menuBarIconGray
-//        
-//        statusMenu.addItem(.separator())
-//        
-//        statusMenu.addItem(
-//            withTitle: "Show UI",
-//            action: #selector(showWindow(_:)),
-//            keyEquivalent: ""
-//        ).target = self
-//        
-//        statusMenu.addItem(
-//            withTitle: "Quit",
-//            action: #selector(quit(_:)),
-//            keyEquivalent: ""
-//        ).target = self
+        let logoIcon = statusMenu.addItem(
+            withTitle: "Swallpaper",
+            action: #selector(showWindow(_:)),
+            keyEquivalent: ""
+        )
+
+        logoIcon.image = .menuBarIconGray
         
-        let statusItem = NSMenuItem()
-        let view = NSHostingView(rootView: MenuBarView())
-        view.frame = NSMakeRect(0, 0, 300, 250)
-        statusItem.view = view
-        statusItem.target = self
-        statusMenu.addItem(statusItem)
+        statusMenu.addItem(.separator())
+        
+        statusMenu.addItem(
+            withTitle: "Show UI",
+            action: #selector(showWindow(_:)),
+            keyEquivalent: ""
+        ).target = self
+        
+        statusMenu.addItem(
+            withTitle: "Quit",
+            action: #selector(quit(_:)),
+            keyEquivalent: ""
+        ).target = self
         
         window.alphaValue = 0
         NSAnimationContext.runAnimationGroup({ (context) -> Void in

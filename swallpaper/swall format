@@ -1,0 +1,24 @@
+Swallpaper Scene Binary Format
+
+struct Video {
+    int length;
+    byte[] data;
+    int fps;
+    float playbackSpeed;
+    
+}
+
+struct MenuBarInfo {
+    bool enabled;
+    int colorsLength;
+    NSColor[] colors;
+    SWGradientEffect effect;
+}
+
+* First 4 Bytes have to be SWAL
+* Strings can be shorter but no more than the specified length and must be null terminated
+
+Name            <String(64)>
+Description     <String(255)>
+Video           <Video>         // If length is 0, no video was specified and this can be skipped
+MenuBarInfo     <MenuBarInfo>

@@ -4,8 +4,10 @@
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
 #include <libswscale/swscale.h>
+#include <decoding/sceneAVIOContext.h>
 
 typedef struct VideoDecoder {
+    SceneAVIOContext* sceneContext;
     int width, height;
     int videoStreamIndex;
     AVFormatContext* formatContext;
@@ -21,6 +23,6 @@ typedef struct VideoDecoder {
     AVBufferRef* hardwareDecoderContext;
 } VideoDecoder;
 
-VideoDecoder* video_decoder_new(const char* path, int hardwareDecoding);
+VideoDecoder* video_decoder_new(SceneAVIOContext* context, int hardwareDecoding);
 AVFrame* video_decoder_decode_next_frame(VideoDecoder* decoder);
 void video_decoder_free(VideoDecoder* decoder);

@@ -9,7 +9,7 @@
 @property (readonly) SWNonConstrainedWindow* window;
 @property (readonly) SWMenuBar* menuBar;
 
-- (void)setVideo: (NSString*)path;
+- (void)setScene: (NSString*)path;
 - (void)start;
 
 - (void)setFps: (int)fps;

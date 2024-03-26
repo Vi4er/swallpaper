@@ -12,8 +12,9 @@ enum AVPixelFormat getHardwareDecoderFormat(AVCodecContext* context, const enum 
     return AV_PIX_FMT_NONE;
 }
 
-VideoDecoder* video_decoder_new(const char* path, int enableHardwareDecoding) {
+VideoDecoder* video_decoder_new(SceneAVIOContext* context, int enableHardwareDecoding) {
     VideoDecoder* decoder = (VideoDecoder*)calloc(1, sizeof(VideoDecoder));
+    decoder->sceneContext = context;
     decoder->hardwarePixelFormat = AV_PIX_FMT_NONE;
     decoder->enableHardwareDecoding = enableHardwareDecoding;
     const AVCodec* codec;
@@ -34,13 +35,15 @@ VideoDecoder* video_decoder_new(const char* path, int enableHardwareDecoding) {
         perror("Could not create format context\n");
         return 0;
     }
+    
+    decoder->formatContext->pb = context->context;
 
-    if (avformat_open_input(&decoder->formatContext, path, NULL, NULL) != 0) {
-        perror("Could not open file\n");
+    if (avformat_open_input(&decoder->formatContext, NULL, NULL, NULL) < 0) {
+        perror("Could not open input\n");
         video_decoder_free(decoder);
         return 0;
     }
-
+    
     if (avformat_find_stream_info(decoder->formatContext, NULL) < 0) {
         perror("Could not find stream info\n");
         video_decoder_free(decoder);
@@ -193,6 +196,7 @@ void video_decoder_free(VideoDecoder* decoder) {
     if (decoder->formatContext) {
         avformat_close_input(&decoder->formatContext);
     }
-
+    
+    scene_aviocontext_free(decoder->sceneContext);
     free(decoder);
 }

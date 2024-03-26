@@ -59,7 +59,7 @@
         [self updatePositionAndSize: &leftMenuBarRect rightRect: &rightMenuBarRect];
         [self orderFront: self];
     }
-    
+
     return self;
 }
 
@@ -131,7 +131,7 @@
             if (left < leftX || leftX == 0) {
                 leftX = left;
             }
-            
+   
             if (right > rightX) {
                 rightX = right;
             }

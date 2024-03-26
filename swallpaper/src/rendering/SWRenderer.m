@@ -61,7 +61,6 @@
     self = [super init];
     
     if (self) {
-        
         self.info = [SWRendererInfo newWithWindow:wallpaper.window];
         self.menuBarInfo = [SWRendererInfo newWithWindow:wallpaper.menuBar];
     }

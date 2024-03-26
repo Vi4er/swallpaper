@@ -1,14 +1,12 @@
 #import <SWWallpaper.h>
 #import <SWGradientLayer.h>
 #import <rendering/SWRenderer.h>
+#import <SWScene.h>
 
 @implementation SWWallpaper
 
 static NSMutableArray<SWWallpaper*>* wallpapers;
 
-@synthesize screen = _screen;
-@synthesize window = _window;
-@synthesize menuBar = _menuBar;
 int _fps = 30.0;
 
 SWRenderer* renderer;
@@ -16,9 +14,15 @@ NSThread* renderThread = nil;
 NSRunLoop* runLoop;
 NSTimer* timer;
 
-- (void)setVideo:(NSString*)path {
-    NSString* videoPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
-    renderer.videoDecoder = video_decoder_new([videoPath cStringUsingEncoding:NSUTF8StringEncoding], 1);
+- (void)setScene:(NSString*)path {
+    // path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
+    
+    if (renderer.videoDecoder) {
+        video_decoder_free(renderer.videoDecoder);
+    }
+    
+    SWScene* scene = [SWScene import:path];
+    renderer.videoDecoder = video_decoder_new(scene_aviocontext_new([path cStringUsingEncoding:NSUTF8StringEncoding], scene.video.dataLocation, scene.video.dataLength), 1);
 }
 
 - (void)renderLoop {
@@ -75,26 +79,6 @@ NSTimer* timer;
     if (self) {
         _screen = screen;
         _menuBar = [SWMenuBar newWithScreen:screen];
-        
-        // Gradient test
-
-//        NSArray* colors = @[(id)[[[NSColor grayColor] colorWithAlphaComponent:0.5] CGColor],
-//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-//                                (id)[[[NSColor whiteColor] colorWithAlphaComponent: 0.5] CGColor],
-//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor],
-//                                (id)[[[NSColor grayColor] colorWithAlphaComponent: 0.5] CGColor]];
-        NSArray* colors = @[(id)[[[NSColor redColor] colorWithAlphaComponent:0.5] CGColor],
-                                (id)[[[NSColor orangeColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor yellowColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor greenColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor blueColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[[NSColor purpleColor] colorWithAlphaComponent: 0.5] CGColor],
-                                (id)[[NSColor colorWithCalibratedRed:75/255.0 green:130/255.0 blue:130/255.0 alpha:0.5] CGColor],
-                                (id)[[[NSColor blueColor] colorWithAlphaComponent: 0.5] CGColor]];
-        CGPoint startPoint = CGPointMake(0, 0);
-        CGPoint endPoint = CGPointMake(1, 0);
-        [_menuBar setGradient: colors startPoint:startPoint endPoint:endPoint];
-        [(SWGradientLayer*)_menuBar.contentView.layer setEffect: kSWGradientEffectWave];
 
         
         // Window

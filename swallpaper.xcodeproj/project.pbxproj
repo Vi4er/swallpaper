@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE103C4A2B9A3C5C006C25C2 /* Assets.xcassets */; };
 		CE2517DF2BAC52DE002911B7 /* SWNonConstrainedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2517DE2BAC52DE002911B7 /* SWNonConstrainedWindow.m */; };
+		CE3FFDE12BB26E73007886AA /* swall format in Resources */ = {isa = PBXBuildFile; fileRef = CE3FFDE02BB26E73007886AA /* swall format */; };
+		CE3FFDEC2BB27491007886AA /* SWScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3FFDEB2BB27491007886AA /* SWScene.m */; };
+		CE3FFDF22BB29870007886AA /* sceneAVIOContext.c in Sources */ = {isa = PBXBuildFile; fileRef = CE3FFDF12BB29870007886AA /* sceneAVIOContext.c */; };
 		CE5DFB682B9A3DFD005B6F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE103C4F2B9A3C5C006C25C2 /* main.m */; };
 		CE5DFB692B9A3E08005B6F2B /* videoDecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = CE73BA212B8A99F400AFC334 /* videoDecoder.c */; };
 		CE5DFB6A2B9A3E08005B6F2B /* SWMenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE51C802B8D6A290019851F /* SWMenuBar.m */; };
@@ -57,6 +60,11 @@
 		CE103C512B9A3C5C006C25C2 /* swallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swallpaper.entitlements; sourceTree = "<group>"; };
 		CE2517DD2BAC52C2002911B7 /* SWNonConstrainedWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNonConstrainedWindow.h; sourceTree = "<group>"; };
 		CE2517DE2BAC52DE002911B7 /* SWNonConstrainedWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SWNonConstrainedWindow.m; path = swallpaper/Assets.xcassets/SWNonConstrainedWindow.m; sourceTree = SOURCE_ROOT; };
+		CE3FFDE02BB26E73007886AA /* swall format */ = {isa = PBXFileReference; lastKnownFileType = text; path = "swall format"; sourceTree = "<group>"; };
+		CE3FFDE92BB27351007886AA /* SWScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWScene.h; sourceTree = "<group>"; };
+		CE3FFDEB2BB27491007886AA /* SWScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWScene.m; sourceTree = "<group>"; };
+		CE3FFDEF2BB297C5007886AA /* sceneAVIOContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sceneAVIOContext.h; sourceTree = "<group>"; };
+		CE3FFDF12BB29870007886AA /* sceneAVIOContext.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sceneAVIOContext.c; sourceTree = "<group>"; };
 		CE4FDEB62B8E54BF00770C5E /* SWApplicationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWApplicationDelegate.h; sourceTree = "<group>"; };
 		CE4FDEB72B8E54E400770C5E /* SWApplicationDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWApplicationDelegate.m; sourceTree = "<group>"; };
 		CE5DFB792B9A3E4B005B6F2B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -149,6 +157,7 @@
 				CE103C4A2B9A3C5C006C25C2 /* Assets.xcassets */,
 				CE103C4F2B9A3C5C006C25C2 /* main.m */,
 				CE103C512B9A3C5C006C25C2 /* swallpaper.entitlements */,
+				CE3FFDE02BB26E73007886AA /* swall format */,
 			);
 			path = swallpaper;
 			sourceTree = "<group>";
@@ -197,6 +206,7 @@
 				CE85C8572BAC2FD80056466B /* SWGradientLayer.m */,
 				CE85C85C2BAC3FE60056466B /* SWWallpaper.m */,
 				CE2517DE2BAC52DE002911B7 /* SWNonConstrainedWindow.m */,
+				CE3FFDEB2BB27491007886AA /* SWScene.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -206,6 +216,7 @@
 			children = (
 				CE85C85A2BAC3F3C0056466B /* decoding */,
 				CE73BA182B8A991F00AFC334 /* rendering */,
+				CE3FFDE92BB27351007886AA /* SWScene.h */,
 				CEE51C822B8D6A350019851F /* SWMenuBar.h */,
 				CE4FDEB62B8E54BF00770C5E /* SWApplicationDelegate.h */,
 				CE85C8562BAC2FAF0056466B /* SWGradientLayer.h */,
@@ -273,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				CE73BA212B8A99F400AFC334 /* videoDecoder.c */,
+				CE3FFDF12BB29870007886AA /* sceneAVIOContext.c */,
 			);
 			path = decoding;
 			sourceTree = "<group>";
@@ -281,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				CE73BA202B8A99E100AFC334 /* videoDecoder.h */,
+				CE3FFDEF2BB297C5007886AA /* sceneAVIOContext.h */,
 			);
 			path = decoding;
 			sourceTree = "<group>";
@@ -377,6 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3FFDE12BB26E73007886AA /* swall format in Resources */,
 				CEB7E6DF2B9D7A1800081A68 /* video.mp4 in Resources */,
 				CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */,
 				CEE594E72BAA9B6B0058165B /* ultrawide.mp4 in Resources */,
@@ -395,6 +409,7 @@
 				CE5DFB902B9A45B4005B6F2B /* UI.swift in Sources */,
 				CE6638F52BA8B87700E29F39 /* OnboardingSignInScreen.swift in Sources */,
 				CE7403D22BA2B8E8004E00BC /* MenuBarView.swift in Sources */,
+				CE3FFDF22BB29870007886AA /* sceneAVIOContext.c in Sources */,
 				CE5DFB6E2B9A3E13005B6F2B /* hwvideo.metal in Sources */,
 				CE5DFB682B9A3DFD005B6F2B /* main.m in Sources */,
 				CE5DFB692B9A3E08005B6F2B /* videoDecoder.c in Sources */,
@@ -402,6 +417,7 @@
 				CE5DFB6B2B9A3E08005B6F2B /* SWApplicationDelegate.m in Sources */,
 				CE5DFB6C2B9A3E10005B6F2B /* SWRenderer.m in Sources */,
 				CE85C85D2BAC3FE60056466B /* SWWallpaper.m in Sources */,
+				CE3FFDEC2BB27491007886AA /* SWScene.m in Sources */,
 				CE74EBCA2B9E72B200A35AA0 /* WallpapersView.swift in Sources */,
 				CE8296EA2B9AD4DD000B6EBD /* SidebarView.swift in Sources */,
 				CEFEDD5C2BA8AE5B001589E1 /* OnboardingScreen.swift in Sources */,
