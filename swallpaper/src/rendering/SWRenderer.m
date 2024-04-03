@@ -6,7 +6,7 @@
 
 @implementation SWRendererInfo
 
-- (instancetype)initWithWindow: (NSWindow*)window {
+- (instancetype)initWithWindow:(NSWindow*)window {
     self = [super init];
     
     if (self) {
@@ -57,7 +57,7 @@
     return self;
 }
 
-+ (instancetype)newWithWindow: (NSWindow*)window {
++ (instancetype)newWithWindow:(NSWindow*)window {
     return [[self alloc] initWithWindow: window];
 }
 

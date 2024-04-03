@@ -10,14 +10,14 @@
 @property (readonly) SWNonConstrainedWindow* window;
 @property (readonly) SWMenuBar* menuBar;
 
-- (void)setScene: (NSString*)path;
+- (void)setScene:(NSString*)path;
 - (void)start;
 
-- (void)setFps: (int)fps;
+- (void)setFps:(int)fps;
 - (int)fps;
 
-- (instancetype)initWithScreen: (NSScreen*)screen;
-+ (instancetype)newWithScreen: (NSScreen*)screen;
+- (instancetype)initWithScreen:(NSScreen*)screen;
++ (instancetype)newWithScreen:(NSScreen*)screen;
 
 
 @end

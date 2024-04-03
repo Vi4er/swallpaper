@@ -27,7 +27,7 @@ class WindowDelegate : NSObject, NSWindowDelegate {
         window.makeKeyAndOrderFront(nil)
         window.minSize = NSSize(width: 720, height: 405)
         window.contentViewController = NSHostingController(rootView: ContentView().frame(minWidth: 720, minHeight: 405))
-        
+
         popover.behavior = .transient
         popover.animates = true
         popover.contentViewController = NSViewController()
@@ -46,6 +46,8 @@ class WindowDelegate : NSObject, NSWindowDelegate {
             context.duration = 0.75
             window.animator().alphaValue = 1
         }, completionHandler: nil)
+        
+        window.miniaturize(nil)
     }
     
     @objc func showWindow(_ sender: Any?) {

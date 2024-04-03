@@ -36,7 +36,7 @@
     [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
 }
 
-- (void)setGradient: (NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+- (void)setGradient:(NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     SWGradientLayer* layer = (SWGradientLayer*)self.contentView.layer;
     layer.startPoint = startPoint;
     layer.endPoint = endPoint;

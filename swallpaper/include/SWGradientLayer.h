@@ -8,6 +8,6 @@ typedef enum {
 
 @interface SWGradientLayer : CAGradientLayer
 
-- (void)setEffect: (SWGradientEffect)effect;
+- (void)setEffect:(SWGradientEffect)effect;
 
 @end

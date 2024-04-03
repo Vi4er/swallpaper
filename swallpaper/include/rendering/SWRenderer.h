@@ -16,8 +16,8 @@ extern NSString* RendererDevice;
 @property id<MTLRenderCommandEncoder> encoder;
 @property MTLViewport viewport;
 
-- (instancetype)initWithWindow: (NSWindow*)window;
-+ (instancetype)newWithWindow: (NSWindow*)window;
+- (instancetype)initWithWindow:(NSWindow*)window;
++ (instancetype)newWithWindow:(NSWindow*)window;
 
 @end
 
@@ -27,8 +27,8 @@ extern NSString* RendererDevice;
 @property SWRendererInfo* menuBarInfo;
 @property (nonatomic) VideoDecoder* videoDecoder;
 
-- (instancetype)initWithWallpaper: (SWWallpaper*)wallpaper;
-+ (instancetype)newWithWallpaper: (SWWallpaper*)wallpaper;
+- (instancetype)initWithWallpaper:(SWWallpaper*)wallpaper;
++ (instancetype)newWithWallpaper:(SWWallpaper*)wallpaper;
 
 + (id<MTLDevice>)device;
 

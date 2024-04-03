@@ -3,6 +3,26 @@
 
 @implementation SWElementParser
 
++ (SWElement*)fromXMLElement:(NSXMLElement*)node {
+    SWElement* element = [SWElement elementNamed:node.name];
+    
+    if (element == nil) {
+        NSLog(@"Invalid root element name '%@'\n", node.name);
+        return nil;
+    }
+    
+    for (NSXMLNode* attribute in node.attributes) {
+        [element setProperty:attribute.name value:attribute.stringValue];
+    }
+
+    for (NSXMLElement* child in node.children) {
+        SWElement* childElement = [SWElementParser fromXMLElement:child];
+        childElement.parent = element;
+    }
+        
+    return element;
+}
+
 + (SWElement*)parseFile:(NSString*)path {
     NSError* error = nil;
     NSData* xmlData = [NSData dataWithContentsOfFile:path];
@@ -13,7 +33,7 @@
         return nil;
     }
     
-    return [SWElement new];
+    return [SWElementParser fromXMLElement:document.rootElement];
 }
 
 + (NSColor*)parseColor:(NSString*)str {
@@ -21,7 +41,7 @@
         NSScanner* scanner = [NSScanner scannerWithString:str];
         [scanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString:@"rgb(,) "]];
 
-        double r, g, b, a = 1;
+        double r, g, b, a = 255;
         if ([scanner scanDouble: &r] && [scanner scanDouble: &g] && [scanner scanDouble: &b]) {
             [scanner scanDouble: &a];
             return [NSColor colorWithCalibratedRed:r / 255 green:g / 255 blue:b / 255 alpha:a / 255];
@@ -31,7 +51,7 @@
         NSScanner* scanner = [NSScanner scannerWithString:str];
         [scanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString:@"hsl(,%) "]];
 
-        double h, s, l, a = 1;
+        double h, s, l, a = 255;
         if ([scanner scanDouble: &h] && [scanner scanDouble: &s] && [scanner scanDouble: &l]) {
             [scanner scanDouble: &a];
 
@@ -99,6 +119,11 @@
     }
 
     return CGPointMake(0, 0);
+}
+
++ (CGSize)parseCGSize:(NSString*)str {
+    CGPoint point = [self parseCGPoint:str];
+    return CGSizeMake(point.x, point.y);
 }
 
 + (NSNumber*)parseNumber:(NSString*)str {

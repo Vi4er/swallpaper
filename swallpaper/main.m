@@ -3,8 +3,6 @@
 #import "swallpaper-Swift.h"
 #import <elements/SWElementParser.h>
 
-@class UI;
-
 int main(int argc, const char* argv[]) {
     @autoreleasepool {
         NSApplication* application = [NSApplication sharedApplication];
@@ -37,7 +35,7 @@ int main(int argc, const char* argv[]) {
 //
 //        [scene export: @"/Users/user/Documents/swallpaper/swallpaper/scene.swal"];
         
-        [SWElementParser parseFile:@"/Users/user/Documents/swallpaper/swallpaper/MediaWidget.xml"];
+        // NSLog(@"%@\n", [NSColor colorNamed:@"AccentColor"]);
 
         SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
         appDelegate.uiWindow = ui.window;

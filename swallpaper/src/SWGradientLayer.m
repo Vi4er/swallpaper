@@ -44,7 +44,7 @@ NSArray* effectLocations;
     [self addAnimation:animation forKey:nil];
 }
 
-- (void)setEffect: (SWGradientEffect)effect {
+- (void)setEffect:(SWGradientEffect)effect {
     if (effect != kSWGradientEffectNone) {
         effectColors = [NSMutableArray array];
     }

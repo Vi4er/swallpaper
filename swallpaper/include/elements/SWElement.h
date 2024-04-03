@@ -10,12 +10,17 @@
 @property CGPoint anchorPoint;
 @property CGSize padding;
 @property SWSizeConstraint sizeConstraint;
+@property NSMutableArray* children;
 
-- (CALayer*)createLayer;
-- (instancetype)initWithParent: (SWElement*)parent;
-+ (instancetype)newWithParent: (SWElement*)parent;
-
+- (instancetype)initWithParent:(SWElement*)parent;
+- (int)isRoot;
+- (void)addChild:(SWElement*)child;
+- (void)updateFrame;
 - (CGRect)getRect;
+- (CALayer*)createLayer;
 - (int)setProperty:(NSString*)name value:(NSString*)value;
+
++ (instancetype)newWithParent:(SWElement*)parent;
++ (SWElement*)elementNamed:(NSString*)name;
 
 @end

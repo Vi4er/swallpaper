@@ -1,4 +1,4 @@
-<SW backgroundColor="rgb(0, 0, 0, 127.5)" anchorPoint="{0.5, 0.5}" cornerRadius="10" position="{0.5, 0, 0.5, 0}" size="{0.5, 0, 0.25, 0}">
-    <SWImage image="car" anchorPoint="{0.5, 0.5}" position="{0.025, 0, 0.5, 0}" size="{0, 0, 0.75, 0}" sizeConstraint="YY" />
-    <SWText text="Test String" padding="{10, 5}" position="{0.5, 0, 0.5, 0}" foregroundColor="white" fontSize="50" font="boldSystem" alignmentMode="center" sizeToFit="true"/>
+<SW backgroundColor="rgb(0, 0, 0, 127.5)" anchorPoint="{0.5, 0.5}" cornerRadius="10" position="{0.5, 0, 0.5, 0}" size="{0.5, 0, 0.25, 0}" sizeConstraint="YY">
+    <SWImage image="AppIcon" anchorPoint="{0.5, 0.5}" position="{0.5, 0, 0.5, 0}" size="{0, 0, 0.75, 0}" sizeConstraint="YY" />
+    <SWText text="Swallpaper" anchorPoint="{0.5, 0.5}" position="{0.5, 0, 0.5, 0}" size="{1, 0, 1, 0}" foregroundColor="rgb(255, 255, 255, 255)" fontSize="35" font="boldSystem" horizontalTextAlignment="center"/>
 </SW>

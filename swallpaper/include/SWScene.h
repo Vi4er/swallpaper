@@ -35,10 +35,10 @@
 @property (readonly) NSData* data;
 @property (readonly) int location;
 
-- (instancetype)initWithData: (NSData*)data;
+- (instancetype)initWithData:(NSData*)data;
 
-- (void)skip: (int)amount;
-- (NSUInteger)readNextBytes: (unsigned char*)buffer length:(NSUInteger)length;
+- (void)skip:(int)amount;
+- (NSUInteger)readNextBytes:(unsigned char*)buffer length:(NSUInteger)length;
 - (NSString*)readNextString;
 - (int)readNextInt;
 - (unsigned int)readNextUInt;
@@ -51,14 +51,14 @@
 
 @property (readonly) NSMutableData* data;
 
-- (instancetype)initWithData: (NSMutableData*)data;
+- (instancetype)initWithData:(NSMutableData*)data;
 
-- (void)writeBytes: (unsigned char*)buffer length:(NSUInteger)length;
-- (void)writeString: (NSString*)string;
-- (void)writeInt: (int)value;
-- (void)writeUInt: (unsigned int)value;
-- (void)writeFloat: (float)value;
-- (void)writeColor: (NSColor*)color;
+- (void)writeBytes:(unsigned char*)buffer length:(NSUInteger)length;
+- (void)writeString:(NSString*)string;
+- (void)writeInt:(int)value;
+- (void)writeUInt:(unsigned int)value;
+- (void)writeFloat:(float)value;
+- (void)writeColor:(NSColor*)color;
 
 @end
 
@@ -84,7 +84,7 @@ typedef struct SWSceneMenuBarInfo {
 @property SWSceneVideo video;
 @property SWSceneMenuBarInfo menuBarInfo;
 
-+ (instancetype)import: (NSString*)path;
-- (void)export: (NSString*)path;
++ (instancetype)import:(NSString*)path;
+- (void)export:(NSString*)path;
 
 @end

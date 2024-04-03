@@ -6,13 +6,13 @@
 @interface SWMenuBar : SWNonConstrainedWindow
 
 - (CGFloat)getMenuBarHeight;
-- (void)updatePositionAndSize: (NSRect*)leftRect rightRect:(NSRect*)rightRect;
-- (void)setGradient: (NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+- (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect;
+- (void)setGradient:(NSArray*)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
 + (NSRect)getLeftMenuBarRect;
 + (NSRect)getRightMenuBarRect;
 
-- (instancetype)initWithScreen: (NSScreen*)screen;
-+ (instancetype)newWithScreen: (NSScreen*)screen;
+- (instancetype)initWithScreen:(NSScreen*)screen;
++ (instancetype)newWithScreen:(NSScreen*)screen;
 
 @end
