@@ -7,6 +7,7 @@
 @implementation SWElement
 
 @synthesize frame = _frame;
+@synthesize layer = _layer;
 @synthesize parent = _parent;
 
 -(instancetype)init {
@@ -37,6 +38,24 @@
     return [self isKindOfClass:[SWWallpaper class]];
 }
 
+- (CALayer*)layer {
+    if ([self isRoot]) {
+        return ((SWWallpaper*)self).window.contentView.layer;
+    }
+    else {
+        return _layer;
+    }
+}
+
+- (void)setLayer:(CALayer*)layer {
+    if ([self isRoot]) {
+        ((SWWallpaper*)self).window.contentView.layer = layer;
+    }
+    else {
+        _layer = layer;
+    }
+}
+
 - (void)addChild:(SWElement*)child {
     child.parent = self;
 }
@@ -50,13 +69,7 @@
     [self.layer removeFromSuperlayer];
 
     if (parent) {
-        if ([parent isRoot]) {
-            [((SWWallpaper*)parent).window.contentView.layer addSublayer:self.layer];
-        }
-        else {
-            [parent.layer addSublayer:self.layer];
-        }
-
+        [parent.layer addSublayer:self.layer];
         [parent.children addObject:self];
     }
     

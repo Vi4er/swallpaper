@@ -82,6 +82,7 @@
 		CED519102BBA769C00FFCF81 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED518EF2BBA769C00FFCF81 /* Styling.swift */; };
 		CED519112BBA769C00FFCF81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED518F12BBA769C00FFCF81 /* ContentView.swift */; };
 		CED519132BBA76AA00FFCF81 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED519122BBA76AA00FFCF81 /* UI.swift */; };
+		CEF5EA852BBD23CC00E43FCF /* SWDragEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +177,8 @@
 		CED519142BBA76D500FFCF81 /* swallpaper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "swallpaper-Bridging-Header.h"; sourceTree = "<group>"; };
 		CEE51C802B8D6A290019851F /* SWMenuBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMenuBar.m; sourceTree = "<group>"; };
 		CEE51C822B8D6A350019851F /* SWMenuBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMenuBar.h; sourceTree = "<group>"; };
+		CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWDragEventHandler.m; sourceTree = "<group>"; };
+		CEF5EA862BBD23DA00E43FCF /* SWDragEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWDragEventHandler.h; sourceTree = "<group>"; };
 		CEF629EA2B96B5DC00046894 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CEF629EC2B96B60900046894 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		CEF629EE2B96B63600046894 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -239,6 +242,7 @@
 				CE6111F02BBB51340025126A /* SWElement.m */,
 				CECAC7292BBC9DE200847575 /* SWImageElement.m */,
 				CECAC7302BBCAF4600847575 /* SWElementParser.m */,
+				CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -251,6 +255,7 @@
 				CE6111EF2BBB50FA0025126A /* SWElement.h */,
 				CECAC7282BBC9DB500847575 /* SWImageElement.h */,
 				CECAC7322BBCAF5200847575 /* SWElementParser.h */,
+				CEF5EA862BBD23DA00E43FCF /* SWDragEventHandler.h */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -704,6 +709,7 @@
 				CED519072BBA769C00FFCF81 /* TNOnlyNumbersFormatter.swift in Sources */,
 				CE5DFB682B9A3DFD005B6F2B /* main.m in Sources */,
 				CE5DFB692B9A3E08005B6F2B /* videoDecoder.c in Sources */,
+				CEF5EA852BBD23CC00E43FCF /* SWDragEventHandler.m in Sources */,
 				CE5DFB6A2B9A3E08005B6F2B /* SWMenuBar.m in Sources */,
 				CE5DFB6B2B9A3E08005B6F2B /* SWApplicationDelegate.m in Sources */,
 				CED518F72BBA769C00FFCF81 /* TNHexNumberTextField.swift in Sources */,

@@ -7,14 +7,34 @@
 
 @implementation SWWallpaper
 
-static NSMutableArray<SWWallpaper*>* wallpapers;
-
 int _fps = 30.0;
 
 SWRenderer* renderer;
 NSThread* renderThread = nil;
 NSRunLoop* runLoop;
 NSTimer* timer;
+
++ (NSMutableArray<SWWallpaper*>*)wallpapers {
+    static NSMutableArray<SWWallpaper*>* wallpapers;
+    
+    if (wallpapers == nil) {
+        wallpapers = [NSMutableArray array];
+        
+        NSNotificationCenter* notificationCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
+
+        [notificationCenter addObserver:self
+                                selector:@selector(appDidActivate:)
+                                name:NSWorkspaceDidActivateApplicationNotification
+                                object:nil];
+        
+        [notificationCenter addObserver:self
+                                selector:@selector(appDidActivate:)
+                                name:NSWorkspaceDidLaunchApplicationNotification
+                                object:nil];
+    }
+    
+    return wallpapers;
+}
 
 - (void)setScene:(NSString*)path {
     path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
@@ -129,23 +149,7 @@ NSTimer* timer;
         
         renderer = [SWRenderer newWithWallpaper:self];
         
-        if (!wallpapers) {
-            wallpapers = [NSMutableArray array];
-            
-            NSNotificationCenter* notificationCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
-
-            [notificationCenter addObserver:self
-                                    selector:@selector(appDidActivate:)
-                                    name:NSWorkspaceDidActivateApplicationNotification
-                                    object:nil];
-            
-            [notificationCenter addObserver:self
-                                    selector:@selector(appDidActivate:)
-                                    name:NSWorkspaceDidLaunchApplicationNotification
-                                    object:nil];
-        }
-        
-        [wallpapers addObject:self];
+        [[SWWallpaper wallpapers] addObject:self];
     }
     
     return self;
@@ -155,7 +159,7 @@ NSTimer* timer;
     return [[self alloc] initWithScreen:screen];
 }
 
-- (void)appDidActivate:(NSNotification *)notification {
++ (void)appDidActivate:(NSNotification *)notification {
     NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
     NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
 
@@ -163,14 +167,14 @@ NSTimer* timer;
         return;
     }
 
-    for (int i = 0; i < wallpapers.count; ++i) {
-        [wallpapers[i].menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
+    for (SWWallpaper* wallpaper in [SWWallpaper wallpapers]) {
+        [wallpaper.menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
     }
 }
 
 - (void)dealloc
 {
-    [wallpapers removeObject:self];
+    [[SWWallpaper wallpapers] removeObject:self];
 }
 
 @end

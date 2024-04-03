@@ -19,5 +19,6 @@
 - (instancetype)initWithScreen:(NSScreen*)screen;
 + (instancetype)newWithScreen:(NSScreen*)screen;
 
++ (NSMutableArray<SWWallpaper*>*)wallpapers;
 
 @end
