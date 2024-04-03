@@ -6,18 +6,27 @@
 + (SWElement*)fromXMLElement:(NSXMLElement*)node {
     SWElement* element = [SWElement elementNamed:node.name];
     
+    if (node.kind != NSXMLElementKind) {
+        return nil;
+    }
+    
     if (element == nil) {
         NSLog(@"Invalid root element name '%@'\n", node.name);
         return nil;
     }
     
     for (NSXMLNode* attribute in node.attributes) {
-        [element setProperty:attribute.name value:attribute.stringValue];
+        if (![element setProperty:attribute.name value:attribute.stringValue]) {
+            NSLog(@"Invalid attribute name '%@'\n", attribute.name);
+        }
     }
 
     for (NSXMLElement* child in node.children) {
         SWElement* childElement = [SWElementParser fromXMLElement:child];
-        childElement.parent = element;
+        
+        if (childElement != nil) {
+            childElement.parent = element;
+        }
     }
         
     return element;

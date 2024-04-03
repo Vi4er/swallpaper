@@ -11,6 +11,7 @@
 @property CGSize padding;
 @property SWSizeConstraint sizeConstraint;
 @property NSMutableArray* children;
+@property bool draggable;
 
 - (instancetype)initWithParent:(SWElement*)parent;
 - (int)isRoot;

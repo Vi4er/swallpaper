@@ -169,6 +169,9 @@ double scaledValue(double parentValue, SWScaled value) {
         self.sizeConstraint = [SWElementParser parseSWSizeConstraint:value];
         [self updateFrame];
     }
+    else if ([name isEqualToString:@"draggable"]) {
+        self.draggable = [SWElementParser parseBoolean:value];
+    }
     else {
         return 0;
     }

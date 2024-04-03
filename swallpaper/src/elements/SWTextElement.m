@@ -10,14 +10,13 @@
 }
 
 - (void)drawInContext:(CGContextRef)ctx {
-//     Center Y for now, change to support VerticalAlignment
-//    CGSize textSize = [self getTextSize];
-//    double offset = (self.bounds.size.height - textSize.height) / 2;
-//
-//    CGContextSaveGState(ctx);
-//    CGContextTranslateCTM(ctx, 0, -offset);
+    CGSize textSize = [self getTextSize];
+    double offset = (self.bounds.size.height - textSize.height) / 2;
+
+    CGContextSaveGState(ctx);
+    CGContextTranslateCTM(ctx, 0, offset);
     [super drawInContext:ctx];
-//    CGContextRestoreGState(ctx);
+    CGContextRestoreGState(ctx);
 }
 
 @end
@@ -49,6 +48,7 @@
     }
     else if ([name isEqualToString:@"fontSize"]) {
         self.layer.fontSize = [SWElementParser parseNumber:value].doubleValue;
+        self.layer.font = CFBridgingRetain([(NSFont*)self.layer.font fontWithSize:self.layer.fontSize]);
     }
     else if ([name isEqualToString:@"font"]) {
         self.layer.font = CFBridgingRetain([NSFont boldSystemFontOfSize: self.layer.fontSize]);

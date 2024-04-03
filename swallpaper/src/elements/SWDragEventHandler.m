@@ -50,6 +50,10 @@
             if ([SWDragEventHandler isHoveringDesktop]) {
                 for (SWWallpaper* wallpaper in [SWWallpaper wallpapers]) {
                     for (SWElement* child in wallpaper.children) {
+                        if (!child.draggable) {
+                            continue;
+                        }
+
                         offset = [wallpaper.layer convertPoint:NSEvent.mouseLocation toLayer:child.layer];
                         offset.y = wallpaper.layer.frame.size.height - NSEvent.mouseLocation.y - child.layer.frame.origin.y; // Flip y
 

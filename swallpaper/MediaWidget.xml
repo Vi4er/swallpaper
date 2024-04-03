@@ -1,4 +1,9 @@
-<SW backgroundColor="rgb(0, 0, 0, 127.5)" anchorPoint="{0, 0}" cornerRadius="10" position="{0, 10, 0, 30}" size="{0, 0, 0.1, 0}" sizeConstraint="YY">
-    <SWImage image="AppIcon" anchorPoint="{0.5, 0.5}" position="{0.5, 0, 0.55, 0}" size="{0, 0, 0.75, 0}" sizeConstraint="YY" />
-    <SWText text="Swallpaper" anchorPoint="{0.5, 0.5}" position="{0.5, 0, 0.5, 0}" size="{1, 0, 1, 0}" foregroundColor="rgb(255, 255, 255, 255)" fontSize="25" font="boldSystem" horizontalTextAlignment="center"/>
+<SW backgroundColor="rgb(25, 25, 25, 200)" cornerRadius="25" anchorPoint="{0.5, 0.5}" position="{0.5, 0, 0.5, 0}" size="{0.25 0, 0.25, 0}" draggable="true">
+    <SWText text="Swallpaper" anchorPoint="{0.5, 0}" position="{0.5, 0, 0.025, 0}" size="{1, 0, 0.15, 0}" foregroundColor="rgb(255, 255, 255, 255)" fontSize="45" font="boldSystem" horizontalTextAlignment="center"/>
+    <SWText text="X" backgroundColor="rgb(255, 255, 255, 50)" cornerRadius="30" anchorPoint="{1, 0}" position="{0.975, 0, 0.025, 0}" size="{0, 0, 0.15, 0}" fontSize="35" sizeConstraint="YY" horizontalTextAlignment="center" font="boldSystem"/>
+
+    <SWImage image="logo_developer" anchorPoint="{0, 0.5}" position="{0.1, 0, 0.55, 0}" size="{0, 0, 0.55, 0}" sizeConstraint="YY" />
+    <SWImage image="logo_swallpaper" anchorPoint="{1, 0.5}" position="{0.9, 0, 0.55, 0}" size="{0, 0, 0.55, 0}" sizeConstraint="YY" />
 </SW>
+
+<!-- position="{0, 10, 0, 30}" -->
