@@ -16,49 +16,30 @@ class WindowDelegate : NSObject, NSWindowDelegate {
 @objc class UI : NSObject {
     @objc var window: NSWindow!
     let windowDelegate = WindowDelegate()
-    var statusItem: NSStatusItem!
-    
+    private var statusItem: NSStatusItem?
+    private var popover = NSPopover()
+
     @objc func show() {
-        window = NSWindow(contentRect: NSMakeRect(0, 0, 720, 405), styleMask: [.fullSizeContentView, .closable, .miniaturizable, .titled], backing: .buffered, defer: false)
+        window = NSWindow(contentRect: NSMakeRect(0, 0, 720, 405), styleMask: [.fullSizeContentView, .closable, .miniaturizable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Swallpaper"
         window.delegate = windowDelegate
         window.center()
         window.makeKeyAndOrderFront(nil)
-        
-        window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
-        
         window.minSize = NSSize(width: 720, height: 405)
+        window.contentViewController = NSHostingController(rootView: ContentView().frame(minWidth: 720, minHeight: 405))
+        
+        popover.behavior = .transient
+        popover.animates = true
+        popover.contentViewController = NSViewController()
+        popover.contentViewController?.view = NSHostingView(rootView: MenuBarView())
+        
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-        window.contentViewController = NSHostingController(rootView: OnboardingScreen().frame(width: window.frame.size.width, height: window.frame.size.height))
-        
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength);
-        statusItem.button?.image = .menuBarIcon
-        
-        let statusMenu = NSMenu(title: "Swallpaper")
-        statusItem.menu = statusMenu
-
-        let logoIcon = statusMenu.addItem(
-            withTitle: "Swallpaper",
-            action: #selector(showWindow(_:)),
-            keyEquivalent: ""
-        )
-
-        logoIcon.image = .menuBarIconGray
-        
-        statusMenu.addItem(.separator())
-        
-        statusMenu.addItem(
-            withTitle: "Show UI",
-            action: #selector(showWindow(_:)),
-            keyEquivalent: ""
-        ).target = self
-        
-        statusMenu.addItem(
-            withTitle: "Quit",
-            action: #selector(quit(_:)),
-            keyEquivalent: ""
-        ).target = self
+        if let menuButton = statusItem?.button {
+            menuButton.image = .menuBarIcon
+            menuButton.action = #selector(menuToggle)
+            menuButton.target = self
+        }
         
         window.alphaValue = 0
         NSAnimationContext.runAnimationGroup({ (context) -> Void in
@@ -74,5 +55,17 @@ class WindowDelegate : NSObject, NSWindowDelegate {
     
     @objc func quit(_ sender: Any?) {
         exit(0)
+    }
+    
+    @objc private func menuToggle(sender: AnyObject) {
+        if popover.isShown {
+            popover.performClose(sender)
+            return
+        }
+        
+        if let menuButton = statusItem?.button {
+            self.popover.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: NSRectEdge.minY)
+            popover.contentViewController?.view.window?.makeKey()
+        }
     }
 }

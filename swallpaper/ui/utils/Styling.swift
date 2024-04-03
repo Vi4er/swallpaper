@@ -2,7 +2,7 @@
 //  Styling.swift
 //  swallpaper
 //
-//  Created by Caleb Boatcallie on 3/18/24.
+//  Created by Antfroze on 3/21/24.
 //
 
 import SwiftUI
@@ -21,3 +21,4 @@ struct Rounding {
     static let lg = 18.0
     static let xl = 24.0
 }
+

@@ -1,6 +1,7 @@
 #import <SWApplicationDelegate.h>
 #import <SWScene.h>
 #import "swallpaper-Swift.h"
+#import <elements/SWElementParser.h>
 
 @class UI;
 
@@ -12,36 +13,36 @@ int main(int argc, const char* argv[]) {
         UI* ui = [[UI alloc] init];
         [ui show];
         
-        SWScene* scene = [[SWScene alloc] init];
-        scene.name = @"Pikachu";
-        scene.desc = @"Pikachu Rain Video";
+//        SWScene* scene = [[SWScene alloc] init];
+//        scene.name = @"Car";
+//        scene.desc = @"Car Video";
+//
+//        SWSceneVideo video = {0};
+//        video.filePath = "/Users/user/Downloads/output.mp4";
+//        video.fps = 60;
+//        video.playbackSpeed = 1;
+//        scene.video = video;
+//
+//        SWSceneMenuBarInfo menuBarInfo = {0};
+//        menuBarInfo.enabled = 1;
+//        menuBarInfo.colors = @[
+//            NSColor.clearColor,
+//            NSColor.clearColor,
+//            NSColor.whiteColor,
+//            NSColor.clearColor,
+//            NSColor.clearColor
+//        ];
+//        menuBarInfo.effect = kSWGradientEffectWave;
+//        scene.menuBarInfo = menuBarInfo;
+//
+//        [scene export: @"/Users/user/Documents/swallpaper/swallpaper/scene.swal"];
         
-        SWSceneVideo video = {0};
-        video.filePath = "/Users/user/Downloads/wallpaper.mp4";
-        video.fps = 60;
-        video.playbackSpeed = 1;
-        scene.video = video;
-        
-        SWSceneMenuBarInfo menuBarInfo = {0};
-        menuBarInfo.enabled = 1;
-        menuBarInfo.colors = @[
-            NSColor.grayColor,
-            NSColor.grayColor,
-            NSColor.whiteColor,
-            NSColor.grayColor,
-            NSColor.grayColor
-        ];
-        menuBarInfo.effect = kSWGradientEffectWave;
-        scene.menuBarInfo = menuBarInfo;
-        
-        [scene export: @"/users/user/desktop/scene.swal"];
+        [SWElementParser parseFile:@"/Users/user/Documents/swallpaper/swallpaper/MediaWidget.xml"];
 
         SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
         appDelegate.uiWindow = ui.window;
         [application setDelegate: appDelegate];
         [application run];
-        
-        // video_decoder_free(appDelegate.renderer.videoDecoder);
     }
     
     return 0;

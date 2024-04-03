@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "winter-kimono-anime-girl-art-4k-wallpaper-uhdpaper.com-407@0@e.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

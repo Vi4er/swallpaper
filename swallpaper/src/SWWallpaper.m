@@ -1,7 +1,9 @@
 #import <SWWallpaper.h>
 #import <SWGradientLayer.h>
+#import <SWFlippedView.h>
 #import <rendering/SWRenderer.h>
 #import <SWScene.h>
+#include "swallpaper-Swift.h"
 
 @implementation SWWallpaper
 
@@ -15,7 +17,7 @@ NSRunLoop* runLoop;
 NSTimer* timer;
 
 - (void)setScene:(NSString*)path {
-    // path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
+    path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
     
     if (renderer.videoDecoder) {
         video_decoder_free(renderer.videoDecoder);
@@ -27,8 +29,14 @@ NSTimer* timer;
 
     if (scene.menuBarInfo.enabled) {
         NSMutableArray* colors = [NSMutableArray array];
+
         for (NSColor* color in scene.menuBarInfo.colors) {
-            [colors addObject:(id)[color colorWithAlphaComponent:0.5].CGColor];
+            if (color.alphaComponent == 0) {
+                [colors addObject: color];
+            }
+            else {
+                [colors addObject:(id)[color colorWithAlphaComponent:0.5].CGColor];
+            }
         }
 
         [self.menuBar setGradient:(NSArray*)colors startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
@@ -106,6 +114,7 @@ NSTimer* timer;
         _window.hasShadow = NO;
         _window.level = kCGDesktopWindowLevel;
         _window.backgroundColor = [NSColor clearColor];
+        _window.contentView = [[SWFlippedView alloc] init];
         
         // Fade
         

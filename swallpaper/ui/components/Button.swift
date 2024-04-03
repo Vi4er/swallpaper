@@ -2,36 +2,50 @@
 //  Button.swift
 //  swallpaper
 //
-//  Created by Caleb Boatcallie on 3/18/24.
+//  Created by Antfroze on 3/20/24.
 //
 
 import SwiftUI
 
-struct CButton: View {
-    enum Style {
+struct CButton<Content: View>: View {
+    var action: () -> Void
+    var content: () -> Content
+    var tintColor: Color
+    
+    @State private var isHovering = false
+    var startOpacity = 0.25
+    var endOpacity = 0.5
+    
+    init(action: @escaping () -> Void, content: @escaping () -> Content, tintColor: Color = .gray) {
+        self.action = action
+        self.content = content
+        self.tintColor = tintColor
         
+        if tintColor != .gray {
+            startOpacity = 0.8
+            endOpacity = 1
+        }
     }
     
     var body: some View {
-        HStack {
-            Text("LOL")
+        ZStack {
+            content()
         }
-        .background(VisualEffectView().ignoresSafeArea())
+        .padding(.vertical, Spacing.xs)
+        .padding(.horizontal, Spacing.sm)
+        .background(isHovering ? tintColor.opacity(endOpacity) : tintColor.opacity(startOpacity))
+        .clipShape(.rect(cornerRadius: Rounding.sm))
+        .onHover { hovering in
+            isHovering = hovering
+        }
+        .onTapGesture {
+            action()
+        }
     }
 }
 
-#Preview {
-    CButton()
-        .frame(width: 250, height: 250)
-}
-
-struct VisualEffectView: NSViewRepresentable {
-    func makeNSView(context: Context) -> NSVisualEffectView {
-        let effectView = NSVisualEffectView()
-        effectView.state = .active
-        return effectView
-    }
-
-    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+extension CButton {
+    func tinted(_ color: Color) -> CButton {
+        CButton(action: action, content: content, tintColor: color)
     }
 }

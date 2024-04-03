@@ -25,6 +25,14 @@
         else {
             self.window.contentView.wantsLayer = YES;
             self.window.contentView.layer = self.layer;
+            
+            CATextLayer* layer = [CATextLayer layer];
+            layer.string = @"FART!\n"; 
+            layer.frame = CGRectMake(50, self.window.contentView.frame.size.height, self.window.contentView.frame.size.width, 100);
+            layer.alignmentMode = kCAAlignmentCenter;
+            layer.foregroundColor = NSColor.whiteColor.CGColor;
+            layer.fontSize = 50.0;
+            [self.window.contentView.layer addSublayer: layer];
         }
         
         self.commandQueue = [[SWRenderer device] newCommandQueue];

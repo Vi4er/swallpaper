@@ -1,6 +1,24 @@
 {
-  "originHash" : "779f5a91326d7dd191f183562d4ad87d419299548eafaf0762bba9d8ddd4eb5f",
+  "originHash" : "f29d8843e8c8b3cb1a8ce6e0bb23e294f8b761ecd88927fcaf746ef35515bd72",
   "pins" : [
+    {
+      "identity" : "glur",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/joogps/Glur",
+      "state" : {
+        "revision" : "9e00ff79da318f2c78b749b1027e54a9d4de2e33",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "rive-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rive-app/rive-ios",
+      "state" : {
+        "revision" : "30e738b8842f236bb0e6b5117eab5dd9b26c88d7",
+        "version" : "5.10.0"
+      }
+    },
     {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
@@ -11,12 +29,12 @@
       }
     },
     {
-      "identity" : "swiftui-system-colors",
+      "identity" : "swiftui-introspect",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/diniska/swiftui-system-colors",
+      "location" : "https://github.com/siteline/swiftui-introspect",
       "state" : {
-        "revision" : "5127afab23337699a714e036588f02d9481ae612",
-        "version" : "1.2.0"
+        "revision" : "0cd2a5a5895306bc21d54a2254302d24a9a571e4",
+        "version" : "1.1.3"
       }
     }
   ],

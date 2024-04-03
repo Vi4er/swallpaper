@@ -2,8 +2,9 @@
 #import <AppKit/AppKit.h>
 #import <SWNonConstrainedWindow.h>
 #import <SWMenuBar.h>
+#import <elements/SWElement.h>
 
-@interface SWWallpaper : NSObject
+@interface SWWallpaper : SWElement
 
 @property (readonly) NSScreen* screen;
 @property (readonly) SWNonConstrainedWindow* window;

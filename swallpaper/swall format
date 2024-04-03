@@ -15,6 +15,31 @@ struct MenuBarInfo {
     SWGradientEffect effect;
 }
 
+struct Element {
+    SWElementType type;
+    Element* parent;
+}
+
+struct SWPoint {
+    double scale, offset;
+}
+
+typedef SWSize SWPoint;
+
+struct SWFrame {
+    SWPoint x, y;
+    SWSize width, height;
+}
+
+struct TextElement {
+    NSString* text;
+    NSColor* backgroundColor, foregroundColor;
+    Vector2 anchorPoint;
+    CATextLayerAlignmentMode horizontalAlignment;
+    
+    SWFrame frame;
+}
+
 * First 4 Bytes have to be SWAL
 * Strings can be shorter but no more than the specified length and must be null terminated
 
@@ -22,3 +47,4 @@ Name            <String(64)>
 Description     <String(255)>
 Video           <Video>         // If length is 0, no video was specified and this can be skipped
 MenuBarInfo     <MenuBarInfo>
+Elements <Element[]>
