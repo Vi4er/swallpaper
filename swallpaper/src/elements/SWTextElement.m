@@ -1,5 +1,6 @@
 #import <elements/SWTextElement.h>
-#import <elements/SWElementParser.h>
+#import <scripting/SWElementParser.h>
+#import <scripting/SWEnumParser.h>
 #import <AppKit/AppKit.h>
 
 @implementation SWTextLayer
@@ -32,48 +33,23 @@
 -(void)sizeToFit {
     CGSize textSize = [self.layer getTextSize];
 
-    SWRect frame = self.frame;
-    frame.size.width.scale = frame.size.height.scale = 0;
-    frame.size.width.offset = textSize.width;
-    frame.size.height.offset = textSize.height;
-    self.frame = frame;
+    self.frame.size.width.scale = self.frame.size.height.scale = 0;
+    self.frame.size.width.offset = textSize.width;
+    self.frame.size.height.offset = textSize.height;
+    [self updateFrame];
 }
 
-- (int)setProperty:(NSString*)name value:(NSString*)value {
-    if ([name isEqualToString:@"text"]) {
-        self.layer.string = value;
-    }
-    else if ([name isEqualToString:@"foregroundColor"]) {
-        self.layer.foregroundColor = [SWElementParser parseColor:value].CGColor;
-    }
-    else if ([name isEqualToString:@"fontSize"]) {
-        self.layer.fontSize = [SWElementParser parseNumber:value].doubleValue;
+// TODO: Add Font
+DECLARE_PROPERTIES(SWTextElement) {
+    STRING_PROPERTY(text, self.layer.string);
+    CGCOLOR_PROPERTY(foregroundColor, self.layer.foregroundColor);
+    DEFINE_PROPERTY(fontSize, Number, ^NSNumber*(SWTextElement* self) {
+        return [NSNumber numberWithDouble:self.layer.fontSize];
+    }, ^void(SWTextElement* self, NSNumber* value) {
+        self.layer.fontSize = value.doubleValue;
         self.layer.font = CFBridgingRetain([(NSFont*)self.layer.font fontWithSize:self.layer.fontSize]);
-    }
-    else if ([name isEqualToString:@"font"]) {
-        self.layer.font = CFBridgingRetain([NSFont boldSystemFontOfSize: self.layer.fontSize]);
-    }
-    else if ([name isEqualToString:@"horizontalTextAlignment"]) {
-        value = [value lowercaseString];
-
-        if ([value isEqualToString:@"center"]) {
-            self.layer.alignmentMode = kCAAlignmentCenter;
-        }
-        else if ([value isEqualToString:@"left"]) {
-            self.layer.alignmentMode = kCAAlignmentLeft;
-        }
-        else if ([value isEqualToString:@"right"]) {
-            self.layer.alignmentMode = kCAAlignmentRight;
-        }
-        else {
-            self.layer.alignmentMode = kCAAlignmentNatural;
-        }
-    }
-    else {
-        return [super setProperty:name value:value];
-    }
-    
-    return 1;
+    });
+    STRING_PROPERTY(horizontalTextAlignment, self.layer.alignmentMode);
 }
 
 @end

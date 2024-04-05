@@ -1,14 +1,15 @@
 #import <elements/SWElement.h>
-#import <SWWallpaper.h>
-#import <elements/SWElementParser.h>
 #import <elements/SWTextElement.h>
 #import <elements/SWImageElement.h>
+#import <scripting/SWEnumParser.h>
+#import <SWWallpaper.h>
 
 @implementation SWElement
 
-@synthesize frame = _frame;
 @synthesize layer = _layer;
 @synthesize parent = _parent;
+
+typedef void*(*isRoot)(void* element);
 
 -(instancetype)init {
     self = [super init];
@@ -16,11 +17,12 @@
     if (self) {
         if (![self isRoot]) {
             self.layer = [self createLayer];
+            self.frame = [SWRect new];
         }
         
         self.children = [NSMutableArray array];
     }
-    
+
     return self;
 }
 
@@ -76,15 +78,6 @@
     [self updateFrame];
 }
 
-- (SWRect)frame {
-    return _frame;
-}
-
-- (void)setFrame:(SWRect)frame {
-    _frame = frame;
-    [self updateFrame];
-}
-
 - (void)updateFrame {
     self.layer.frame = [self getRect];
     
@@ -93,7 +86,7 @@
     }
 }
 
-double scaledValue(double parentValue, SWScaled value) {
+double scaledValue(double parentValue, SWScaled* value) {
     return parentValue * value.scale + value.offset;
 }
 
@@ -108,13 +101,13 @@ double scaledValue(double parentValue, SWScaled value) {
     }
     
     CGRect parentRect = [self.parent getRect];
-    float x = scaledValue(parentRect.size.width, self.frame.position.x);
-    float y = scaledValue(parentRect.size.height, self.frame.position.y);
+    float x = scaledValue(parentRect.size.width, self.frame.origin.x);
+    float y = scaledValue(parentRect.size.height, self.frame.origin.y);
     float width = scaledValue(parentRect.size.width, self.frame.size.width);
     float height = scaledValue(parentRect.size.height, self.frame.size.height);
     
-    width += self.padding.width * 2;
-    height += self.padding.height * 2;
+    width += self.padding.x * 2;
+    height += self.padding.y * 2;
     
     if (self.sizeConstraint == kSWSizeConstraintXX) {
         height = width;
@@ -133,50 +126,20 @@ double scaledValue(double parentValue, SWScaled value) {
     return [CALayer layer];
 }
 
-- (int)setProperty:(NSString*)name value:(NSString*)value {
-    if ([name isEqualToString:@"backgroundColor"]) {
-        self.layer.backgroundColor = [SWElementParser parseColor:value].CGColor;
+- (void)setProperty:(NSString*)name value:(NSString*)value {
+    SWPropertyDefinition* definition = [[[self class] properties] getPropertyDefinition:name];
+    
+    if (definition.type == kSWPropertyTypeEnum) {
+        definition.set(self, [NSNumber numberWithInt:[SWPropertyTypeDefinition parseEnum:definition.enumParseSelector value:value]]);
+        return;
     }
-    else if ([name isEqualToString:@"position"]) {
-        SWRect frame = self.frame;
-        frame.position = [SWElementParser parseSWPosition:value];
-        self.frame = frame;
+    
+    if (!definition) {
+        NSLog(@"Invalid property name for '%@' ('%@')\n", [self className], name);
+        return;
     }
-    else if ([name isEqualToString:@"size"]) {
-        SWRect frame = self.frame;
-        frame.size = [SWElementParser parseSWSize:value];
-        self.frame = frame;
-    }
-    else if ([name isEqualToString:@"padding"]) {
-        self.padding = [SWElementParser parseCGSize:value];
-        [self updateFrame];
-    }
-    else if ([name isEqualToString:@"anchorPoint"]) {
-        self.anchorPoint = [SWElementParser parseCGPoint:value];
-        [self updateFrame];
-    }
-    else if ([name isEqualToString:@"cornerRadius"]) {
-        NSNumber* num = [SWElementParser parseNumber:value];
-
-        if (num != nil) {
-            self.layer.cornerRadius = num.doubleValue;
-        }
-    }
-    else if ([name isEqualToString:@"maskToBounds"]) {
-        self.layer.masksToBounds = [SWElementParser parseBoolean:value];
-    }
-    else if ([name isEqualToString:@"sizeConstraint"]) {
-        self.sizeConstraint = [SWElementParser parseSWSizeConstraint:value];
-        [self updateFrame];
-    }
-    else if ([name isEqualToString:@"draggable"]) {
-        self.draggable = [SWElementParser parseBoolean:value];
-    }
-    else {
-        return 0;
-    }
- 
-    return 1;
+    
+    definition.set(self, [SWPropertyTypeDefinition typeDefinitions][definition.type].parseFromXML(value));
 }
 
 + (instancetype)newWithParent:(SWElement*)parent {
@@ -196,6 +159,34 @@ double scaledValue(double parentValue, SWScaled value) {
     else {
         return nil;
     }
+}
+
+DECLARE_PROPERTIES(SWElement) {
+    DEFINE_PROPERTY(origin, Point,
+        ^SWPoint*(SWElement* self) {
+            return self.frame.origin;
+        },
+        ^void(SWElement* self, SWPoint* value) {
+            self.frame.origin = value;
+            [self updateFrame];
+        }
+    );
+    DEFINE_PROPERTY(size, Size,
+        ^SWSize*(SWElement* self) {
+            return self.frame.size;
+        },
+        ^void(SWElement* self, SWSize* value) {
+            self.frame.size = value;
+            [self updateFrame];
+        }
+    );
+    VECTOR2_PROPERTY(padding, self.padding);
+    VECTOR2_PROPERTY(anchorPoint, self.anchorPoint);
+    BOOLEAN_PROPERTY(masksToBounds, self.layer.masksToBounds);
+    BOOLEAN_PROPERTY(draggable, self.draggable);
+    DOUBLE_PROPERTY(cornerRadius, self.layer.cornerRadius);
+    CGCOLOR_PROPERTY(backgroundColor, self.layer.backgroundColor);
+    ENUM_PROPERTY(sizeConstraint, self.sizeConstraint, @selector(parseSWSizeConstraint:));
 }
 
 @end

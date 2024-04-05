@@ -1,60 +1,56 @@
 #pragma once
+#import <Foundation/Foundation.h>
 
-typedef struct SWScaled {
-    double scale, offset;
-} SWScaled;
+@interface SWScaled : NSObject
 
-typedef struct SWPosition {
-    SWScaled x, y;
-} SWPosition;
+@property double scale, offset;
 
-typedef struct SWSize {
-    SWScaled width, height;
-} SWSize;
+- (instancetype)initWithScale: (double)scale offset:(double)offset;
++ (instancetype)newWithScale: (double)scale offset:(double)offset;
 
-typedef struct SWRect {
-    SWPosition position;
-    SWSize size;
-} SWRect;
+@end
+
+@interface SWPoint : NSObject
+
+@property SWScaled* x;
+@property SWScaled* y;
+
+- (instancetype)initWithX: (SWScaled*)x y:(SWScaled*)y;
++ (instancetype)newWithX: (SWScaled*)x y:(SWScaled*)y;
+
+@end
+
+@interface SWSize : NSObject
+
+@property SWScaled* width;
+@property SWScaled* height;
+
+- (instancetype)initWithWidth: (SWScaled*)width height:(SWScaled*)height;
++ (instancetype)newWithWidth: (SWScaled*)width height:(SWScaled*)height;
+
+@end
+
+@interface SWRect : NSObject
+
+@property SWPoint* origin;
+@property SWSize* size;
+
+- (instancetype)initWithOrigin: (SWPoint*)origin size:(SWSize*)size;
++ (instancetype)newWithOrigin: (SWPoint*)origin size:(SWSize*)size;
+
+@end
+
+@interface SWVector2 : NSObject
+
+@property double x, y;
+
+- (instancetype)initWithX: (double)x y:(double)y;
++ (instancetype)newWithX: (double)x y:(double)y;
+
+@end
 
 typedef enum SWSizeConstraint {
     kSWSizeConstraintXY,
     kSWSizeConstraintXX,
     kSWSizeConstraintYY
 } SWSizeConstraint;
-
-static inline SWScaled SWScaledMake(double scale, double offset) {
-    SWScaled scaled = {
-        .scale = scale,
-        .offset = offset
-    };
-    
-    return scaled;
-}
-
-static inline SWPosition SWPositionMake(SWScaled x, SWScaled y) {
-    SWPosition position = {
-        .x = x,
-        .y = y
-    };
-    
-    return position;
-}
-
-static inline SWSize SWSizeMake(SWScaled width, SWScaled height) {
-    SWSize size = {
-        .width = width,
-        .height = height
-    };
-    
-    return size;
-}
-
-static inline SWRect SWRectMake(SWScaled x, SWScaled y, SWScaled width, SWScaled height) {
-    SWRect rect = {
-        .position = SWPositionMake(x, y),
-        .size = SWSizeMake(width, height)
-    };
-    
-    return rect;
-}

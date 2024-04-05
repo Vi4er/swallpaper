@@ -1,7 +1,7 @@
 #import <SWApplicationDelegate.h>
 #import <SWWallpaper.h>
 #import <SWGradientLayer.h>
-#import <elements/SWElementParser.h>
+#import <scripting/SWElementParser.h>
 #import <elements/SWImageElement.h>
 #import <elements/SWTextElement.h>
 #import <elements/SWDragEventHandler.h>

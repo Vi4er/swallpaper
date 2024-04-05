@@ -42,6 +42,8 @@
 		CEA4DBDB2BB3D29100296C4E /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBDA2BB3D29100296C4E /* RiveRuntime */; };
 		CEA4DBE72BB3D39500296C4E /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBE62BB3D39500296C4E /* SwiftUIIntrospect */; };
 		CEA4DBEA2BB3D3AB00296C4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBE92BB3D3AB00296C4E /* SnapKit */; };
+		CEB541EF2BBFD92100852176 /* SWTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB541EE2BBFD92100852176 /* SWTypes.m */; };
+		CEB541F32BC0213200852176 /* SWEnumParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB541F22BC0213200852176 /* SWEnumParser.m */; };
 		CECAC72A2BBC9DE200847575 /* SWImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC7292BBC9DE200847575 /* SWImageElement.m */; };
 		CECAC72C2BBCA82200847575 /* SWFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC72B2BBCA82200847575 /* SWFlippedView.m */; };
 		CECAC72F2BBCA9A500847575 /* MediaWidget.xml in Resources */ = {isa = PBXBuildFile; fileRef = CECAC72E2BBCA9A500847575 /* MediaWidget.xml */; };
@@ -83,6 +85,7 @@
 		CED519112BBA769C00FFCF81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED518F12BBA769C00FFCF81 /* ContentView.swift */; };
 		CED519132BBA76AA00FFCF81 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED519122BBA76AA00FFCF81 /* UI.swift */; };
 		CEF5EA852BBD23CC00E43FCF /* SWDragEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */; };
+		CEFA5C722BBFB4EA00285F7D /* SWPropertyDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5C712BBFB4EA00285F7D /* SWPropertyDefinition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +134,10 @@
 		CE85C85B2BAC3FD90056466B /* SWWallpaper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWWallpaper.h; sourceTree = "<group>"; };
 		CE85C85C2BAC3FE60056466B /* SWWallpaper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWWallpaper.m; sourceTree = "<group>"; };
 		CE86071B2BBA6A9F00AFEA41 /* scene.swal */ = {isa = PBXFileReference; lastKnownFileType = file; path = scene.swal; sourceTree = "<group>"; };
+		CEAC29792BBFA58700B4DB0F /* SWPropertyDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPropertyDefinition.h; sourceTree = "<group>"; };
+		CEB541EE2BBFD92100852176 /* SWTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWTypes.m; sourceTree = "<group>"; };
+		CEB541F12BC0210A00852176 /* SWEnumParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEnumParser.h; sourceTree = "<group>"; };
+		CEB541F22BC0213200852176 /* SWEnumParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEnumParser.m; sourceTree = "<group>"; };
 		CECAC7282BBC9DB500847575 /* SWImageElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWImageElement.h; sourceTree = "<group>"; };
 		CECAC7292BBC9DE200847575 /* SWImageElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWImageElement.m; sourceTree = "<group>"; };
 		CECAC72B2BBCA82200847575 /* SWFlippedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWFlippedView.m; sourceTree = "<group>"; };
@@ -185,6 +192,7 @@
 		CEF629F02B96B64D00046894 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		CEF629F22B96B66400046894 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEF629F42B96B68300046894 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CEFA5C712BBFB4EA00285F7D /* SWPropertyDefinition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWPropertyDefinition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,8 +249,8 @@
 				CE6111EC2BBB386C0025126A /* SWTextElement.m */,
 				CE6111F02BBB51340025126A /* SWElement.m */,
 				CECAC7292BBC9DE200847575 /* SWImageElement.m */,
-				CECAC7302BBCAF4600847575 /* SWElementParser.m */,
 				CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */,
+				CEB541EE2BBFD92100852176 /* SWTypes.m */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -254,7 +262,6 @@
 				CE6111EE2BBB394E0025126A /* SWTypes.h */,
 				CE6111EF2BBB50FA0025126A /* SWElement.h */,
 				CECAC7282BBC9DB500847575 /* SWImageElement.h */,
-				CECAC7322BBCAF5200847575 /* SWElementParser.h */,
 				CEF5EA862BBD23DA00E43FCF /* SWDragEventHandler.h */,
 			);
 			path = elements;
@@ -280,6 +287,7 @@
 		CE73BA152B8A98FC00AFC334 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				CEAC29762BBFA42400B4DB0F /* scripting */,
 				CE6111E92BBB38460025126A /* elements */,
 				CE85C8592BAC3F310056466B /* decoding */,
 				CE73BA192B8A992700AFC334 /* rendering */,
@@ -298,6 +306,7 @@
 		CE73BA172B8A991500AFC334 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				CEAC29752BBFA42000B4DB0F /* scripting */,
 				CE6111EA2BBB38520025126A /* elements */,
 				CE85C85A2BAC3F3C0056466B /* decoding */,
 				CE73BA182B8A991F00AFC334 /* rendering */,
@@ -384,6 +393,26 @@
 				CE3FFDEF2BB297C5007886AA /* sceneAVIOContext.h */,
 			);
 			path = decoding;
+			sourceTree = "<group>";
+		};
+		CEAC29752BBFA42000B4DB0F /* scripting */ = {
+			isa = PBXGroup;
+			children = (
+				CEAC29792BBFA58700B4DB0F /* SWPropertyDefinition.h */,
+				CECAC7322BBCAF5200847575 /* SWElementParser.h */,
+				CEB541F12BC0210A00852176 /* SWEnumParser.h */,
+			);
+			path = scripting;
+			sourceTree = "<group>";
+		};
+		CEAC29762BBFA42400B4DB0F /* scripting */ = {
+			isa = PBXGroup;
+			children = (
+				CECAC7302BBCAF4600847575 /* SWElementParser.m */,
+				CEFA5C712BBFB4EA00285F7D /* SWPropertyDefinition.m */,
+				CEB541F22BC0213200852176 /* SWEnumParser.m */,
+			);
+			path = scripting;
 			sourceTree = "<group>";
 		};
 		CED518BA2BBA768800FFCF81 /* ui */ = {
@@ -708,6 +737,7 @@
 				CED518FD2BBA769C00FFCF81 /* TNSaturationBrightnessView.swift in Sources */,
 				CED519072BBA769C00FFCF81 /* TNOnlyNumbersFormatter.swift in Sources */,
 				CE5DFB682B9A3DFD005B6F2B /* main.m in Sources */,
+				CEB541F32BC0213200852176 /* SWEnumParser.m in Sources */,
 				CE5DFB692B9A3E08005B6F2B /* videoDecoder.c in Sources */,
 				CEF5EA852BBD23CC00E43FCF /* SWDragEventHandler.m in Sources */,
 				CE5DFB6A2B9A3E08005B6F2B /* SWMenuBar.m in Sources */,
@@ -719,6 +749,7 @@
 				CED519092BBA769C00FFCF81 /* TNGradientPickerSliderViewController.swift in Sources */,
 				CED518FF2BBA769C00FFCF81 /* TNColorPickerViewController.swift in Sources */,
 				CED518F62BBA769C00FFCF81 /* TNColorInformationView.swift in Sources */,
+				CEB541EF2BBFD92100852176 /* SWTypes.m in Sources */,
 				CE6111ED2BBB386C0025126A /* SWTextElement.m in Sources */,
 				CE6111F12BBB51340025126A /* SWElement.m in Sources */,
 				CED519002BBA769C00FFCF81 /* CAMediaTimingFunction+Easings.swift in Sources */,
@@ -726,6 +757,7 @@
 				CED519022BBA769C00FFCF81 /* NSBezierPath+CGPath.swift in Sources */,
 				CED518FE2BBA769C00FFCF81 /* TNTransparancySliderView.swift in Sources */,
 				CECAC7312BBCAF4600847575 /* SWElementParser.m in Sources */,
+				CEFA5C722BBFB4EA00285F7D /* SWPropertyDefinition.m in Sources */,
 				CED5190D2BBA769C00FFCF81 /* RGB.swift in Sources */,
 				CED5190F2BBA769C00FFCF81 /* TNGradientColor.swift in Sources */,
 				CED519112BBA769C00FFCF81 /* ContentView.swift in Sources */,

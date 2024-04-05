@@ -13,15 +13,12 @@
     self.layer.contents = image;
 }
 
--(int)setProperty:(NSString*)name value:(NSString*)value {
-    if ([name isEqualToString:@"image"]) {
-        self.image = [NSImage imageNamed:value];
-    }
-    else {
-        return [super setProperty:name value:value];
-    }
-
-    return 1;
+DECLARE_PROPERTIES(SWImageElement) {
+    DEFINE_PROPERTY(image, Image, ^NSImage*(SWImageElement* self) {
+        return self.image;
+    }, ^void(SWImageElement* self, NSImage* image) {
+        self.image = image;
+    });
 }
 
 @end

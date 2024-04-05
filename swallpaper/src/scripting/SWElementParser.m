@@ -1,4 +1,4 @@
-#import <elements/SWElementParser.h>
+#import <scripting/SWElementParser.h>
 #import <SWColorUtils.h>
 
 @implementation SWElementParser
@@ -16,9 +16,7 @@
     }
     
     for (NSXMLNode* attribute in node.attributes) {
-        if (![element setProperty:attribute.name value:attribute.stringValue]) {
-            NSLog(@"Invalid attribute name '%@'\n", attribute.name);
-        }
+        [element setProperty:attribute.name value:attribute.stringValue];
     }
 
     for (NSXMLElement* child in node.children) {
@@ -43,6 +41,10 @@
     }
     
     return [SWElementParser fromXMLElement:document.rootElement];
+}
+
++ (NSString*)parseString:(NSString*)str {
+    return str;
 }
 
 + (NSColor*)parseColor:(NSString*)str {
@@ -101,38 +103,29 @@
     return array;
 }
 
-+ (SWPosition)parseSWPosition:(NSString*)str {
++ (SWPoint*)parseSWPoint:(NSString*)str {
     NSArray* numbers = [self parseNumberList:str];
     
     if (numbers.count == 4) {
-        return SWPositionMake(
-                    SWScaledMake([numbers[0] doubleValue], [numbers[1] doubleValue]),
-                    SWScaledMake([numbers[2] doubleValue], [numbers[3] doubleValue])
-                );
+        return [SWPoint newWithX:[SWScaled newWithScale:[numbers[0] doubleValue] offset:[numbers[1] doubleValue]] y:[SWScaled newWithScale:[numbers[2] doubleValue] offset:[numbers[3] doubleValue]]];
     }
 
-    SWPosition position = {0};
-    return position;
+    return nil;
 }
 
-+ (SWSize)parseSWSize:(NSString*)str {
-    SWPosition pos = [self parseSWPosition:str];
-    return SWSizeMake(pos.x, pos.y);
++ (SWSize*)parseSWSize:(NSString*)str {
+    SWPoint* point = [self parseSWPoint:str];
+    return [SWSize newWithWidth:point.x height:point.y];
 }
 
-+ (CGPoint)parseCGPoint:(NSString*)str {
++ (SWVector2*)parseSWVector2:(NSString*)str {
     NSArray* numbers = [self parseNumberList:str];
 
     if (numbers.count == 2) {
-        return CGPointMake([numbers[0] doubleValue], [numbers[1] doubleValue]);
+        return [SWVector2 newWithX:[numbers[0] doubleValue] y:[numbers[1] doubleValue]];
     }
 
-    return CGPointMake(0, 0);
-}
-
-+ (CGSize)parseCGSize:(NSString*)str {
-    CGPoint point = [self parseCGPoint:str];
-    return CGSizeMake(point.x, point.y);
+    return nil;
 }
 
 + (NSNumber*)parseNumber:(NSString*)str {
@@ -143,22 +136,12 @@
     return [numberFormatter numberFromString:str];
 }
 
-+ (int)parseBoolean:(NSString*)str {
-    return ![[str lowercaseString] isEqualToString: @"false"];
++ (NSNumber*)parseBoolean:(NSString*)str {
+    return [NSNumber numberWithBool:![[str lowercaseString] isEqualToString: @"false"]];
 }
 
-+ (SWSizeConstraint)parseSWSizeConstraint:(NSString*)str {
-    str = [str lowercaseString];
-    
-    if ([str isEqualToString:@"xx"]) {
-        return kSWSizeConstraintXX;
-    }
-    else if ([str isEqualToString:@"yy"]) {
-        return kSWSizeConstraintYY;
-    }
-    else {
-        return kSWSizeConstraintXY;
-    }
++ (NSImage*)parseImage:(NSString*)str {
+    return [NSImage imageNamed:str];
 }
 
 @end

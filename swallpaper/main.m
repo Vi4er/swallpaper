@@ -1,7 +1,8 @@
 #import <SWApplicationDelegate.h>
 #import <SWScene.h>
 #import "swallpaper-Swift.h"
-#import <elements/SWElementParser.h>
+
+#import <elements/SWTextElement.h>
 
 int main(int argc, const char* argv[]) {
     @autoreleasepool {
@@ -10,7 +11,7 @@ int main(int argc, const char* argv[]) {
 
         UI* ui = [[UI alloc] init];
         [ui show];
-        
+
 //        SWScene* scene = [[SWScene alloc] init];
 //        scene.name = @"Car";
 //        scene.desc = @"Car Video";
@@ -34,8 +35,6 @@ int main(int argc, const char* argv[]) {
 //        scene.menuBarInfo = menuBarInfo;
 //
 //        [scene export: @"/Users/user/Documents/swallpaper/swallpaper/scene.swal"];
-        
-        // NSLog(@"%@\n", [NSColor colorNamed:@"AccentColor"]);
 
         SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
         appDelegate.uiWindow = ui.window;
