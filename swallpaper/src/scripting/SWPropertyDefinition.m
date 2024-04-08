@@ -1,27 +1,27 @@
 #import <scripting/SWPropertyDefinition.h>
 #import <scripting/SWElementParser.h>
 #import <scripting/SWEnumParser.h>
+#import <scripting/types/SWLuaTypes.h>
 
 @implementation SWPropertyTypeDefinition
 
-- (instancetype)initWithParserSelector:(SEL)parserSelector luaPush:(SWTypeLuaPush)luaPush luaPop:(SWTypeLuaPop)luaPop {
+- (instancetype)initWithParserSelector: (SEL)parserSelector luaPush:(SWTypeLuaPush)luaPush luaTo:(SWTypeLuaTo)luaTo {
     self = [super init];
     
     if (self) {
         SWTypeParseXML parseXML = (SWTypeParseXML)[SWElementParser methodForSelector:parserSelector];
-
         self.parseFromXML = ^id(NSString* value) {
             return parseXML([SWElementParser class], parserSelector, value);
         };
         self.luaPush = luaPush;
-        self.luaPop = luaPop;
+        self.luaTo = luaTo;
     }
     
     return self;
 }
 
-+ (id)newWithParserSelector:(SEL)parserSelector luaPush:(SWTypeLuaPush)luaPush luaPop:(SWTypeLuaPop)luaPop {
-    return [[self alloc] initWithParserSelector:parserSelector luaPush:luaPush luaPop:luaPop];
++ (instancetype)newWithParserSelector: (SEL)parserSelector luaPush:(SWTypeLuaPush)luaPush luaTo:(SWTypeLuaTo)luaTo {
+    return [[self alloc] initWithParserSelector:parserSelector luaPush:luaPush luaTo:luaTo];
 }
 
 + (NSArray<SWPropertyTypeDefinition*>*)typeDefinitions {
@@ -34,14 +34,14 @@
             [typeDefinitions addObject:(SWPropertyTypeDefinition*)[NSNull null]];
         }
         
-        typeDefinitions[kSWPropertyTypeString] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseString:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypeNumber] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseNumber:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypeBoolean] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseBoolean:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypeColor] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseColor:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypePoint] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWPoint:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypeSize] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWSize:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypeVector2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWVector2:) luaPush:0 luaPop:0];
-        typeDefinitions[kSWPropertyTypeImage] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseImage:) luaPush:0 luaPop:0];
+        typeDefinitions[kSWPropertyTypeString] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseString:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeNumber] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseNumber:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeBoolean] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseBoolean:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeColor] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseColor:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypePoint] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWPoint:) luaPush:lua_pushSWPoint luaTo:lua_toSWPoint];
+        typeDefinitions[kSWPropertyTypeSize] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWSize:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeVector2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWVector2:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeImage] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseImage:) luaPush:0 luaTo:0];
     }
     
     return typeDefinitions;

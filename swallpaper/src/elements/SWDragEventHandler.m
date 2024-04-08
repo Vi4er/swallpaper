@@ -15,12 +15,12 @@
 + (void)dragWorkaround {
     CGEventRef emptyEvent = CGEventCreate(NULL);
     CGPoint mousePosition = CGEventGetLocation(emptyEvent);
-    CGPoint dragTo = mousePosition;
-    dragTo.x += 5;
+//    CGPoint dragTo = mousePosition;
+//    dragTo.x += 5;
 
-    [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseDragged mouseCursorPosition:dragTo];
-    [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseUp mouseCursorPosition:dragTo];
-    [SWDragEventHandler sendLeftEvent:kCGEventMouseMoved mouseCursorPosition:mousePosition];
+    // [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseDragged mouseCursorPosition:dragTo];
+    [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseUp mouseCursorPosition:mousePosition];
+    // [SWDragEventHandler sendLeftEvent:kCGEventMouseMoved mouseCursorPosition:mousePosition];
     
     CFRelease(emptyEvent);
 }

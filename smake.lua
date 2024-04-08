@@ -1,3 +1,3 @@
 import('smake/dependencyInstaller', true)
 
-InstallDependencies('ffmpeg', 'zlib', 'bzip2')
+InstallDependencies('ffmpeg', 'zlib', 'bzip2', 'lua')

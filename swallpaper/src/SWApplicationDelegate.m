@@ -5,6 +5,7 @@
 #import <elements/SWImageElement.h>
 #import <elements/SWTextElement.h>
 #import <elements/SWDragEventHandler.h>
+#import <CoreImage/CoreImage.h>
 #import "swallpaper-Swift.h"
 
 @implementation SWApplicationDelegate
@@ -19,6 +20,11 @@ SWElement* element;
     
     if ((element = [SWElementParser parseFile:@"/Users/user/Documents/swallpaper/swallpaper/MediaWidget.xml"]) != nil) {
         element.parent = wallpaper;
+        CIFilter* filter = [CIFilter filterWithName:@"CIGaussianBlur" withInputParameters:@{
+            kCIInputRadiusKey: @5
+        }];
+        element.layer.backgroundFilters = @[filter];
+        
         NSLog(@"Reloaded widget\n");
     }
 }
