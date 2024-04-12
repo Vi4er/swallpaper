@@ -2,12 +2,16 @@
 #import <elements/SWTextElement.h>
 #import <elements/SWImageElement.h>
 #import <scripting/SWEnumParser.h>
+#import <scripting/types/SWEvent.h>
 #import <SWWallpaper.h>
+#import <scripting/lua.h>
 
 @implementation SWElement
 
+@synthesize elementId = _elementId;
 @synthesize layer = _layer;
 @synthesize parent = _parent;
+@synthesize eventListeners = _eventListeners;
 
 typedef void*(*isRoot)(void* element);
 
@@ -17,7 +21,9 @@ typedef void*(*isRoot)(void* element);
     if (self) {
         if (![self isRoot]) {
             self.layer = [self createLayer];
-            self.frame = [SWRect new];
+            SWRect frame = {0};
+            self.frame = frame;
+            _eventListeners = [NSMutableDictionary dictionary];
         }
         
         self.children = [NSMutableArray array];
@@ -86,13 +92,13 @@ typedef void*(*isRoot)(void* element);
     }
 }
 
-double scaledValue(double parentValue, SWScaled* value) {
+double scaledValue(double parentValue, SWScaled value) {
     return parentValue * value.scale + value.offset;
 }
 
 - (CGRect)getRect {
     if ([self isRoot]) {
-        return ((SWWallpaper*)self).screen.frame;
+        return ((SWWallpaper*)self).window.screen.frame;
     }
     
     // Cannot scale without a parent
@@ -142,6 +148,45 @@ double scaledValue(double parentValue, SWScaled* value) {
     definition.set(self, [SWPropertyTypeDefinition typeDefinitions][definition.type].parseFromXML(value));
 }
 
+- (void)addEventListener:(SWEventType)event ref:(int)ref {
+    if (!event) {
+        return;
+    }
+    
+    NSNumber* key = [NSNumber numberWithInt:event];
+
+    if (![self.eventListeners objectForKey:key]) {
+        self.eventListeners[key] = [NSMutableArray array];
+    }
+    
+    [self.eventListeners[key] addObject:[NSNumber numberWithInt:ref]];
+}
+
+- (void)removeEventListener:(SWEventType)event ref:(int)ref {
+    if (!event) {
+        return;
+    }
+    
+    NSNumber* key = [NSNumber numberWithInt:event];
+    [self.eventListeners[key] removeObject:[NSNumber numberWithInt:ref]];
+    
+    luaL_unref(SWLuaState, LUA_REGISTRYINDEX, ref);
+}
+
+- (void)triggerEvent:(SWEvent*)event {
+    NSNumber* key = [NSNumber numberWithInt:event.type];
+
+    if (![self.eventListeners objectForKey:key]) {
+        return;
+    }
+    
+    for (NSNumber* ref in [self.eventListeners objectForKey:key]) {
+        lua_rawgeti(SWLuaState, LUA_REGISTRYINDEX, [ref intValue]);
+        lua_pushSWEvent(SWLuaState, event);
+        lua_call(SWLuaState, 1, 0);
+    }
+}
+
 + (instancetype)newWithParent:(SWElement*)parent {
     return [[self alloc] initWithParent:parent];
 }
@@ -161,22 +206,50 @@ double scaledValue(double parentValue, SWScaled* value) {
     }
 }
 
++ (NSMutableDictionary<NSString*,SWElement*>*)idMap {
+    static NSMutableDictionary* idMap;
+    
+    if (idMap == nil) {
+        idMap = [NSMutableDictionary dictionary];
+    }
+    
+    return idMap;
+}
+
++ (SWElement*)getElementById:(NSString*)elementId {
+    return [[self class] idMap][elementId];
+}
+
+- (NSString*)elementId {
+    return _elementId;
+}
+
+- (void)setElementId:(NSString*)elementId {
+    _elementId = elementId;
+    [[self class] idMap][elementId] = self;
+}
+
 DECLARE_PROPERTIES(SWElement) {
+    STRING_PROPERTY(id, self.elementId);
     DEFINE_PROPERTY(origin, Point,
-        ^SWPoint*(SWElement* self) {
-            return self.frame.origin;
+        ^NSValue*(SWElement* self) {
+            return [NSValue valueWithSWPoint:self.frame.origin];
         },
-        ^void(SWElement* self, SWPoint* value) {
-            self.frame.origin = value;
+        ^void(SWElement* self, NSValue* value) {
+            SWRect frame = self.frame;
+            frame.origin = [value SWPointValue];
+            self.frame = frame;
             [self updateFrame];
         }
     );
     DEFINE_PROPERTY(size, Size,
-        ^SWSize*(SWElement* self) {
-            return self.frame.size;
+        ^NSValue*(SWElement* self) {
+            return [NSValue valueWithSWSize:self.frame.size];
         },
-        ^void(SWElement* self, SWSize* value) {
-            self.frame.size = value;
+        ^void(SWElement* self, NSValue* value) {
+            SWRect frame = self.frame;
+            frame.size = [value SWSizeValue];
+            self.frame = frame;
             [self updateFrame];
         }
     );

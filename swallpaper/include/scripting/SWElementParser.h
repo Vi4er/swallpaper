@@ -8,9 +8,9 @@
 
 + (NSString*)parseString:(NSString*)str;
 + (NSColor*)parseColor:(NSString*)str;
-+ (SWPoint*)parseSWPoint:(NSString*)str;
-+ (SWSize*)parseSWSize:(NSString*)str;
-+ (SWVector2*)parseSWVector2:(NSString*)str;
++ (NSValue*)parseSWPoint:(NSString*)str;
++ (NSValue*)parseSWSize:(NSString*)str;
++ (NSValue*)parseSWVector2:(NSString*)str;
 + (NSNumber*)parseNumber:(NSString*)str;
 + (NSNumber*)parseBoolean:(NSString*)str;
 + (NSImage*)parseImage:(NSString*)str;

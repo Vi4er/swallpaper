@@ -3,12 +3,13 @@
 #import <SWNonConstrainedWindow.h>
 #import <SWMenuBar.h>
 #import <elements/SWElement.h>
+#import <rendering/SWRenderer.h>
 
 @interface SWWallpaper : SWElement
 
-@property (readonly) NSScreen* screen;
 @property (readonly) SWNonConstrainedWindow* window;
 @property (readonly) SWMenuBar* menuBar;
+@property (readonly) SWRenderer* renderer;
 
 - (void)setScene:(NSString*)path;
 - (void)start;

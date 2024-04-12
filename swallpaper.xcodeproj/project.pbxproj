@@ -46,12 +46,14 @@
 		CEA4DBDB2BB3D29100296C4E /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBDA2BB3D29100296C4E /* RiveRuntime */; };
 		CEA4DBE72BB3D39500296C4E /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBE62BB3D39500296C4E /* SwiftUIIntrospect */; };
 		CEA4DBEA2BB3D3AB00296C4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBE92BB3D3AB00296C4E /* SnapKit */; };
-		CEB541EF2BBFD92100852176 /* SWTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB541EE2BBFD92100852176 /* SWTypes.m */; };
+		CEAA3FD32BC6B8A50037E0DD /* SWEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA3FD22BC6B8A50037E0DD /* SWEvent.m */; };
+		CEAA3FD62BC6BB370037E0DD /* lua.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA3FD52BC6BB370037E0DD /* lua.m */; };
+		CEAA3FD82BC6C0510037E0DD /* SWEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA3FD72BC6C0510037E0DD /* SWEvent.m */; };
 		CEB541F32BC0213200852176 /* SWEnumParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB541F22BC0213200852176 /* SWEnumParser.m */; };
 		CEC722722BC0D60E00E54D50 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC7226F2BC0D53500E54D50 /* liblua.a */; };
 		CECAC72A2BBC9DE200847575 /* SWImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC7292BBC9DE200847575 /* SWImageElement.m */; };
 		CECAC72C2BBCA82200847575 /* SWFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC72B2BBCA82200847575 /* SWFlippedView.m */; };
-		CECAC72F2BBCA9A500847575 /* MediaWidget.xml in Resources */ = {isa = PBXBuildFile; fileRef = CECAC72E2BBCA9A500847575 /* MediaWidget.xml */; };
+		CECAC72F2BBCA9A500847575 /* Widget.xml in Resources */ = {isa = PBXBuildFile; fileRef = CECAC72E2BBCA9A500847575 /* Widget.xml */; };
 		CECAC7312BBCAF4600847575 /* SWElementParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC7302BBCAF4600847575 /* SWElementParser.m */; };
 		CECAC7352BBCBA4400847575 /* SWColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC7342BBCBA4400847575 /* SWColorUtils.m */; };
 		CED5185D2BBA758900FFCF81 /* SWGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5185C2BBA758900FFCF81 /* SWGradientLayer.m */; };
@@ -89,7 +91,8 @@
 		CED519102BBA769C00FFCF81 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED518EF2BBA769C00FFCF81 /* Styling.swift */; };
 		CED519112BBA769C00FFCF81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED518F12BBA769C00FFCF81 /* ContentView.swift */; };
 		CED519132BBA76AA00FFCF81 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED519122BBA76AA00FFCF81 /* UI.swift */; };
-		CEF5EA852BBD23CC00E43FCF /* SWDragEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */; };
+		CEF2247B2BC8FF58002CF258 /* SWTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2247A2BC8FF58002CF258 /* SWTypes.m */; };
+		CEF5EA852BBD23CC00E43FCF /* SWEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5EA842BBD23CC00E43FCF /* SWEventHandler.m */; };
 		CEFA5C722BBFB4EA00285F7D /* SWPropertyDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5C712BBFB4EA00285F7D /* SWPropertyDefinition.m */; };
 /* End PBXBuildFile section */
 
@@ -149,17 +152,21 @@
 		CE9638422BC3C44F00AA8615 /* SWElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWElement.m; sourceTree = "<group>"; };
 		CE9638442BC3C66D00AA8615 /* SWLuaTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLuaTypes.h; sourceTree = "<group>"; };
 		CE9822E62BC11C2D001184F2 /* lua.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lua.h; sourceTree = "<group>"; };
+		CEAA3FD12BC6B5BB0037E0DD /* SWEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEvent.h; sourceTree = "<group>"; };
+		CEAA3FD22BC6B8A50037E0DD /* SWEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEvent.m; sourceTree = "<group>"; };
+		CEAA3FD42BC6B8AF0037E0DD /* SWEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEvent.h; sourceTree = "<group>"; };
+		CEAA3FD52BC6BB370037E0DD /* lua.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lua.m; sourceTree = "<group>"; };
+		CEAA3FD72BC6C0510037E0DD /* SWEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEvent.m; sourceTree = "<group>"; };
 		CEAC29792BBFA58700B4DB0F /* SWPropertyDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPropertyDefinition.h; sourceTree = "<group>"; };
-		CEB541EE2BBFD92100852176 /* SWTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWTypes.m; sourceTree = "<group>"; };
 		CEB541F12BC0210A00852176 /* SWEnumParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEnumParser.h; sourceTree = "<group>"; };
 		CEB541F22BC0213200852176 /* SWEnumParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEnumParser.m; sourceTree = "<group>"; };
 		CEC7226F2BC0D53500E54D50 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = dependencies/lua/lib/liblua.a; sourceTree = "<group>"; };
-		CEC722702BC0D5ED00E54D50 /* test.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.lua; sourceTree = "<group>"; };
+		CEC722702BC0D5ED00E54D50 /* Widget.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = Widget.lua; sourceTree = "<group>"; };
 		CECAC7282BBC9DB500847575 /* SWImageElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWImageElement.h; sourceTree = "<group>"; };
 		CECAC7292BBC9DE200847575 /* SWImageElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWImageElement.m; sourceTree = "<group>"; };
 		CECAC72B2BBCA82200847575 /* SWFlippedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWFlippedView.m; sourceTree = "<group>"; };
 		CECAC72D2BBCA83200847575 /* SWFlippedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWFlippedView.h; sourceTree = "<group>"; };
-		CECAC72E2BBCA9A500847575 /* MediaWidget.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MediaWidget.xml; sourceTree = "<group>"; };
+		CECAC72E2BBCA9A500847575 /* Widget.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Widget.xml; sourceTree = "<group>"; };
 		CECAC7302BBCAF4600847575 /* SWElementParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWElementParser.m; sourceTree = "<group>"; };
 		CECAC7322BBCAF5200847575 /* SWElementParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWElementParser.h; sourceTree = "<group>"; };
 		CECAC7332BBCB9F700847575 /* SWColorUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWColorUtils.h; sourceTree = "<group>"; };
@@ -201,8 +208,9 @@
 		CED519142BBA76D500FFCF81 /* swallpaper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "swallpaper-Bridging-Header.h"; sourceTree = "<group>"; };
 		CEE51C802B8D6A290019851F /* SWMenuBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWMenuBar.m; sourceTree = "<group>"; };
 		CEE51C822B8D6A350019851F /* SWMenuBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWMenuBar.h; sourceTree = "<group>"; };
-		CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWDragEventHandler.m; sourceTree = "<group>"; };
-		CEF5EA862BBD23DA00E43FCF /* SWDragEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWDragEventHandler.h; sourceTree = "<group>"; };
+		CEF2247A2BC8FF58002CF258 /* SWTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWTypes.m; sourceTree = "<group>"; };
+		CEF5EA842BBD23CC00E43FCF /* SWEventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEventHandler.m; sourceTree = "<group>"; };
+		CEF5EA862BBD23DA00E43FCF /* SWEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEventHandler.h; sourceTree = "<group>"; };
 		CEF629EA2B96B5DC00046894 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CEF629EC2B96B60900046894 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		CEF629EE2B96B63600046894 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -256,8 +264,8 @@
 				CE103C4F2B9A3C5C006C25C2 /* main.m */,
 				CE103C512B9A3C5C006C25C2 /* swallpaper.entitlements */,
 				CE3FFDE02BB26E73007886AA /* swall format */,
-				CECAC72E2BBCA9A500847575 /* MediaWidget.xml */,
-				CEC722702BC0D5ED00E54D50 /* test.lua */,
+				CECAC72E2BBCA9A500847575 /* Widget.xml */,
+				CEC722702BC0D5ED00E54D50 /* Widget.lua */,
 			);
 			path = swallpaper;
 			sourceTree = "<group>";
@@ -268,8 +276,9 @@
 				CE6111EC2BBB386C0025126A /* SWTextElement.m */,
 				CE6111F02BBB51340025126A /* SWElement.m */,
 				CECAC7292BBC9DE200847575 /* SWImageElement.m */,
-				CEF5EA842BBD23CC00E43FCF /* SWDragEventHandler.m */,
-				CEB541EE2BBFD92100852176 /* SWTypes.m */,
+				CEF5EA842BBD23CC00E43FCF /* SWEventHandler.m */,
+				CEAA3FD72BC6C0510037E0DD /* SWEvent.m */,
+				CEF2247A2BC8FF58002CF258 /* SWTypes.m */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -281,7 +290,8 @@
 				CE6111EE2BBB394E0025126A /* SWTypes.h */,
 				CE6111EF2BBB50FA0025126A /* SWElement.h */,
 				CECAC7282BBC9DB500847575 /* SWImageElement.h */,
-				CEF5EA862BBD23DA00E43FCF /* SWDragEventHandler.h */,
+				CEF5EA862BBD23DA00E43FCF /* SWEventHandler.h */,
+				CEAA3FD12BC6B5BB0037E0DD /* SWEvent.h */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -423,6 +433,7 @@
 				CE96383E2BC3BF8500AA8615 /* SWPoint.h */,
 				CE9638412BC3C41D00AA8615 /* SWElement.h */,
 				CE9638442BC3C66D00AA8615 /* SWLuaTypes.h */,
+				CEAA3FD42BC6B8AF0037E0DD /* SWEvent.h */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -434,6 +445,7 @@
 				CE96383C2BC3BF0000AA8615 /* Utils.m */,
 				CE96383F2BC3C0D000AA8615 /* SWPoint.m */,
 				CE9638422BC3C44F00AA8615 /* SWElement.m */,
+				CEAA3FD22BC6B8A50037E0DD /* SWEvent.m */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -457,6 +469,7 @@
 				CECAC7302BBCAF4600847575 /* SWElementParser.m */,
 				CEFA5C712BBFB4EA00285F7D /* SWPropertyDefinition.m */,
 				CEB541F22BC0213200852176 /* SWEnumParser.m */,
+				CEAA3FD52BC6BB370037E0DD /* lua.m */,
 			);
 			path = scripting;
 			sourceTree = "<group>";
@@ -760,7 +773,7 @@
 				CE3FFDE12BB26E73007886AA /* swall format in Resources */,
 				CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */,
 				CE86071C2BBA6A9F00AFEA41 /* scene.swal in Resources */,
-				CECAC72F2BBCA9A500847575 /* MediaWidget.xml in Resources */,
+				CECAC72F2BBCA9A500847575 /* Widget.xml in Resources */,
 				CED518F42BBA769C00FFCF81 /* binoculars.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -785,18 +798,18 @@
 				CE5DFB682B9A3DFD005B6F2B /* main.m in Sources */,
 				CEB541F32BC0213200852176 /* SWEnumParser.m in Sources */,
 				CE5DFB692B9A3E08005B6F2B /* videoDecoder.c in Sources */,
-				CEF5EA852BBD23CC00E43FCF /* SWDragEventHandler.m in Sources */,
+				CEF5EA852BBD23CC00E43FCF /* SWEventHandler.m in Sources */,
 				CE5DFB6A2B9A3E08005B6F2B /* SWMenuBar.m in Sources */,
 				CE5DFB6B2B9A3E08005B6F2B /* SWApplicationDelegate.m in Sources */,
 				CED518F72BBA769C00FFCF81 /* TNHexNumberTextField.swift in Sources */,
 				CED5190B2BBA769C00FFCF81 /* TNTrackHandleView.swift in Sources */,
+				CEAA3FD32BC6B8A50037E0DD /* SWEvent.m in Sources */,
 				CED519082BBA769C00FFCF81 /* TNGradientPickerSliderConfiguration.swift in Sources */,
 				CED5185E2BBA75DB00FFCF81 /* SWNonConstrainedWindow.m in Sources */,
 				CED519092BBA769C00FFCF81 /* TNGradientPickerSliderViewController.swift in Sources */,
 				CED518FF2BBA769C00FFCF81 /* TNColorPickerViewController.swift in Sources */,
 				CE96383A2BC3BD6300AA8615 /* SWScaled.m in Sources */,
 				CED518F62BBA769C00FFCF81 /* TNColorInformationView.swift in Sources */,
-				CEB541EF2BBFD92100852176 /* SWTypes.m in Sources */,
 				CE6111ED2BBB386C0025126A /* SWTextElement.m in Sources */,
 				CE6111F12BBB51340025126A /* SWElement.m in Sources */,
 				CED519002BBA769C00FFCF81 /* CAMediaTimingFunction+Easings.swift in Sources */,
@@ -806,6 +819,7 @@
 				CECAC7312BBCAF4600847575 /* SWElementParser.m in Sources */,
 				CEFA5C722BBFB4EA00285F7D /* SWPropertyDefinition.m in Sources */,
 				CED5190D2BBA769C00FFCF81 /* RGB.swift in Sources */,
+				CEAA3FD82BC6C0510037E0DD /* SWEvent.m in Sources */,
 				CED5190F2BBA769C00FFCF81 /* TNGradientColor.swift in Sources */,
 				CED519112BBA769C00FFCF81 /* ContentView.swift in Sources */,
 				CED518F52BBA769C00FFCF81 /* Button.swift in Sources */,
@@ -822,9 +836,11 @@
 				CED519012BBA769C00FFCF81 /* CGFloat+Clamp.swift in Sources */,
 				CED519042BBA769C00FFCF81 /* NSColor+Random.swift in Sources */,
 				CE9638402BC3C0D000AA8615 /* SWPoint.m in Sources */,
+				CEF2247B2BC8FF58002CF258 /* SWTypes.m in Sources */,
 				CED5190A2BBA769C00FFCF81 /* TNGradientSliderView.swift in Sources */,
 				CECAC7352BBCBA4400847575 /* SWColorUtils.m in Sources */,
 				CECAC72A2BBC9DE200847575 /* SWImageElement.m in Sources */,
+				CEAA3FD62BC6BB370037E0DD /* lua.m in Sources */,
 				CE5DFB6D2B9A3E10005B6F2B /* SWVideoRenderer.m in Sources */,
 				CED519062BBA769C00FFCF81 /* NSView+BackgroundColor.swift in Sources */,
 				CED519132BBA76AA00FFCF81 /* UI.swift in Sources */,
@@ -861,6 +877,7 @@
 				);
 				INFOPLIST_KEY_CFBundleDisplayName = Swallpaper;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -913,6 +930,7 @@
 				);
 				INFOPLIST_KEY_CFBundleDisplayName = Swallpaper;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -996,6 +1014,7 @@
 					swallpaper/include,
 					"dependencies/**",
 				);
+				INFOPLIST_KEY_LSUIElement = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1057,6 +1076,7 @@
 					swallpaper/include,
 					"dependencies/**",
 				);
+				INFOPLIST_KEY_LSUIElement = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;

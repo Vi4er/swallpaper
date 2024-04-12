@@ -103,29 +103,39 @@
     return array;
 }
 
-+ (SWPoint*)parseSWPoint:(NSString*)str {
++ (NSValue*)parseSWPoint:(NSString*)str {
     NSArray* numbers = [self parseNumberList:str];
-    
+    SWPoint point = {0};
+
     if (numbers.count == 4) {
-        return [SWPoint newWithX:[SWScaled newWithScale:[numbers[0] doubleValue] offset:[numbers[1] doubleValue]] y:[SWScaled newWithScale:[numbers[2] doubleValue] offset:[numbers[3] doubleValue]]];
+        point.x.scale = [numbers[0] doubleValue];
+        point.x.offset = [numbers[1] doubleValue];
+        point.y.scale = [numbers[2] doubleValue];
+        point.y.offset = [numbers[3] doubleValue];
     }
 
-    return nil;
+    return [NSValue valueWithSWPoint:point];
 }
 
-+ (SWSize*)parseSWSize:(NSString*)str {
-    SWPoint* point = [self parseSWPoint:str];
-    return [SWSize newWithWidth:point.x height:point.y];
++ (NSValue*)parseSWSize:(NSString*)str {
+    SWPoint point = [[self parseSWPoint:str] SWPointValue];
+    SWSize size = {
+        .width = point.x,
+        .height = point.y
+    };
+    return [NSValue valueWithSWSize:size];
 }
 
-+ (SWVector2*)parseSWVector2:(NSString*)str {
++ (NSValue*)parseSWVector2:(NSString*)str {
     NSArray* numbers = [self parseNumberList:str];
+    SWVector2 vec2 = {0};
 
     if (numbers.count == 2) {
-        return [SWVector2 newWithX:[numbers[0] doubleValue] y:[numbers[1] doubleValue]];
+        vec2.x = [numbers[0] doubleValue];
+        vec2.y = [numbers[1] doubleValue];
     }
 
-    return nil;
+    return [NSValue valueWithSWVector2:vec2];
 }
 
 + (NSNumber*)parseNumber:(NSString*)str {

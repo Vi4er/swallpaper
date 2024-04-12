@@ -9,7 +9,6 @@
 
 int _fps = 30.0;
 
-SWRenderer* renderer;
 NSThread* renderThread = nil;
 NSRunLoop* runLoop;
 NSTimer* timer;
@@ -31,6 +30,11 @@ NSTimer* timer;
                                 selector:@selector(appDidActivate:)
                                 name:NSWorkspaceDidLaunchApplicationNotification
                                 object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(screenUpdate:)
+                                                     name:NSApplicationDidChangeScreenParametersNotification
+                                                   object:nil];
     }
     
     return wallpapers;
@@ -39,12 +43,12 @@ NSTimer* timer;
 - (void)setScene:(NSString*)path {
     path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
     
-    if (renderer.videoDecoder) {
-        video_decoder_free(renderer.videoDecoder);
+    if (self.renderer.videoDecoder) {
+        video_decoder_free(self.renderer.videoDecoder);
     }
     
     SWScene* scene = [SWScene import:path];
-    renderer.videoDecoder = video_decoder_new(scene_aviocontext_new([path cStringUsingEncoding:NSUTF8StringEncoding], scene.video.dataLocation, scene.video.dataLength), 1);
+    self.renderer.videoDecoder = video_decoder_new(scene_aviocontext_new([path cStringUsingEncoding:NSUTF8StringEncoding], scene.video.dataLocation, scene.video.dataLength), 1);
     [self setFps: scene.video.fps];
 
     if (scene.menuBarInfo.enabled) {
@@ -69,8 +73,8 @@ NSTimer* timer;
 }
 
 - (void)renderLoop {
-    video_decoder_decode_next_frame(renderer.videoDecoder);
-    [renderer render];
+    video_decoder_decode_next_frame(self.renderer.videoDecoder);
+    [self.renderer render];
 }
 
 - (void)renderThreadEntryPoint:(id)object {
@@ -120,14 +124,13 @@ NSTimer* timer;
     self = [super init];
     
     if (self) {
-        _screen = screen;
         _menuBar = [SWMenuBar newWithScreen:screen];
 
         
         // Window
 
         _window = [[SWNonConstrainedWindow alloc] initWithContentRect:screen.frame
-                                                            styleMask:NSWindowStyleMaskBorderless
+                                                            styleMask:NSWindowStyleMaskBorderless|NSWindowStyleMaskNonactivatingPanel
                                                               backing:NSBackingStoreBuffered
                                                                 defer:NO
                                                                screen:screen];
@@ -147,7 +150,7 @@ NSTimer* timer;
     
         [_window orderFront: nil];
         
-        renderer = [SWRenderer newWithWallpaper:self];
+        _renderer = [SWRenderer newWithWallpaper:self];
         
         [[SWWallpaper wallpapers] addObject:self];
     }
@@ -159,7 +162,13 @@ NSTimer* timer;
     return [[self alloc] initWithScreen:screen];
 }
 
-+ (void)appDidActivate:(NSNotification *)notification {
++ (void)appDidActivate:(NSNotification*)notification {
+    NSRunningApplication* runningApp = notification.userInfo[NSWorkspaceApplicationKey];
+
+    if (runningApp.processIdentifier == [NSRunningApplication currentApplication].processIdentifier) {
+        return;
+    }
+    
     NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
     NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
 
@@ -171,6 +180,33 @@ NSTimer* timer;
         [wallpaper.menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
     }
 }
+
+// TODO: Make more fluent
++ (void)screenUpdate:(NSNotification*)notification {
+    NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
+    NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
+
+    if (leftMenuBarRect.origin.x == -1) {
+        return;
+    }
+
+    for (SWWallpaper* wallpaper in [SWWallpaper wallpapers]) {
+        wallpaper.renderer.menuBarInfo.layer.drawableSize = wallpaper.menuBar.frame.size;
+        wallpaper.renderer.info.layer.drawableSize = wallpaper.window.screen.frame.size;
+        [wallpaper.menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
+        [wallpaper.window setFrame: NSMakeRect(0, 0, wallpaper.window.screen.frame.size.width, wallpaper.window.screen.frame.size.height) display:NO];
+        
+        MTLViewport viewport = {
+            0, 0,
+            wallpaper.window.screen.frame.size.width,
+            wallpaper.window.screen.frame.size.height,
+            -1.0,
+            1.0
+        };
+        wallpaper.renderer.viewport = viewport;
+    }
+}
+
 
 - (void)dealloc
 {

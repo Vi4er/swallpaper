@@ -2,8 +2,8 @@
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 #import <decoding/videoDecoder.h>
-#import <SWWallpaper.h>
 
+@class SWWallpaper;
 extern NSString* RendererDevice;
 
 @interface SWRendererInfo : NSObject
@@ -14,7 +14,6 @@ extern NSString* RendererDevice;
 @property MTLRenderPassDescriptor* renderPassDescriptor;
 @property MTLRenderPassColorAttachmentDescriptor* colorAttachmentDescriptor;
 @property id<MTLRenderCommandEncoder> encoder;
-@property MTLViewport viewport;
 
 - (instancetype)initWithWindow:(NSWindow*)window;
 + (instancetype)newWithWindow:(NSWindow*)window;
@@ -26,6 +25,7 @@ extern NSString* RendererDevice;
 @property SWRendererInfo* info;
 @property SWRendererInfo* menuBarInfo;
 @property (nonatomic) VideoDecoder* videoDecoder;
+@property MTLViewport viewport;
 
 - (instancetype)initWithWallpaper:(SWWallpaper*)wallpaper;
 + (instancetype)newWithWallpaper:(SWWallpaper*)wallpaper;

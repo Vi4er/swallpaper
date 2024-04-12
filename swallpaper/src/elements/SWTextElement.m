@@ -32,10 +32,10 @@
 
 -(void)sizeToFit {
     CGSize textSize = [self.layer getTextSize];
-
-    self.frame.size.width.scale = self.frame.size.height.scale = 0;
-    self.frame.size.width.offset = textSize.width;
-    self.frame.size.height.offset = textSize.height;
+    SWRect frame = {0};
+    frame.size.width.offset = textSize.width;
+    frame.size.height.offset = textSize.height;
+    self.frame = frame;
     [self updateFrame];
 }
 

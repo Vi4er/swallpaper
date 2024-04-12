@@ -14,17 +14,15 @@ class WindowDelegate : NSObject, NSWindowDelegate {
 }
 
 @objc class UI : NSObject {
-    @objc var window: NSWindow!
-    let windowDelegate = WindowDelegate()
-    private var statusItem: NSStatusItem?
-    private var popover = NSPopover()
+    @objc static var window: NSWindow!
+    static let windowDelegate = WindowDelegate()
+    private static var statusItem: NSStatusItem?
+    private static var popover = NSPopover()
 
-    @objc func show() {
+    @objc static func setup() {
         window = NSWindow(contentRect: NSMakeRect(0, 0, 720, 405), styleMask: [.fullSizeContentView, .closable, .miniaturizable, .titled, .resizable], backing: .buffered, defer: false)
         window.title = "Swallpaper"
         window.delegate = windowDelegate
-        window.center()
-        window.makeKeyAndOrderFront(nil)
         window.minSize = NSSize(width: 720, height: 405)
         window.contentViewController = NSHostingController(rootView: ContentView().frame(minWidth: 720, minHeight: 405))
 
@@ -41,33 +39,31 @@ class WindowDelegate : NSObject, NSWindowDelegate {
             menuButton.target = self
         }
         
+        // window.miniaturize(nil)
+    }
+    
+    @objc static func showWindow(_ sender: Any?) {
         window.alphaValue = 0
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+        
         NSAnimationContext.runAnimationGroup({ (context) -> Void in
             context.duration = 0.75
             window.animator().alphaValue = 1
         }, completionHandler: nil)
         
-        window.miniaturize(nil)
+        NSApp.activate()
     }
     
-    @objc func showWindow(_ sender: Any?) {
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
-    }
-    
-    @objc func quit(_ sender: Any?) {
-        exit(0)
-    }
-    
-    @objc private func menuToggle(sender: AnyObject) {
+    @objc static private func menuToggle(sender: AnyObject) {
         if popover.isShown {
             popover.performClose(sender)
             return
         }
         
         if let menuButton = statusItem?.button {
-            self.popover.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: NSRectEdge.minY)
-            popover.contentViewController?.view.window?.makeKey()
+            popover.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: NSRectEdge.minY)
+            // popover.contentViewController?.view.window?.makeKey()
         }
     }
 }

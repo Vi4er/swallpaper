@@ -1,41 +1,51 @@
 #import <scripting/types/SWScaled.h>
 #import <scripting/types/Utils.h>
 
+// TODO: Simplify this process of using NSValue wrapped structs
+
 static int __index(lua_State* L) {
-    NSString* index = [[NSString alloc] initWithUTF8String:luaL_checkstring(L, 2)];
-    NSLog(@"%@\n", index);
+    SWScaled scaled = [lua_toSWScaled(L, 1) SWScaledValue];
+    NSString* index = [NSString stringWithUTF8String:luaL_checkstring(L, 2)];
+
+    if ([index isEqualToString:@"offset"]) {
+        lua_pushnumber(L, scaled.offset);
+    }
+    else if ([index isEqualToString:@"scale"]) {
+        lua_pushnumber(L, scaled.scale);
+    }
     
-    return 0;
+    return 1;
 }
 
 static int __tostring(lua_State* L) {
-    SWScaled* scaled = lua_toSWScaled(L, 1);
+    SWScaled scaled = [lua_toSWScaled(L, 1) SWScaledValue];
     NSString* str = [NSString stringWithFormat:@"{%f, %f}", scaled.scale, scaled.offset];
     lua_pushstring(L, [str UTF8String]);
     
     return 1;
 }
 
-void lua_pushSWScaled(lua_State* L, SWScaled* scaled) {
+void lua_pushSWScaled(lua_State* L, NSValue* scaled) {
     SWUserdataInfo info = {
         .name = "Scaled",
         .__index = __index,
         .__tostring = __tostring
     };
 
-    SWScaledStruct* data = lua_newSWUserdata(L, sizeof(SWScaledStruct), info);
-    data->scale = scaled.scale;
-    data->offset = scaled.offset;
+    SWScaled* data = lua_newSWUserdata(L, sizeof(SWScaled), info);
+    SWScaled src = [scaled SWScaledValue];
+    memcpy(data, &src, sizeof(SWScaled));
 }
 
-SWScaled* lua_toSWScaled(lua_State* L, int idx) {
-    SWScaledStruct* data = luaL_checkudata(L, idx, "Scaled");
-    return [SWScaled newWithScale:data->scale offset:data->offset];
+NSValue* lua_toSWScaled(lua_State* L, int idx) {
+    return [NSValue valueWithSWScaled:*(SWScaled*)luaL_checkudata(L, idx, "Scaled")];
 }
 
 static int l_new(lua_State* L) {
-    SWScaled* scaled = [SWScaled newWithScale:luaL_checknumber(L, 1) offset:luaL_checknumber(L, 2)];
-    lua_pushSWScaled(L, scaled);
+    SWScaled scaled;
+    scaled.scale = luaL_checknumber(L, 1);
+    scaled.offset = luaL_checknumber(L, 2);
+    lua_pushSWScaled(L, [NSValue valueWithSWScaled:scaled]);
     return 1;
 }
 
@@ -47,5 +57,5 @@ void lua_registerSWScaled(lua_State* L) {
 
     lua_newtable(L);
     luaL_setfuncs(L, lib, 0);
-    lua_setglobal(L, "SWScaled");
+    lua_setglobal(L, "Scaled");
 }

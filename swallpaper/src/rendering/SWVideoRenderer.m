@@ -99,8 +99,8 @@ typedef struct {
     id<MTLTexture> luminanceTexture = [[SWRenderer device] newTextureWithDescriptor:luminanceTextureDescriptor iosurface:surface plane:0];
     id<MTLTexture> chrominanceTexture = [[SWRenderer device] newTextureWithDescriptor:chrominanceTextureDescriptor iosurface:surface plane:1];
     
-    [self drawTextureWithEncoder:renderer.info.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.info.viewport];
-    [self drawTextureWithEncoder:renderer.menuBarInfo.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.info.viewport];
+    [self drawTextureWithEncoder:renderer.info.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.viewport];
+    [self drawTextureWithEncoder:renderer.menuBarInfo.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.viewport];
 }
 
 @end

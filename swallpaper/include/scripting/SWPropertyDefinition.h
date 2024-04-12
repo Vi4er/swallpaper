@@ -47,7 +47,6 @@ typedef enum SWPropertyType {
 
 - (instancetype)initWithType:(SWPropertyType)type getter:(SWPropertyGetterBlock)getter setter:(SWPropertySetterBlock)setter;
 
-
 @end
 
 @interface SWPropertyDefinitions : NSObject
@@ -85,11 +84,12 @@ typedef _class* CLASS;\
 // Property Types
 
 #define GENERIC_PROPERTY(name, path, type, swtype) DEFINE_PROPERTY(name, swtype, ^type(CLASS self) { return path; }, ^void(CLASS self, type value) { path = value; })
+#define NSVALUE_PROPERTY(name, path, type, swtype) DEFINE_PROPERTY(name, swtype, ^NSValue*(CLASS self) { return [NSValue valueWith##type:path]; }, ^void(CLASS self, NSValue* value) { path = [value type##Value]; })
 #define STRING_PROPERTY(name, path) GENERIC_PROPERTY(name, path, NSString*, String)
 #define DOUBLE_PROPERTY(name, path) DEFINE_PROPERTY(name, Number, ^NSNumber*(CLASS self) { return [NSNumber numberWithDouble:path]; }, ^void(CLASS self, NSNumber* value) { path = value.doubleValue; })
 #define BOOLEAN_PROPERTY(name, path) DEFINE_PROPERTY(name, Boolean, ^NSNumber*(CLASS self) { return [NSNumber numberWithBool:path]; }, ^void(CLASS self, NSNumber* value) { path = value.boolValue; })
 #define CGCOLOR_PROPERTY(name, path) DEFINE_PROPERTY(name, Color, ^NSColor*(CLASS self) { return [NSColor colorWithCGColor:path];}, ^void(CLASS self, NSColor* color) { path = color.CGColor; })
-#define POINT_PROPERTY(name, path) GENERIC_PROPERTY(name, path, SWPoint*, Point)
-#define SIZE_PROPERTY(name, path) GENERIC_PROPERTY(name, path, SWSize*, Size)
-#define VECTOR2_PROPERTY(name, path) GENERIC_PROPERTY(name, path, SWVector2*, Vector2)
+#define POINT_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWPoint, Point)
+#define SIZE_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWSize, Size)
+#define VECTOR2_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWVector2, Vector2)
 #define ENUM_PROPERTY(name, path, selector) [[self properties] addEnumPropertyDefinition:@#name getter:^NSNumber*(CLASS self) { return [NSNumber numberWithInt:path];} setter:^void(CLASS self, NSNumber* value) { path = value.intValue; }  enumParserSelector:selector]

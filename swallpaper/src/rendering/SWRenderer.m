@@ -3,6 +3,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <rendering/SWVideoRenderer.h>
 #import <SWGradientLayer.h>
+#import <SWWallpaper.h>
 
 @implementation SWRendererInfo
 
@@ -12,7 +13,6 @@
     if (self) {
         self.layer = [[CAMetalLayer alloc] init];
         self.layer.device = [SWRenderer device];
-        self.layer.drawableSize = window.frame.size;
         self.layer.presentsWithTransaction = YES;
         self.layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
         
@@ -25,14 +25,6 @@
         else {
             self.window.contentView.wantsLayer = YES;
             self.window.contentView.layer = self.layer;
-            
-            CATextLayer* layer = [CATextLayer layer];
-            layer.string = @"FART!\n"; 
-            layer.frame = CGRectMake(50, self.window.contentView.frame.size.height, self.window.contentView.frame.size.width, 100);
-            layer.alignmentMode = kCAAlignmentCenter;
-            layer.foregroundColor = NSColor.whiteColor.CGColor;
-            layer.fontSize = 50.0;
-            [self.window.contentView.layer addSublayer: layer];
         }
         
         self.commandQueue = [[SWRenderer device] newCommandQueue];
@@ -42,16 +34,6 @@
         self.colorAttachmentDescriptor.clearColor = MTLClearColorMake(0, 0, 0, 1);
         self.colorAttachmentDescriptor.loadAction = MTLLoadActionClear;
         self.colorAttachmentDescriptor.storeAction = MTLStoreActionStore;
-        
-        MTLViewport viewport = {
-            0, 0,
-            self.window.frame.size.width,
-            self.window.frame.size.height,
-            -1.0,
-            1.0
-        };
-
-        self.viewport = viewport;
     }
     
     return self;
@@ -65,12 +47,27 @@
 
 @implementation SWRenderer
 
+// TODO: Cleanup the update code for menu bar (updating with rects)
 - (instancetype)initWithWallpaper:(SWWallpaper*)wallpaper {
     self = [super init];
     
     if (self) {
         self.info = [SWRendererInfo newWithWindow:wallpaper.window];
         self.menuBarInfo = [SWRendererInfo newWithWindow:wallpaper.menuBar];
+        
+        MTLViewport viewport = {
+            0, 0,
+            wallpaper.window.screen.frame.size.width,
+            wallpaper.window.screen.frame.size.height,
+            -1.0,
+            1.0
+        };
+
+        self.viewport = viewport;
+        
+        NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
+        NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
+        [wallpaper.menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
     }
     
     return self;

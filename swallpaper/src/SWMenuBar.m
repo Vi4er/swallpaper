@@ -12,7 +12,7 @@
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
     CGFloat menuBarHeight = [self getMenuBarHeight];
 
-    CGFloat capsuleHeight = menuBarHeight / 1.75;
+    CGFloat capsuleHeight = menuBarHeight * 0.8; // menuBarHeight / 1.75;
     CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight)
@@ -32,6 +32,8 @@
     [maskLayer addSublayer: bezierLayer];
 
     self.contentView.layer.sublayers[0].mask = maskLayer;
+    self.contentView.layer.sublayers[0].frame = self.contentView.layer.frame;
+    NSLog(@"%f\n", self.screen.frame.size.width);
     
     [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
 }
@@ -44,7 +46,7 @@
 }
 
 - (instancetype)initWithScreen:(NSScreen*)screen {
-    self = [super initWithContentRect:NSMakeRect(0, 0, screen.frame.size.width, 1) styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:NO screen:screen];
+    self = [super initWithContentRect:NSMakeRect(0, 0, screen.frame.size.width, 1) styleMask:NSWindowStyleMaskBorderless|NSWindowStyleMaskNonactivatingPanel backing:NSBackingStoreBuffered defer:NO screen:screen];
     
     if (self) {
         self.level = kCGMaximumWindowLevel;
@@ -57,7 +59,7 @@
         NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
         NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
         [self updatePositionAndSize: &leftMenuBarRect rightRect: &rightMenuBarRect];
-        [self orderFront: self];
+        [self orderFront: nil];
     }
 
     return self;

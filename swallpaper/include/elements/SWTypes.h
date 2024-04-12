@@ -1,53 +1,48 @@
 #pragma once
 #import <Foundation/Foundation.h>
 
-@interface SWScaled : NSObject
-
-@property double scale, offset;
-
-- (instancetype)initWithScale: (double)scale offset:(double)offset;
-+ (instancetype)newWithScale: (double)scale offset:(double)offset;
-
+#define NSVALUE_INTERFACE(type) @interface NSValue (type)\
++ (instancetype)valueWith##type:(type)value;\
+@property (readonly) type type##Value;\
 @end
 
-@interface SWPoint : NSObject
-
-@property SWScaled* x;
-@property SWScaled* y;
-
-- (instancetype)initWithX: (SWScaled*)x y:(SWScaled*)y;
-+ (instancetype)newWithX: (SWScaled*)x y:(SWScaled*)y;
-
+#define NSVALUE_IMPLEMENTATION(type) @implementation NSValue (type)\
++ (instancetype)valueWith##type:(type)value { return [self valueWithBytes:&value objCType:@encode(type)]; }\
+- (type) type##Value { type value; [self getValue:&value]; return value; }\
 @end
 
-@interface SWSize : NSObject
+typedef struct SWScaled {
+    double scale, offset;
+} SWScaled;
 
-@property SWScaled* width;
-@property SWScaled* height;
+NSVALUE_INTERFACE(SWScaled)
 
-- (instancetype)initWithWidth: (SWScaled*)width height:(SWScaled*)height;
-+ (instancetype)newWithWidth: (SWScaled*)width height:(SWScaled*)height;
+typedef struct SWPoint {
+    SWScaled x;
+    SWScaled y;
+} SWPoint;
 
-@end
+NSVALUE_INTERFACE(SWPoint)
 
-@interface SWRect : NSObject
+typedef struct SWSize {
+    SWScaled width;
+    SWScaled height;
+} SWSize;
 
-@property SWPoint* origin;
-@property SWSize* size;
+NSVALUE_INTERFACE(SWSize)
 
-- (instancetype)initWithOrigin: (SWPoint*)origin size:(SWSize*)size;
-+ (instancetype)newWithOrigin: (SWPoint*)origin size:(SWSize*)size;
+typedef struct SWRect {
+    SWPoint origin;
+    SWSize size;
+} SWRect;
 
-@end
+NSVALUE_INTERFACE(SWRect)
 
-@interface SWVector2 : NSObject
+typedef struct SWVector2 {
+    double x, y;
+} SWVector2;
 
-@property double x, y;
-
-- (instancetype)initWithX: (double)x y:(double)y;
-+ (instancetype)newWithX: (double)x y:(double)y;
-
-@end
+NSVALUE_INTERFACE(SWVector2)
 
 typedef enum SWSizeConstraint {
     kSWSizeConstraintXY,

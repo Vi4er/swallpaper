@@ -16,4 +16,16 @@
     }
 }
 
++ (SWEventType)parseSWEvent:(NSString*)str {
+    if ([str isEqualToString:@"onMouseEnter"]) {
+        return kSWEventTypeMouseEnter;
+    }
+    else if ([str isEqualTo:@"onMouseLeave"]) {
+        return kSWEventTypeMouseLeave;
+    }
+    else {
+        return kSWEventTypeInvalid;
+    }
+}
+
 @end

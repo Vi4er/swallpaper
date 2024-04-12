@@ -1,10 +1,10 @@
-#import <elements/SWDragEventHandler.h>
+#import <elements/SWEventHandler.h>
 #import <AppKit/AppKit.h>
 #import <SWWallpaper.h>
 
 // TODO: Make this actually clean
 
-@implementation SWDragEventHandler
+@implementation SWEventHandler
 
 + (void)sendLeftEvent:(CGEventType)mouseType mouseCursorPosition:(CGPoint)mouseCursorPosition {
     CGEventRef event = CGEventCreateMouseEvent(NULL, mouseType, mouseCursorPosition, kCGMouseButtonLeft);
@@ -19,7 +19,7 @@
 //    dragTo.x += 5;
 
     // [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseDragged mouseCursorPosition:dragTo];
-    [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseUp mouseCursorPosition:mousePosition];
+    [SWEventHandler sendLeftEvent:kCGEventLeftMouseUp mouseCursorPosition:mousePosition];
     // [SWDragEventHandler sendLeftEvent:kCGEventMouseMoved mouseCursorPosition:mousePosition];
     
     CFRelease(emptyEvent);
@@ -41,13 +41,43 @@
     return 0;
 }
 
-+ (void)registerHandler {
++ (Boolean)isHovered: (SWElement*)element wallpaper:(SWWallpaper*)wallpaper {
+    CGPoint converted = [wallpaper.layer convertPoint:NSEvent.mouseLocation toLayer:element.layer];
+    converted.y = wallpaper.layer.frame.size.height - NSEvent.mouseLocation.y - element.layer.frame.origin.y; // Flip y
+    
+    return [element.layer containsPoint:converted];
+}
+
+// TODO: Implement ZIndex and ignoresPointerEvents
++ (SWElement*)hoveredElement: (SWWallpaper*)wallpaper element:(SWElement*)element {
+    if (element == nil) {
+        element = wallpaper;
+    }
+    
+    for (SWElement* child in element.children) {
+        if ([[self class] isHovered:child wallpaper:wallpaper]) {
+            SWElement* hovered = [[self class] hoveredElement:wallpaper element:child];
+            
+            if (hovered) {
+                return hovered;
+            }
+            else {
+                return child;
+            }
+        }
+    }
+    
+    return nil;
+}
+
++ (void)init {
+    __block NSMutableArray<SWElement*>* hoveredElements = [NSMutableArray array];
     __block SWElement* draggingElement;
     __block CGPoint offset;
-
-    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSEventMaskLeftMouseDown|NSEventMaskLeftMouseDragged) handler:^(NSEvent* event) {
+    
+    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSEventMaskLeftMouseDown|NSEventMaskLeftMouseDragged|NSEventMaskMouseMoved) handler:^(NSEvent* event) {
         if (event.type == NSEventTypeLeftMouseDown) {
-            if ([SWDragEventHandler isHoveringDesktop]) {
+            if ([SWEventHandler isHoveringDesktop]) {
                 for (SWWallpaper* wallpaper in [SWWallpaper wallpapers]) {
                     for (SWElement* child in wallpaper.children) {
                         if (!child.draggable) {
@@ -59,7 +89,7 @@
 
                         if ([child.layer containsPoint:offset]) {
                             draggingElement = child;
-                            [SWDragEventHandler dragWorkaround];
+                            [SWEventHandler dragWorkaround];
                             break;
                         }
                         else {
@@ -72,8 +102,7 @@
                 draggingElement = nil;
             }
         }
-        
-        if (event.type == NSEventTypeLeftMouseDragged && draggingElement) {
+        else if (event.type == NSEventTypeLeftMouseDragged && draggingElement) {
             [CATransaction begin];
             [CATransaction setDisableActions:YES];
             SWWallpaper* wallpaper = (SWWallpaper*)draggingElement.parent;
@@ -90,6 +119,27 @@
             draggingElement.layer.frame = rect;
 
             [CATransaction commit];
+        }
+        else if (event.type == NSEventTypeMouseMoved) {
+            // TODO: Make work for multiple wallpapers (idk maybe get root parent as wallpaper)
+            SWMouseEvent* event = [SWMouseEvent new];
+            SWElement* hovered = [[self class] hoveredElement:[SWWallpaper wallpapers][0] element:nil];
+            
+            if (hovered && ![hoveredElements containsObject:hovered]) {
+                event.type = kSWEventTypeMouseEnter;
+                [hovered triggerEvent:event];
+                [hoveredElements addObject:hovered];
+            }
+            
+            for (NSUInteger i = hoveredElements.count; i > 0; --i) {
+                SWElement* element = hoveredElements[i - 1];
+                
+                if (![[self class] isHovered:element wallpaper:[SWWallpaper wallpapers][0]]) {
+                    event.type = kSWEventTypeMouseLeave;
+                    [element triggerEvent:event];
+                    [hoveredElements removeObject:element];
+                }
+            }
         }
     }];
 }

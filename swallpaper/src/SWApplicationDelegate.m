@@ -4,32 +4,37 @@
 #import <scripting/SWElementParser.h>
 #import <elements/SWImageElement.h>
 #import <elements/SWTextElement.h>
-#import <elements/SWDragEventHandler.h>
+#import <elements/SWEventHandler.h>
 #import <CoreImage/CoreImage.h>
-#import "swallpaper-Swift.h"
+#import <scripting/lua.h>
 
 @implementation SWApplicationDelegate
 
 SWWallpaper* wallpaper;
 SWElement* element;
+lua_State* L;
 
 - (void)reloadWidget {
     if (element) {
         element.parent = nil;
     }
     
-    if ((element = [SWElementParser parseFile:@"/Users/user/Documents/swallpaper/swallpaper/MediaWidget.xml"]) != nil) {
+    if ((element = [SWElementParser parseFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"]) != nil) {
         element.parent = wallpaper;
         CIFilter* filter = [CIFilter filterWithName:@"CIGaussianBlur" withInputParameters:@{
             kCIInputRadiusKey: @5
         }];
         element.layer.backgroundFilters = @[filter];
         
+        if (luaL_dofile(SWLuaState, "/Users/user/Documents/swallpaper/swallpaper/Widget.lua") != LUA_OK) {
+            NSLog(@"Error executing file: %s\n", lua_tostring(L, -1));
+        }
+        
         NSLog(@"Reloaded widget\n");
     }
 }
 
-- (void)monitorFile:(NSString*) path {
+- (void)monitorFile:(NSString*)path {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     int descriptor = open([path UTF8String], O_EVTONLY);
 
@@ -60,17 +65,17 @@ SWElement* element;
     [wallpaper setScene: @"scene.swal"];
     [wallpaper setFps:60];
     [wallpaper start];
-    
+
     [self reloadWidget];
-    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/MediaWidget.xml"];
-    
-    [SWDragEventHandler registerHandler];
+    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"];
+    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.lua"];
+
+    [SWEventHandler init];
+    [UI setup];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {
-    if (self.uiWindow) {
-        [self.uiWindow deminiaturize: self];
-    }
+    [UI.window deminiaturize: nil];
     
     return true;
 }

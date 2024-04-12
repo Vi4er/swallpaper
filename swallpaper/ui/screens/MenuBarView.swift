@@ -54,7 +54,9 @@ struct MenuBarView: View {
             HStack(alignment: .center) {
                 Button("Feedback") {}
                     .buttonStyle(.plain)
-                Button("Help") {}
+                Button("Help") {
+                    UI.showWindow(nil);
+                }
                     .buttonStyle(.plain)
                 Button("Quit") {
                     exit(0)
