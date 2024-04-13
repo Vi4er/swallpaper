@@ -256,9 +256,11 @@ DECLARE_PROPERTIES(SWElement) {
     VECTOR2_PROPERTY(padding, self.padding);
     VECTOR2_PROPERTY(anchorPoint, self.anchorPoint);
     BOOLEAN_PROPERTY(masksToBounds, self.layer.masksToBounds);
-    BOOLEAN_PROPERTY(draggable, self.draggable);
     DOUBLE_PROPERTY(cornerRadius, self.layer.cornerRadius);
     CGCOLOR_PROPERTY(backgroundColor, self.layer.backgroundColor);
+    BOOLEAN_PROPERTY(draggable, self.draggable);
+    DOUBLE_PROPERTY(zIndex, self.zIndex);
+    BOOLEAN_PROPERTY(ignoresPointerEvents, self.ignoresPointerEvents);
     ENUM_PROPERTY(sizeConstraint, self.sizeConstraint, @selector(parseSWSizeConstraint:));
 }
 

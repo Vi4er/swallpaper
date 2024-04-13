@@ -35,10 +35,10 @@
         }
         
         typeDefinitions[kSWPropertyTypeString] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseString:) luaPush:0 luaTo:0];
-        typeDefinitions[kSWPropertyTypeNumber] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseNumber:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeNumber] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseNumber:) luaPush:lua_pushNSNumber luaTo:lua_toNSNumber];
         typeDefinitions[kSWPropertyTypeBoolean] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseBoolean:) luaPush:0 luaTo:0];
         typeDefinitions[kSWPropertyTypeColor] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseColor:) luaPush:0 luaTo:0];
-        typeDefinitions[kSWPropertyTypePoint] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWPoint:) luaPush:lua_pushSWPoint luaTo:lua_toSWPoint];
+        typeDefinitions[kSWPropertyTypePoint] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWPoint:) luaPush:lua_pushNSValue luaTo:lua_toNSValue];
         typeDefinitions[kSWPropertyTypeSize] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWSize:) luaPush:0 luaTo:0];
         typeDefinitions[kSWPropertyTypeVector2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWVector2:) luaPush:0 luaTo:0];
         typeDefinitions[kSWPropertyTypeImage] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseImage:) luaPush:0 luaTo:0];

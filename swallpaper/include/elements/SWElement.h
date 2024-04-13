@@ -15,8 +15,10 @@
 @property SWVector2 anchorPoint;
 @property SWVector2 padding;
 @property SWSizeConstraint sizeConstraint;
-@property NSMutableArray* children;
+@property int zIndex;
 @property bool draggable;
+@property bool ignoresPointerEvents;
+@property NSMutableArray* children;
 @property (readonly) NSMutableDictionary<NSNumber*, NSMutableArray<NSNumber*>*>* eventListeners;
 
 - (instancetype)initWithParent:(SWElement*)parent;

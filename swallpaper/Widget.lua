@@ -9,3 +9,5 @@ element:addEventListener('onMouseLeave', function(event)
     print('LEAVE')
     element.origin = Point.fromOffset(10, 30)
 end)
+
+print(element.origin)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE103C4A2B9A3C5C006C25C2 /* Assets.xcassets */; };
+		CE3E00952BCA40C2009A9270 /* NSNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E00942BCA40C2009A9270 /* NSNumber.m */; };
+		CE3E00982BCA4238009A9270 /* NSValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E00972BCA4238009A9270 /* NSValue.m */; };
 		CE3FFDE12BB26E73007886AA /* swall format in Resources */ = {isa = PBXBuildFile; fileRef = CE3FFDE02BB26E73007886AA /* swall format */; };
 		CE3FFDEC2BB27491007886AA /* SWScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3FFDEB2BB27491007886AA /* SWScene.m */; };
 		CE3FFDF22BB29870007886AA /* sceneAVIOContext.c in Sources */ = {isa = PBXBuildFile; fileRef = CE3FFDF12BB29870007886AA /* sceneAVIOContext.c */; };
@@ -103,6 +105,10 @@
 		CE103C512B9A3C5C006C25C2 /* swallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swallpaper.entitlements; sourceTree = "<group>"; };
 		CE2517DD2BAC52C2002911B7 /* SWNonConstrainedWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNonConstrainedWindow.h; sourceTree = "<group>"; };
 		CE2517DE2BAC52DE002911B7 /* SWNonConstrainedWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNonConstrainedWindow.m; sourceTree = "<group>"; };
+		CE3E00932BCA406F009A9270 /* NSNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSNumber.h; sourceTree = "<group>"; };
+		CE3E00942BCA40C2009A9270 /* NSNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSNumber.m; sourceTree = "<group>"; };
+		CE3E00962BCA4194009A9270 /* NSValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSValue.h; sourceTree = "<group>"; };
+		CE3E00972BCA4238009A9270 /* NSValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSValue.m; sourceTree = "<group>"; };
 		CE3FFDE02BB26E73007886AA /* swall format */ = {isa = PBXFileReference; lastKnownFileType = text; path = "swall format"; sourceTree = "<group>"; };
 		CE3FFDE92BB27351007886AA /* SWScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWScene.h; sourceTree = "<group>"; };
 		CE3FFDEB2BB27491007886AA /* SWScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWScene.m; sourceTree = "<group>"; };
@@ -434,6 +440,8 @@
 				CE9638412BC3C41D00AA8615 /* SWElement.h */,
 				CE9638442BC3C66D00AA8615 /* SWLuaTypes.h */,
 				CEAA3FD42BC6B8AF0037E0DD /* SWEvent.h */,
+				CE3E00932BCA406F009A9270 /* NSNumber.h */,
+				CE3E00962BCA4194009A9270 /* NSValue.h */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -446,6 +454,8 @@
 				CE96383F2BC3C0D000AA8615 /* SWPoint.m */,
 				CE9638422BC3C44F00AA8615 /* SWElement.m */,
 				CEAA3FD22BC6B8A50037E0DD /* SWEvent.m */,
+				CE3E00942BCA40C2009A9270 /* NSNumber.m */,
+				CE3E00972BCA4238009A9270 /* NSValue.m */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -790,8 +800,10 @@
 				CED518FA2BBA769C00FFCF81 /* TNColorPreviewCircleView.swift in Sources */,
 				CE3FFDF22BB29870007886AA /* sceneAVIOContext.c in Sources */,
 				CED5190C2BBA769C00FFCF81 /* HSB.swift in Sources */,
+				CE3E00982BCA4238009A9270 /* NSValue.m in Sources */,
 				CED518F22BBA769C00FFCF81 /* MenuBarView.swift in Sources */,
 				CED518FB2BBA769C00FFCF81 /* TNHueSliderView.swift in Sources */,
+				CE3E00952BCA40C2009A9270 /* NSNumber.m in Sources */,
 				CE5DFB6E2B9A3E13005B6F2B /* hwvideo.metal in Sources */,
 				CED518FD2BBA769C00FFCF81 /* TNSaturationBrightnessView.swift in Sources */,
 				CED519072BBA769C00FFCF81 /* TNOnlyNumbersFormatter.swift in Sources */,

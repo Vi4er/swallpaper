@@ -4,7 +4,7 @@
 // TODO: Simplify this process of using NSValue wrapped structs
 
 static int __index(lua_State* L) {
-    SWScaled scaled = [lua_toSWScaled(L, 1) SWScaledValue];
+    SWScaled scaled = lua_toSWScaled(L, 1);
     NSString* index = [NSString stringWithUTF8String:luaL_checkstring(L, 2)];
 
     if ([index isEqualToString:@"offset"]) {
@@ -18,14 +18,14 @@ static int __index(lua_State* L) {
 }
 
 static int __tostring(lua_State* L) {
-    SWScaled scaled = [lua_toSWScaled(L, 1) SWScaledValue];
+    SWScaled scaled = lua_toSWScaled(L, 1);
     NSString* str = [NSString stringWithFormat:@"{%f, %f}", scaled.scale, scaled.offset];
     lua_pushstring(L, [str UTF8String]);
     
     return 1;
 }
 
-void lua_pushSWScaled(lua_State* L, NSValue* scaled) {
+void lua_pushSWScaled(lua_State* L, SWScaled scaled) {
     SWUserdataInfo info = {
         .name = "Scaled",
         .__index = __index,
@@ -33,19 +33,18 @@ void lua_pushSWScaled(lua_State* L, NSValue* scaled) {
     };
 
     SWScaled* data = lua_newSWUserdata(L, sizeof(SWScaled), info);
-    SWScaled src = [scaled SWScaledValue];
-    memcpy(data, &src, sizeof(SWScaled));
+    memcpy(data, &scaled, sizeof(SWScaled));
 }
 
-NSValue* lua_toSWScaled(lua_State* L, int idx) {
-    return [NSValue valueWithSWScaled:*(SWScaled*)luaL_checkudata(L, idx, "Scaled")];
+SWScaled lua_toSWScaled(lua_State* L, int idx) {
+    return *(SWScaled*)luaL_checkudata(L, idx, "Scaled");
 }
 
 static int l_new(lua_State* L) {
     SWScaled scaled;
     scaled.scale = luaL_checknumber(L, 1);
     scaled.offset = luaL_checknumber(L, 2);
-    lua_pushSWScaled(L, [NSValue valueWithSWScaled:scaled]);
+    lua_pushSWScaled(L, scaled);
     return 1;
 }
 
