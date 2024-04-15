@@ -41,23 +41,24 @@
     return 0;
 }
 
-+ (Boolean)isHovered: (SWElement*)element wallpaper:(SWWallpaper*)wallpaper {
++ (Boolean)isHovered: (SWElement*)element {
     NSPoint mouseLocation = NSEvent.mouseLocation;
     mouseLocation.y = [NSScreen mainScreen].frame.size.height - mouseLocation.y;
 
-    CGPoint converted = [wallpaper.layer convertPoint:mouseLocation toLayer:element.layer];
+    SWElement* root = element.parent;
+    while (root.parent) {
+        root = root.parent;
+    }
+
+    CGPoint converted = [root.layer convertPoint:mouseLocation toLayer:element.layer];
     return [element.layer containsPoint:converted];
 }
 
 // TODO: Implement ZIndex and ignoresPointerEvents
-+ (SWElement*)hoveredElement: (SWWallpaper*)wallpaper element:(SWElement*)element {
-    if (element == nil) {
-        element = wallpaper;
-    }
-    
-    for (SWElement* child in element.children) {
-        if ([[self class] isHovered:child wallpaper:wallpaper]) {
-            SWElement* hovered = [[self class] hoveredElement:wallpaper element:child];
++ (SWElement*)hoveredElement: (SWElement*)parent {
+    for (SWElement* child in parent.children) {
+        if ([[self class] isHovered:child]) {
+            SWElement* hovered = [[self class] hoveredElement:child];
             
             if (hovered) {
                 return hovered;
@@ -125,7 +126,7 @@
         else if (event.type == NSEventTypeMouseMoved) {
             // TODO: Make work for multiple wallpapers (idk maybe get root parent as wallpaper)
             SWMouseEvent* event = [SWMouseEvent new];
-            SWElement* hovered = [[self class] hoveredElement:[SWWallpaper wallpapers][0] element:nil];
+            SWElement* hovered = [[self class] hoveredElement:[SWWallpaper wallpapers][0]];
             
             if (hovered && ![hoveredElements containsObject:hovered]) {
                 event.type = kSWEventTypeMouseEnter;
@@ -136,7 +137,7 @@
             for (NSUInteger i = hoveredElements.count; i > 0; --i) {
                 SWElement* element = hoveredElements[i - 1];
                 
-                if (![[self class] isHovered:element wallpaper:[SWWallpaper wallpapers][0]]) {
+                if (![[self class] isHovered:element]) {
                     event.type = kSWEventTypeMouseLeave;
                     [element triggerEvent:event];
                     [hoveredElements removeObject:element];
