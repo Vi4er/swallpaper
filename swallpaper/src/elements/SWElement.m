@@ -11,6 +11,7 @@
 @synthesize elementId = _elementId;
 @synthesize layer = _layer;
 @synthesize parent = _parent;
+@synthesize frame = _frame;
 @synthesize eventListeners = _eventListeners;
 
 typedef void*(*isRoot)(void* element);
@@ -92,6 +93,15 @@ typedef void*(*isRoot)(void* element);
     }
 }
 
+- (SWRect)frame {
+    return _frame;
+}
+
+- (void)setFrame:(SWRect)frame {
+    _frame = frame;
+    [self updateFrame];
+}
+
 double scaledValue(double parentValue, SWScaled value) {
     return parentValue * value.scale + value.offset;
 }
@@ -109,8 +119,8 @@ double scaledValue(double parentValue, SWScaled value) {
     CGRect parentRect = [self.parent getRect];
     float x = scaledValue(parentRect.size.width, self.frame.origin.x);
     float y = scaledValue(parentRect.size.height, self.frame.origin.y);
-    float width = scaledValue(parentRect.size.width, self.frame.size.width);
-    float height = scaledValue(parentRect.size.height, self.frame.size.height);
+    float width = scaledValue(parentRect.size.width, self.frame.size.x);
+    float height = scaledValue(parentRect.size.height, self.frame.size.y);
     
     width += self.padding.x * 2;
     height += self.padding.y * 2;
@@ -231,24 +241,24 @@ double scaledValue(double parentValue, SWScaled value) {
 
 DECLARE_PROPERTIES(SWElement) {
     STRING_PROPERTY(id, self.elementId);
-    DEFINE_PROPERTY(origin, Point,
+    DEFINE_PROPERTY(origin, Scaled2,
         ^NSValue*(SWElement* self) {
-            return [NSValue valueWithSWPoint:self.frame.origin];
+            return [NSValue valueWithSWScaled2:self.frame.origin];
         },
         ^void(SWElement* self, NSValue* value) {
             SWRect frame = self.frame;
-            frame.origin = [value SWPointValue];
+            frame.origin = [value SWScaled2Value];
             self.frame = frame;
             [self updateFrame];
         }
     );
-    DEFINE_PROPERTY(size, Size,
+    DEFINE_PROPERTY(size, Scaled2,
         ^NSValue*(SWElement* self) {
-            return [NSValue valueWithSWSize:self.frame.size];
+            return [NSValue valueWithSWScaled2:self.frame.size];
         },
         ^void(SWElement* self, NSValue* value) {
             SWRect frame = self.frame;
-            frame.size = [value SWSizeValue];
+            frame.size = [value SWScaled2Value];
             self.frame = frame;
             [self updateFrame];
         }

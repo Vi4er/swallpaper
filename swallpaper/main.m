@@ -12,13 +12,6 @@ int main(int argc, const char* argv[]) {
         NSApp.activationPolicy = NSApplicationActivationPolicyAccessory;
 
         SWInitLua();
-        
-        SWVector2 vec = {
-            .x = 10,
-            .y = 15
-        };
-        NSValue* value = [NSValue valueWithSWVector2:vec];
-        lua_pushNSValue(0, value);
 
         SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
         [application setDelegate: appDelegate];

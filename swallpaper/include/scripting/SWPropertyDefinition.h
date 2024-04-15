@@ -16,8 +16,7 @@ typedef enum SWPropertyType {
     kSWPropertyTypeNumber,
     kSWPropertyTypeBoolean,
     kSWPropertyTypeColor,
-    kSWPropertyTypePoint,
-    kSWPropertyTypeSize,
+    kSWPropertyTypeScaled2,
     kSWPropertyTypeVector2,
     kSWPropertyTypeEnum,
     kSWPropertyTypeImage,
@@ -89,7 +88,6 @@ typedef _class* CLASS;\
 #define DOUBLE_PROPERTY(name, path) DEFINE_PROPERTY(name, Number, ^NSNumber*(CLASS self) { return [NSNumber numberWithDouble:path]; }, ^void(CLASS self, NSNumber* value) { path = value.doubleValue; })
 #define BOOLEAN_PROPERTY(name, path) DEFINE_PROPERTY(name, Boolean, ^NSNumber*(CLASS self) { return [NSNumber numberWithBool:path]; }, ^void(CLASS self, NSNumber* value) { path = value.boolValue; })
 #define CGCOLOR_PROPERTY(name, path) DEFINE_PROPERTY(name, Color, ^NSColor*(CLASS self) { return [NSColor colorWithCGColor:path];}, ^void(CLASS self, NSColor* color) { path = color.CGColor; })
-#define POINT_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWPoint, Point)
-#define SIZE_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWSize, Size)
+#define SCALED2_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWScaled2, Scaled2)
 #define VECTOR2_PROPERTY(name, path) NSVALUE_PROPERTY(name, path, SWVector2, Vector2)
 #define ENUM_PROPERTY(name, path, selector) [[self properties] addEnumPropertyDefinition:@#name getter:^NSNumber*(CLASS self) { return [NSNumber numberWithInt:path];} setter:^void(CLASS self, NSNumber* value) { path = value.intValue; }  enumParserSelector:selector]

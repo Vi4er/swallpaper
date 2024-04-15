@@ -1,5 +1,5 @@
 #import <scripting/lua.h>
-#import <scripting/types/Utils.h>
+#import <scripting/types/SWLuaTypes.h>
 
 lua_State* SWLuaState;
 

@@ -17,23 +17,14 @@ typedef struct SWScaled {
 
 NSVALUE_INTERFACE(SWScaled)
 
-typedef struct SWPoint {
-    SWScaled x;
-    SWScaled y;
-} SWPoint;
+typedef struct SWScaled2 {
+    SWScaled x, y;
+} SWScaled2;
 
-NSVALUE_INTERFACE(SWPoint)
-
-typedef struct SWSize {
-    SWScaled width;
-    SWScaled height;
-} SWSize;
-
-NSVALUE_INTERFACE(SWSize)
+NSVALUE_INTERFACE(SWScaled2)
 
 typedef struct SWRect {
-    SWPoint origin;
-    SWSize size;
+    SWScaled2 origin, size;
 } SWRect;
 
 NSVALUE_INTERFACE(SWRect)
@@ -49,3 +40,30 @@ typedef enum SWSizeConstraint {
     kSWSizeConstraintXX,
     kSWSizeConstraintYY
 } SWSizeConstraint;
+
+static inline SWScaled SWMakeScaled(double scale, double offset) {
+    SWScaled scaled = {
+        .scale = scale,
+        .offset = offset
+    };
+    
+    return scaled;
+}
+
+static inline SWScaled2 SWMakeScaled2(SWScaled x, SWScaled y) {
+    SWScaled2 scaled2 = {
+        .x = x,
+        .y = y
+    };
+    
+    return scaled2;
+}
+
+static inline SWRect SWMakeRect(SWScaled x, SWScaled y, SWScaled width, SWScaled height) {
+    SWRect rect = {
+        .origin = SWMakeScaled2(x, y),
+        .size = SWMakeScaled2(width, height)
+    };
+    
+    return rect;
+}

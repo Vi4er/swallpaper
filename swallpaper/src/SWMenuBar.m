@@ -33,7 +33,6 @@
 
     self.contentView.layer.sublayers[0].mask = maskLayer;
     self.contentView.layer.sublayers[0].frame = self.contentView.layer.frame;
-    NSLog(@"%f\n", self.screen.frame.size.width);
     
     [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
 }

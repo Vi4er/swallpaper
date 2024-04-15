@@ -27,7 +27,7 @@ lua_State* L;
         element.layer.backgroundFilters = @[filter];
         
         if (luaL_dofile(SWLuaState, "/Users/user/Documents/swallpaper/swallpaper/Widget.lua") != LUA_OK) {
-            NSLog(@"Error executing file: %s\n", lua_tostring(L, -1));
+            NSLog(@"Error executing file: %s\n", lua_tostring(SWLuaState, -1));
         }
         
         NSLog(@"Reloaded widget\n");

@@ -15,12 +15,12 @@
 + (void)dragWorkaround {
     CGEventRef emptyEvent = CGEventCreate(NULL);
     CGPoint mousePosition = CGEventGetLocation(emptyEvent);
-//    CGPoint dragTo = mousePosition;
-//    dragTo.x += 5;
+    CGPoint dragTo = mousePosition;
+    dragTo.x += 5;
 
-    // [SWDragEventHandler sendLeftEvent:kCGEventLeftMouseDragged mouseCursorPosition:dragTo];
+    [SWEventHandler sendLeftEvent:kCGEventLeftMouseDragged mouseCursorPosition:dragTo];
     [SWEventHandler sendLeftEvent:kCGEventLeftMouseUp mouseCursorPosition:mousePosition];
-    // [SWDragEventHandler sendLeftEvent:kCGEventMouseMoved mouseCursorPosition:mousePosition];
+    [SWEventHandler sendLeftEvent:kCGEventMouseMoved mouseCursorPosition:mousePosition];
     
     CFRelease(emptyEvent);
 }
@@ -42,8 +42,10 @@
 }
 
 + (Boolean)isHovered: (SWElement*)element wallpaper:(SWWallpaper*)wallpaper {
+    // TODO: FIX, DOES NOT WORK FOR CHILDREN
     CGPoint converted = [wallpaper.layer convertPoint:NSEvent.mouseLocation toLayer:element.layer];
     converted.y = wallpaper.layer.frame.size.height - NSEvent.mouseLocation.y - element.layer.frame.origin.y; // Flip y
+    NSLog(@"%f\n", converted.y);
     
     return [element.layer containsPoint:converted];
 }
@@ -107,16 +109,17 @@
             [CATransaction setDisableActions:YES];
             SWWallpaper* wallpaper = (SWWallpaper*)draggingElement.parent;
 
-            CGRect rect = draggingElement.layer.frame;
-            rect.origin.x = MIN(MAX(
+            SWRect rect = draggingElement.frame;
+            rect.origin.x.scale = rect.origin.y.scale = 0;
+            rect.origin.x.offset = MIN(MAX(
                                 NSEvent.mouseLocation.x - offset.x,
                                 0
                             ), wallpaper.layer.frame.size.width - draggingElement.layer.frame.size.width);
-            rect.origin.y = MIN(MAX(
+            rect.origin.y.offset = MIN(MAX(
                                 wallpaper.layer.frame.size.height - NSEvent.mouseLocation.y - offset.y,
                                 wallpaper.menuBar.frame.size.height
                             ), wallpaper.layer.frame.size.height - draggingElement.layer.frame.size.height);
-            draggingElement.layer.frame = rect;
+            draggingElement.frame = rect;
 
             [CATransaction commit];
         }

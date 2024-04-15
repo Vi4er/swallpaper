@@ -103,27 +103,18 @@
     return array;
 }
 
-+ (NSValue*)parseSWPoint:(NSString*)str {
++ (NSValue*)parseSWScaled2:(NSString*)str {
     NSArray* numbers = [self parseNumberList:str];
-    SWPoint point = {0};
+    SWScaled2 scaled2 = {0};
 
     if (numbers.count == 4) {
-        point.x.scale = [numbers[0] doubleValue];
-        point.x.offset = [numbers[1] doubleValue];
-        point.y.scale = [numbers[2] doubleValue];
-        point.y.offset = [numbers[3] doubleValue];
+        scaled2.x.scale = [numbers[0] doubleValue];
+        scaled2.x.offset = [numbers[1] doubleValue];
+        scaled2.y.scale = [numbers[2] doubleValue];
+        scaled2.y.offset = [numbers[3] doubleValue];
     }
 
-    return [NSValue valueWithSWPoint:point];
-}
-
-+ (NSValue*)parseSWSize:(NSString*)str {
-    SWPoint point = [[self parseSWPoint:str] SWPointValue];
-    SWSize size = {
-        .width = point.x,
-        .height = point.y
-    };
-    return [NSValue valueWithSWSize:size];
+    return [NSValue valueWithSWScaled2:scaled2];
 }
 
 + (NSValue*)parseSWVector2:(NSString*)str {

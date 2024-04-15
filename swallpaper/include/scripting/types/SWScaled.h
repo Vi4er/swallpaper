@@ -1,6 +1,6 @@
 #pragma once
-#import <elements/SWTypes.h>
 #import <scripting/lua.h>
+#import <elements/SWTypes.h>
 
 void lua_pushSWScaled(lua_State* L, SWScaled scaled);
 SWScaled lua_toSWScaled(lua_State* L, int idx);

@@ -33,14 +33,13 @@
         for (int i = 0; i < kSWPropertyTypeCount; ++i) {
             [typeDefinitions addObject:(SWPropertyTypeDefinition*)[NSNull null]];
         }
-        
-        typeDefinitions[kSWPropertyTypeString] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseString:) luaPush:0 luaTo:0];
+
+        typeDefinitions[kSWPropertyTypeString] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseString:) luaPush:lua_pushNSString luaTo:lua_toNSString];
         typeDefinitions[kSWPropertyTypeNumber] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseNumber:) luaPush:lua_pushNSNumber luaTo:lua_toNSNumber];
-        typeDefinitions[kSWPropertyTypeBoolean] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseBoolean:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeBoolean] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseBoolean:) luaPush:lua_pushNSNumberAsBoolean luaTo:lua_toNSNumber];
         typeDefinitions[kSWPropertyTypeColor] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseColor:) luaPush:0 luaTo:0];
-        typeDefinitions[kSWPropertyTypePoint] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWPoint:) luaPush:lua_pushNSValue luaTo:lua_toNSValue];
-        typeDefinitions[kSWPropertyTypeSize] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWSize:) luaPush:0 luaTo:0];
-        typeDefinitions[kSWPropertyTypeVector2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWVector2:) luaPush:0 luaTo:0];
+        typeDefinitions[kSWPropertyTypeScaled2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWScaled2:) luaPush:lua_pushNSValue luaTo:lua_toNSValue];
+        typeDefinitions[kSWPropertyTypeVector2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWVector2:) luaPush:lua_pushNSValue luaTo:lua_toNSValue];
         typeDefinitions[kSWPropertyTypeImage] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseImage:) luaPush:0 luaTo:0];
     }
     

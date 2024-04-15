@@ -1,5 +1,5 @@
 #import <scripting/types/SWElement.h>
-#import <scripting/types/Utils.h>
+#import <scripting/types/SWLuaTypes.h>
 #import <scripting/SWEnumParser.h>
 
 static int l_new(lua_State* L) {
@@ -56,6 +56,14 @@ static int __index(lua_State* L) {
     if ([index isEqualToString:@"addEventListener"]) {
         lua_pushcfunction(L, l_addEventListener);
     }
+    else if ([index isEqual:@"children"]) {
+        lua_newtable(L);
+        
+        for (int i = 0; i < element.children.count; ++i) {
+            lua_pushSWElement(L, element.children[i]);
+            lua_rawseti(L, -2, i + 1);
+        }
+    }
     else {
         SWPropertyDefinition* property = [[[element class] properties] getPropertyDefinition:index];
         
@@ -90,8 +98,10 @@ void lua_pushSWElement(lua_State* L, SWElement* element) {
     if (element) {
         SWUserdataInfo info = {
             .name = "Element",
-            .__index = __index,
-            .__newindex = __newindex
+            .metamethods = @{
+                @"__index": [NSValue valueWithPointer: __index],
+                @"__newindex": [NSValue valueWithPointer: __newindex],
+            }
         };
 
         void** data = lua_newSWUserdata(L, sizeof(void*), info);

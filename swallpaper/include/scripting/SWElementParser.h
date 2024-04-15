@@ -8,8 +8,7 @@
 
 + (NSString*)parseString:(NSString*)str;
 + (NSColor*)parseColor:(NSString*)str;
-+ (NSValue*)parseSWPoint:(NSString*)str;
-+ (NSValue*)parseSWSize:(NSString*)str;
++ (NSValue*)parseSWScaled2:(NSString*)str;
 + (NSValue*)parseSWVector2:(NSString*)str;
 + (NSNumber*)parseNumber:(NSString*)str;
 + (NSNumber*)parseBoolean:(NSString*)str;

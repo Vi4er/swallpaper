@@ -1,7 +1,5 @@
 #import <scripting/types/SWScaled.h>
-#import <scripting/types/Utils.h>
-
-// TODO: Simplify this process of using NSValue wrapped structs
+#import <scripting/types/SWLuaTypes.h>
 
 static int __index(lua_State* L) {
     SWScaled scaled = lua_toSWScaled(L, 1);
@@ -28,8 +26,10 @@ static int __tostring(lua_State* L) {
 void lua_pushSWScaled(lua_State* L, SWScaled scaled) {
     SWUserdataInfo info = {
         .name = "Scaled",
-        .__index = __index,
-        .__tostring = __tostring
+        .metamethods = @{
+            @"__index": [NSValue valueWithPointer: __index],
+            @"__tostring": [NSValue valueWithPointer: __tostring],
+        }
     };
 
     SWScaled* data = lua_newSWUserdata(L, sizeof(SWScaled), info);

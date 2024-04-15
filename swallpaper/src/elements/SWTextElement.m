@@ -5,6 +5,8 @@
 
 @implementation SWTextLayer
 
+@synthesize string = _string;
+
 - (CGSize)getTextSize {
     NSDictionary* attributes = @{NSFontAttributeName:(NSFont*)self.font};
     return [self.string sizeWithAttributes:attributes];
@@ -32,22 +34,38 @@
 
 -(void)sizeToFit {
     CGSize textSize = [self.layer getTextSize];
-    SWRect frame = {0};
-    frame.size.width.offset = textSize.width;
-    frame.size.height.offset = textSize.height;
+    SWRect frame = self.frame;
+    frame.size.x.scale = frame.size.y.scale = 0;
+    frame.size.x.offset = textSize.width;
+    frame.size.y.offset = textSize.height;
     self.frame = frame;
-    [self updateFrame];
 }
 
 // TODO: Add Font
 DECLARE_PROPERTIES(SWTextElement) {
-    STRING_PROPERTY(text, self.layer.string);
+    DEFINE_PROPERTY(text, String, ^NSString*(SWTextElement* self) {
+        return self.layer.string;
+    }, ^void(SWTextElement* self, NSString* str) {
+        self.layer.string = str;
+        if (self.sizesToFit) {
+            [self sizeToFit];
+        }
+    });
     CGCOLOR_PROPERTY(foregroundColor, self.layer.foregroundColor);
     DEFINE_PROPERTY(fontSize, Number, ^NSNumber*(SWTextElement* self) {
         return [NSNumber numberWithDouble:self.layer.fontSize];
     }, ^void(SWTextElement* self, NSNumber* value) {
         self.layer.fontSize = value.doubleValue;
         self.layer.font = CFBridgingRetain([(NSFont*)self.layer.font fontWithSize:self.layer.fontSize]);
+    });
+    DEFINE_PROPERTY(sizesToFit, Boolean, ^NSNumber*(SWTextElement* self) {
+        return [NSNumber numberWithInt:self.sizesToFit];
+    }, ^void(SWTextElement* self, NSNumber* value) {
+        self.sizesToFit = value.intValue;
+
+        if (value.intValue) {
+            [self sizeToFit];
+        }
     });
     STRING_PROPERTY(horizontalTextAlignment, self.layer.alignmentMode);
 }

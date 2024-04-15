@@ -1,5 +1,5 @@
 #import <scripting/types/SWEvent.h>
-#import <scripting/types/Utils.h>
+#import <scripting/types/SWLuaTypes.h>
 #import <Foundation/Foundation.h>
 
 static int __index(lua_State* L) {
@@ -20,7 +20,9 @@ SWEvent* lua_toSWEvent(lua_State* L, int idx) {
 void lua_pushSWEvent(lua_State* L, SWEvent* event) {
     SWUserdataInfo info = {
         .name = "Event",
-        .__index = __index
+        .metamethods = @{
+            @"__index": [NSValue valueWithPointer: __index]
+        }
     };
 
     void** data = lua_newSWUserdata(L, sizeof(void*), info);

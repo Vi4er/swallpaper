@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE103C4A2B9A3C5C006C25C2 /* Assets.xcassets */; };
+		CE3D6A0A2BCCAB9300DB8E71 /* NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D6A092BCCAB9300DB8E71 /* NSString.m */; };
+		CE3D6A0E2BCCAFC000DB8E71 /* SWVector2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D6A0D2BCCAFC000DB8E71 /* SWVector2.m */; };
 		CE3E00952BCA40C2009A9270 /* NSNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E00942BCA40C2009A9270 /* NSNumber.m */; };
 		CE3E00982BCA4238009A9270 /* NSValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E00972BCA4238009A9270 /* NSValue.m */; };
 		CE3FFDE12BB26E73007886AA /* swall format in Resources */ = {isa = PBXBuildFile; fileRef = CE3FFDE02BB26E73007886AA /* swall format */; };
@@ -41,8 +43,8 @@
 		CE85C85D2BAC3FE60056466B /* SWWallpaper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85C85C2BAC3FE60056466B /* SWWallpaper.m */; };
 		CE86071C2BBA6A9F00AFEA41 /* scene.swal in Resources */ = {isa = PBXBuildFile; fileRef = CE86071B2BBA6A9F00AFEA41 /* scene.swal */; };
 		CE96383A2BC3BD6300AA8615 /* SWScaled.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638392BC3BD6300AA8615 /* SWScaled.m */; };
-		CE96383D2BC3BF0000AA8615 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE96383C2BC3BF0000AA8615 /* Utils.m */; };
-		CE9638402BC3C0D000AA8615 /* SWPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CE96383F2BC3C0D000AA8615 /* SWPoint.m */; };
+		CE96383D2BC3BF0000AA8615 /* SWLuaTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CE96383C2BC3BF0000AA8615 /* SWLuaTypes.m */; };
+		CE9638402BC3C0D000AA8615 /* SWScaled2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE96383F2BC3C0D000AA8615 /* SWScaled2.m */; };
 		CE9638432BC3C44F00AA8615 /* SWElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638422BC3C44F00AA8615 /* SWElement.m */; };
 		CEA4DBD82BB3D26B00296C4E /* Glur in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBD72BB3D26B00296C4E /* Glur */; };
 		CEA4DBDB2BB3D29100296C4E /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CEA4DBDA2BB3D29100296C4E /* RiveRuntime */; };
@@ -105,6 +107,10 @@
 		CE103C512B9A3C5C006C25C2 /* swallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swallpaper.entitlements; sourceTree = "<group>"; };
 		CE2517DD2BAC52C2002911B7 /* SWNonConstrainedWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWNonConstrainedWindow.h; sourceTree = "<group>"; };
 		CE2517DE2BAC52DE002911B7 /* SWNonConstrainedWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWNonConstrainedWindow.m; sourceTree = "<group>"; };
+		CE3D6A092BCCAB9300DB8E71 /* NSString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSString.m; sourceTree = "<group>"; };
+		CE3D6A0B2BCCAB9B00DB8E71 /* NSString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSString.h; sourceTree = "<group>"; };
+		CE3D6A0C2BCCAF9100DB8E71 /* SWVector2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWVector2.h; sourceTree = "<group>"; };
+		CE3D6A0D2BCCAFC000DB8E71 /* SWVector2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWVector2.m; sourceTree = "<group>"; };
 		CE3E00932BCA406F009A9270 /* NSNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSNumber.h; sourceTree = "<group>"; };
 		CE3E00942BCA40C2009A9270 /* NSNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSNumber.m; sourceTree = "<group>"; };
 		CE3E00962BCA4194009A9270 /* NSValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSValue.h; sourceTree = "<group>"; };
@@ -150,10 +156,9 @@
 		CE86071B2BBA6A9F00AFEA41 /* scene.swal */ = {isa = PBXFileReference; lastKnownFileType = file; path = scene.swal; sourceTree = "<group>"; };
 		CE9638372BC3BD3B00AA8615 /* SWScaled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWScaled.h; sourceTree = "<group>"; };
 		CE9638392BC3BD6300AA8615 /* SWScaled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWScaled.m; sourceTree = "<group>"; };
-		CE96383B2BC3BEAB00AA8615 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
-		CE96383C2BC3BF0000AA8615 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		CE96383E2BC3BF8500AA8615 /* SWPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPoint.h; sourceTree = "<group>"; };
-		CE96383F2BC3C0D000AA8615 /* SWPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWPoint.m; sourceTree = "<group>"; };
+		CE96383C2BC3BF0000AA8615 /* SWLuaTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWLuaTypes.m; sourceTree = "<group>"; };
+		CE96383E2BC3BF8500AA8615 /* SWScaled2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWScaled2.h; sourceTree = "<group>"; };
+		CE96383F2BC3C0D000AA8615 /* SWScaled2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWScaled2.m; sourceTree = "<group>"; };
 		CE9638412BC3C41D00AA8615 /* SWElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWElement.h; sourceTree = "<group>"; };
 		CE9638422BC3C44F00AA8615 /* SWElement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWElement.m; sourceTree = "<group>"; };
 		CE9638442BC3C66D00AA8615 /* SWLuaTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWLuaTypes.h; sourceTree = "<group>"; };
@@ -435,13 +440,14 @@
 			isa = PBXGroup;
 			children = (
 				CE9638372BC3BD3B00AA8615 /* SWScaled.h */,
-				CE96383B2BC3BEAB00AA8615 /* Utils.h */,
-				CE96383E2BC3BF8500AA8615 /* SWPoint.h */,
+				CE96383E2BC3BF8500AA8615 /* SWScaled2.h */,
 				CE9638412BC3C41D00AA8615 /* SWElement.h */,
 				CE9638442BC3C66D00AA8615 /* SWLuaTypes.h */,
 				CEAA3FD42BC6B8AF0037E0DD /* SWEvent.h */,
 				CE3E00932BCA406F009A9270 /* NSNumber.h */,
 				CE3E00962BCA4194009A9270 /* NSValue.h */,
+				CE3D6A0B2BCCAB9B00DB8E71 /* NSString.h */,
+				CE3D6A0C2BCCAF9100DB8E71 /* SWVector2.h */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -450,12 +456,14 @@
 			isa = PBXGroup;
 			children = (
 				CE9638392BC3BD6300AA8615 /* SWScaled.m */,
-				CE96383C2BC3BF0000AA8615 /* Utils.m */,
-				CE96383F2BC3C0D000AA8615 /* SWPoint.m */,
+				CE96383C2BC3BF0000AA8615 /* SWLuaTypes.m */,
+				CE96383F2BC3C0D000AA8615 /* SWScaled2.m */,
 				CE9638422BC3C44F00AA8615 /* SWElement.m */,
 				CEAA3FD22BC6B8A50037E0DD /* SWEvent.m */,
 				CE3E00942BCA40C2009A9270 /* NSNumber.m */,
 				CE3E00972BCA4238009A9270 /* NSValue.m */,
+				CE3D6A092BCCAB9300DB8E71 /* NSString.m */,
+				CE3D6A0D2BCCAFC000DB8E71 /* SWVector2.m */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -802,6 +810,7 @@
 				CED5190C2BBA769C00FFCF81 /* HSB.swift in Sources */,
 				CE3E00982BCA4238009A9270 /* NSValue.m in Sources */,
 				CED518F22BBA769C00FFCF81 /* MenuBarView.swift in Sources */,
+				CE3D6A0E2BCCAFC000DB8E71 /* SWVector2.m in Sources */,
 				CED518FB2BBA769C00FFCF81 /* TNHueSliderView.swift in Sources */,
 				CE3E00952BCA40C2009A9270 /* NSNumber.m in Sources */,
 				CE5DFB6E2B9A3E13005B6F2B /* hwvideo.metal in Sources */,
@@ -840,14 +849,14 @@
 				CED519102BBA769C00FFCF81 /* Styling.swift in Sources */,
 				CE85C85D2BAC3FE60056466B /* SWWallpaper.m in Sources */,
 				CECAC72C2BBCA82200847575 /* SWFlippedView.m in Sources */,
-				CE96383D2BC3BF0000AA8615 /* Utils.m in Sources */,
+				CE96383D2BC3BF0000AA8615 /* SWLuaTypes.m in Sources */,
 				CED5185D2BBA758900FFCF81 /* SWGradientLayer.m in Sources */,
 				CE9638432BC3C44F00AA8615 /* SWElement.m in Sources */,
 				CE3FFDEC2BB27491007886AA /* SWScene.m in Sources */,
 				CED518F92BBA769C00FFCF81 /* TNScrollableValueLabel.swift in Sources */,
 				CED519012BBA769C00FFCF81 /* CGFloat+Clamp.swift in Sources */,
 				CED519042BBA769C00FFCF81 /* NSColor+Random.swift in Sources */,
-				CE9638402BC3C0D000AA8615 /* SWPoint.m in Sources */,
+				CE9638402BC3C0D000AA8615 /* SWScaled2.m in Sources */,
 				CEF2247B2BC8FF58002CF258 /* SWTypes.m in Sources */,
 				CED5190A2BBA769C00FFCF81 /* TNGradientSliderView.swift in Sources */,
 				CECAC7352BBCBA4400847575 /* SWColorUtils.m in Sources */,
@@ -856,6 +865,7 @@
 				CE5DFB6D2B9A3E10005B6F2B /* SWVideoRenderer.m in Sources */,
 				CED519062BBA769C00FFCF81 /* NSView+BackgroundColor.swift in Sources */,
 				CED519132BBA76AA00FFCF81 /* UI.swift in Sources */,
+				CE3D6A0A2BCCAB9300DB8E71 /* NSString.m in Sources */,
 				CED519052BBA769C00FFCF81 /* NSColor+RGBA.swift in Sources */,
 				CED518F82BBA769C00FFCF81 /* TNInlineNumberTextField.swift in Sources */,
 			);

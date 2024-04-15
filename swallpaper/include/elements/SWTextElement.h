@@ -10,6 +10,7 @@
 @interface SWTextElement : SWElement
 
 @property SWTextLayer* layer;
+@property bool sizesToFit;
 - (void)sizeToFit;
 
 @end
