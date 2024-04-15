@@ -42,11 +42,10 @@
 }
 
 + (Boolean)isHovered: (SWElement*)element wallpaper:(SWWallpaper*)wallpaper {
-    // TODO: FIX, DOES NOT WORK FOR CHILDREN
-    CGPoint converted = [wallpaper.layer convertPoint:NSEvent.mouseLocation toLayer:element.layer];
-    converted.y = wallpaper.layer.frame.size.height - NSEvent.mouseLocation.y - element.layer.frame.origin.y; // Flip y
-    NSLog(@"%f\n", converted.y);
-    
+    NSPoint mouseLocation = NSEvent.mouseLocation;
+    mouseLocation.y = [NSScreen mainScreen].frame.size.height - mouseLocation.y;
+
+    CGPoint converted = [wallpaper.layer convertPoint:mouseLocation toLayer:element.layer];
     return [element.layer containsPoint:converted];
 }
 

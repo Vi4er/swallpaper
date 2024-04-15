@@ -12,7 +12,7 @@
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
     CGFloat menuBarHeight = [self getMenuBarHeight];
 
-    CGFloat capsuleHeight = menuBarHeight * 0.8; // menuBarHeight / 1.75;
+    CGFloat capsuleHeight = menuBarHeight / 1.75;
     CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight)

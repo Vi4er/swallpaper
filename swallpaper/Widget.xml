@@ -1,4 +1,4 @@
-<SW id="widget" backgroundColor="rgb(25, 25, 25, 200)" cornerRadius="15" origin="{0, 10, 0, 30}" size="{0.1 0, 0.1, 0}" draggable="true" masksToBounds="true">
+<SW id="widget" backgroundColor="rgb(25, 25, 25, 200)" cornerRadius="15" origin="{0, 10, 0, 30}" size="{0.15 0, 0.15, 0}" draggable="true" masksToBounds="true">
     <SWText text="Swallpaper" anchorPoint="{0.5, 0}" origin="{0.5, 0, 0.025, 0}" foregroundColor="rgb(255, 255, 255, 255)" fontSize="20" font="boldSystem" horizontalTextAlignment="center" sizesToFit="true"/>
     <SWText text="X" backgroundColor="rgb(255, 255, 255, 50)" cornerRadius="12" anchorPoint="{1, 0}" origin="{0.985, 0, 0.025, 0}" padding="{3, 3}" fontSize="15" sizeConstraint="YY" horizontalTextAlignment="center" font="systemBold" sizesToFit="true"/>
 
