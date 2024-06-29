@@ -41,9 +41,10 @@ SWVector2 lua_toSWVector2(lua_State* L, int idx) {
 }
 
 static int l_new(lua_State* L) {
-    SWVector2 vector2;
-    vector2.x = luaL_checknumber(L, 1);
-    vector2.y = luaL_checknumber(L, 2);
+    SWVector2 vector2 = {
+        .x = luaL_checknumber(L, 1),
+        .y = luaL_checknumber(L, 2)
+    };
     lua_pushSWVector2(L, vector2);
     return 1;
 }

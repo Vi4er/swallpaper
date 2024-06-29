@@ -45,10 +45,10 @@
 }
 
 - (instancetype)initWithScreen:(NSScreen*)screen {
-    self = [super initWithContentRect:NSMakeRect(0, 0, screen.frame.size.width, 1) styleMask:NSWindowStyleMaskBorderless|NSWindowStyleMaskNonactivatingPanel backing:NSBackingStoreBuffered defer:NO screen:screen];
+    self = [super initWithContentRect:NSMakeRect(0, 0, screen.frame.size.width, 1) styleMask:NSWindowStyleMaskBorderless|NSWindowStyleMaskNonactivatingPanel|NSWindowStyleMaskFullSizeContentView backing:NSBackingStoreBuffered defer:NO screen:screen];
     
     if (self) {
-        self.level = kCGMaximumWindowLevel;
+        self.level = NSMainMenuWindowLevel + 1;
         self.ignoresMouseEvents = YES;
         self.backgroundColor = [NSColor clearColor];
         self.hasShadow = NO;

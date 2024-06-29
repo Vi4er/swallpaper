@@ -41,7 +41,6 @@
 		CE6111ED2BBB386C0025126A /* SWTextElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6111EC2BBB386C0025126A /* SWTextElement.m */; };
 		CE6111F12BBB51340025126A /* SWElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6111F02BBB51340025126A /* SWElement.m */; };
 		CE85C85D2BAC3FE60056466B /* SWWallpaper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85C85C2BAC3FE60056466B /* SWWallpaper.m */; };
-		CE86071C2BBA6A9F00AFEA41 /* scene.swal in Resources */ = {isa = PBXBuildFile; fileRef = CE86071B2BBA6A9F00AFEA41 /* scene.swal */; };
 		CE96383A2BC3BD6300AA8615 /* SWScaled.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638392BC3BD6300AA8615 /* SWScaled.m */; };
 		CE96383D2BC3BF0000AA8615 /* SWLuaTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CE96383C2BC3BF0000AA8615 /* SWLuaTypes.m */; };
 		CE9638402BC3C0D000AA8615 /* SWScaled2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE96383F2BC3C0D000AA8615 /* SWScaled2.m */; };
@@ -54,6 +53,7 @@
 		CEAA3FD62BC6BB370037E0DD /* lua.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA3FD52BC6BB370037E0DD /* lua.m */; };
 		CEAA3FD82BC6C0510037E0DD /* SWEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA3FD72BC6C0510037E0DD /* SWEvent.m */; };
 		CEB541F32BC0213200852176 /* SWEnumParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB541F22BC0213200852176 /* SWEnumParser.m */; };
+		CEC049192C2F9CCA007AE172 /* scene.swal in Resources */ = {isa = PBXBuildFile; fileRef = CEC049182C2F9CCA007AE172 /* scene.swal */; };
 		CEC722722BC0D60E00E54D50 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC7226F2BC0D53500E54D50 /* liblua.a */; };
 		CECAC72A2BBC9DE200847575 /* SWImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC7292BBC9DE200847575 /* SWImageElement.m */; };
 		CECAC72C2BBCA82200847575 /* SWFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECAC72B2BBCA82200847575 /* SWFlippedView.m */; };
@@ -153,7 +153,6 @@
 		CE85C8562BAC2FAF0056466B /* SWGradientLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGradientLayer.h; sourceTree = "<group>"; };
 		CE85C85B2BAC3FD90056466B /* SWWallpaper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWWallpaper.h; sourceTree = "<group>"; };
 		CE85C85C2BAC3FE60056466B /* SWWallpaper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWWallpaper.m; sourceTree = "<group>"; };
-		CE86071B2BBA6A9F00AFEA41 /* scene.swal */ = {isa = PBXFileReference; lastKnownFileType = file; path = scene.swal; sourceTree = "<group>"; };
 		CE9638372BC3BD3B00AA8615 /* SWScaled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWScaled.h; sourceTree = "<group>"; };
 		CE9638392BC3BD6300AA8615 /* SWScaled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWScaled.m; sourceTree = "<group>"; };
 		CE96383C2BC3BF0000AA8615 /* SWLuaTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWLuaTypes.m; sourceTree = "<group>"; };
@@ -171,6 +170,7 @@
 		CEAC29792BBFA58700B4DB0F /* SWPropertyDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPropertyDefinition.h; sourceTree = "<group>"; };
 		CEB541F12BC0210A00852176 /* SWEnumParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWEnumParser.h; sourceTree = "<group>"; };
 		CEB541F22BC0213200852176 /* SWEnumParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWEnumParser.m; sourceTree = "<group>"; };
+		CEC049182C2F9CCA007AE172 /* scene.swal */ = {isa = PBXFileReference; lastKnownFileType = file; path = scene.swal; sourceTree = "<group>"; };
 		CEC7226F2BC0D53500E54D50 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = dependencies/lua/lib/liblua.a; sourceTree = "<group>"; };
 		CEC722702BC0D5ED00E54D50 /* Widget.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = Widget.lua; sourceTree = "<group>"; };
 		CECAC7282BBC9DB500847575 /* SWImageElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWImageElement.h; sourceTree = "<group>"; };
@@ -266,8 +266,8 @@
 		CE103C432B9A3C5C006C25C2 /* swallpaper */ = {
 			isa = PBXGroup;
 			children = (
+				CEC049182C2F9CCA007AE172 /* scene.swal */,
 				CED518BA2BBA768800FFCF81 /* ui */,
-				CE86071B2BBA6A9F00AFEA41 /* scene.swal */,
 				CE73BA402B8A9CDD00AFC334 /* shaders */,
 				CE73BA172B8A991500AFC334 /* include */,
 				CE73BA152B8A98FC00AFC334 /* src */,
@@ -790,7 +790,7 @@
 			files = (
 				CE3FFDE12BB26E73007886AA /* swall format in Resources */,
 				CE103C4B2B9A3C5C006C25C2 /* Assets.xcassets in Resources */,
-				CE86071C2BBA6A9F00AFEA41 /* scene.swal in Resources */,
+				CEC049192C2F9CCA007AE172 /* scene.swal in Resources */,
 				CECAC72F2BBCA9A500847575 /* Widget.xml in Resources */,
 				CED518F42BBA769C00FFCF81 /* binoculars.riv in Resources */,
 			);

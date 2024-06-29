@@ -26,7 +26,7 @@
             childElement.parent = element;
         }
     }
-        
+
     return element;
 }
 
@@ -34,7 +34,7 @@
     NSError* error = nil;
     NSData* xmlData = [NSData dataWithContentsOfFile:path];
     NSXMLDocument* document = [[NSXMLDocument alloc] initWithData:xmlData options:NSXMLNodeOptionsNone error:&error];
-    
+
     if (error != nil) {
         NSLog(@"%@\n", error);
         return nil;
@@ -75,6 +75,7 @@
             return [NSColor colorWithCalibratedHue:h saturation:s brightness:b alpha:a];
         }
     }
+    // TODO: Add support for 6 letter and 3 letter hex codes, currently only supports 8 letter hex codes
     else if ([str hasPrefix:@"#"]) {
         unsigned long long hexColor;
         NSScanner* scanner = [NSScanner scannerWithString:[str substringFromIndex:1]];

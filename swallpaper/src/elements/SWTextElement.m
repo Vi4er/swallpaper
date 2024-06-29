@@ -29,7 +29,12 @@
 @dynamic layer;
 
 -(CALayer*)createLayer {
-    return [SWTextLayer layer];
+    SWTextLayer* layer = [SWTextLayer layer];
+    // TODO: Improve this
+    layer.contentsScale = [[NSScreen mainScreen] backingScaleFactor];
+//    layer.font = (__bridge CFTypeRef _Nullable)([NSFont fontWithName:@"SF-Pro-Rounded-Semibold" size:14.0]);
+    
+    return layer;
 }
 
 -(void)sizeToFit {
@@ -56,7 +61,11 @@ DECLARE_PROPERTIES(SWTextElement) {
         return [NSNumber numberWithDouble:self.layer.fontSize];
     }, ^void(SWTextElement* self, NSNumber* value) {
         self.layer.fontSize = value.doubleValue;
-        self.layer.font = CFBridgingRetain([(NSFont*)self.layer.font fontWithSize:self.layer.fontSize]);
+//        self.layer.font = CFBridgingRetain([(NSFont*)self.layer.font fontWithSize:self.layer.fontSize]);
+        
+        NSFont* systemFont = [NSFont systemFontOfSize:self.layer.fontSize weight:NSFontWeightSemibold];
+        self.layer.font = CFBridgingRetain([NSFont fontWithDescriptor: [systemFont.fontDescriptor fontDescriptorWithDesign:NSFontDescriptorSystemDesignRounded]
+ size:self.layer.fontSize]);
     });
     DEFINE_PROPERTY(sizesToFit, Boolean, ^NSNumber*(SWTextElement* self) {
         return [NSNumber numberWithInt:self.sizesToFit];

@@ -202,7 +202,7 @@ double scaledValue(double parentValue, SWScaled value) {
 }
 
 + (SWElement*)elementNamed:(NSString*)name {
-    if ([name isEqualToString:@"SW"]) {
+    if ([name isEqualToString:@"SW"] || [name isEqualToString:@"SWFrame"]) {
         return [SWElement new];
     }
     else if ([name isEqualToString:@"SWText"]) {
@@ -262,6 +262,13 @@ DECLARE_PROPERTIES(SWElement) {
             self.frame = frame;
             [self updateFrame];
         }
+    );
+    // TODO: Make ReadOnly properties
+    DEFINE_PROPERTY(absoluteSize, Vector2,
+        ^NSValue*(SWElement* self) {
+            return [NSValue valueWithSWVector2:SWMakeVector2(self.layer.frame.size.width, self.layer.frame.size.height)];
+        },
+        ^void(SWElement* self, NSValue* value) {}
     );
     VECTOR2_PROPERTY(padding, self.padding);
     VECTOR2_PROPERTY(anchorPoint, self.anchorPoint);

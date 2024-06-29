@@ -40,7 +40,6 @@
         typeDefinitions[kSWPropertyTypeColor] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseColor:) luaPush:0 luaTo:0];
         typeDefinitions[kSWPropertyTypeScaled2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWScaled2:) luaPush:lua_pushNSValue luaTo:lua_toNSValue];
         typeDefinitions[kSWPropertyTypeVector2] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseSWVector2:) luaPush:lua_pushNSValue luaTo:lua_toNSValue];
-        typeDefinitions[kSWPropertyTypeImage] = [SWPropertyTypeDefinition newWithParserSelector:@selector(parseImage:) luaPush:0 luaTo:0];
     }
     
     return typeDefinitions;

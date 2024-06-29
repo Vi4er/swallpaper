@@ -59,6 +59,15 @@ static inline SWScaled2 SWMakeScaled2(SWScaled x, SWScaled y) {
     return scaled2;
 }
 
+static inline SWVector2 SWMakeVector2(double x, double y) {
+    SWVector2 vector2 = {
+        .x = x,
+        .y = y
+    };
+    
+    return vector2;
+}
+
 static inline SWRect SWMakeRect(SWScaled x, SWScaled y, SWScaled width, SWScaled height) {
     SWRect rect = {
         .origin = SWMakeScaled2(x, y),

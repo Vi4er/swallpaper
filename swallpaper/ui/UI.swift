@@ -34,7 +34,9 @@ class WindowDelegate : NSObject, NSWindowDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let menuButton = statusItem?.button {
-            menuButton.image = .menuBarIcon
+            let image: NSImage = .menuBarIcon
+            image.isTemplate = true
+            menuButton.image = image
             menuButton.action = #selector(menuToggle)
             menuButton.target = self
         }

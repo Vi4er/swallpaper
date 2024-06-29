@@ -21,14 +21,14 @@ lua_State* L;
     
     if ((element = [SWElementParser parseFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"]) != nil) {
         element.parent = wallpaper;
-        CIFilter* filter = [CIFilter filterWithName:@"CIGaussianBlur" withInputParameters:@{
-            kCIInputRadiusKey: @5
-        }];
-        element.layer.backgroundFilters = @[filter];
+//        CIFilter* filter = [CIFilter filterWithName:@"CIGaussianBlur" withInputParameters:@{
+//            kCIInputRadiusKey: @0
+//        }];
+//        element.layer.backgroundFilters = @[filter];
         
-        if (luaL_dofile(SWLuaState, "/Users/user/Documents/swallpaper/swallpaper/Widget.lua") != LUA_OK) {
-            NSLog(@"Error executing file: %s\n", lua_tostring(SWLuaState, -1));
-        }
+//        if (luaL_dofile(SWLuaState, "/Users/user/Documents/swallpaper/swallpaper/Widget.lua") != LUA_OK) {
+//            NSLog(@"Error executing file: %s\n", lua_tostring(SWLuaState, -1));
+//        }
         
         NSLog(@"Reloaded widget\n");
     }
@@ -62,20 +62,26 @@ lua_State* L;
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification {
     wallpaper = [SWWallpaper newWithScreen: [NSScreen mainScreen]];
+    
+//    [self reloadWidget];
+
     [wallpaper setScene: @"scene.swal"];
-    [wallpaper setFps:60];
+    [wallpaper setFps:30];
     [wallpaper start];
 
-    [self reloadWidget];
-    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"];
-    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.lua"];
+    // THE LINE FIX, DO NOT REMOVE
+    CIFilter* filter = [CIFilter filterWithName:@"CIHueAdjust" withInputParameters:@{}];
+    wallpaper.layer.backgroundFilters = @[filter];
+
+//    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"];
+//    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.lua"];
 
     [SWEventHandler init];
     [UI setup];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {
-    [UI.window deminiaturize: nil];
+//    [UI.window deminiaturize: nil];
     
     return true;
 }

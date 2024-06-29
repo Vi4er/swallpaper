@@ -14,10 +14,10 @@
 }
 
 DECLARE_PROPERTIES(SWImageElement) {
-    DEFINE_PROPERTY(image, Image, ^NSImage*(SWImageElement* self) {
-        return self.image;
-    }, ^void(SWImageElement* self, NSImage* image) {
-        self.image = image;
+    DEFINE_PROPERTY(image, String, ^NSString*(SWImageElement* self) {
+        return [self.image name];
+    }, ^void(SWImageElement* self, NSString* image) {
+        self.image = [NSImage imageNamed:image];
     });
 }
 

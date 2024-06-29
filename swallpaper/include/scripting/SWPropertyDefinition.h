@@ -19,7 +19,6 @@ typedef enum SWPropertyType {
     kSWPropertyTypeScaled2,
     kSWPropertyTypeVector2,
     kSWPropertyTypeEnum,
-    kSWPropertyTypeImage,
     kSWPropertyTypeCount
 } SWPropertyType;
 

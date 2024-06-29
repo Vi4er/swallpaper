@@ -12,22 +12,14 @@ int main(int argc, const char* argv[]) {
         NSApp.activationPolicy = NSApplicationActivationPolicyAccessory;
 
         SWInitLua();
-
-        SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
-        [application setDelegate: appDelegate];
-        [application run];
-    }
-    
-    return 0;
-}
-
+        
 //        SWScene* scene = [[SWScene alloc] init];
-//        scene.name = @"Car";
-//        scene.desc = @"Car Video";
+//        scene.name = @"Test";
+//        scene.desc = @"Test Video";
 //
 //        SWSceneVideo video = {0};
-//        video.filePath = "/Users/user/Downloads/output.mp4";
-//        video.fps = 60;
+//        video.filePath = "/Users/user/Downloads/4779866-hd_1920_1080_30fps.mp4";
+//        video.fps = 30;
 //        video.playbackSpeed = 1;
 //        scene.video = video;
 //
@@ -44,3 +36,12 @@ int main(int argc, const char* argv[]) {
 //        scene.menuBarInfo = menuBarInfo;
 //
 //        [scene export: @"/Users/user/Documents/swallpaper/swallpaper/scene.swal"];
+
+        SWApplicationDelegate* appDelegate = [[SWApplicationDelegate alloc] init];
+        [application setDelegate: appDelegate];
+        [application run];
+    }
+    
+    return 0;
+}
+

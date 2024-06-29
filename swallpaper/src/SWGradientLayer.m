@@ -24,24 +24,24 @@ NSArray* effectLocations;
     }
     
     int count = (int)colors.count;
-    CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"locations"];
-
     NSMutableArray* startLocations = [NSMutableArray arrayWithCapacity:count * 2];
+    NSMutableArray* endLocations = [NSMutableArray arrayWithCapacity:count * 2];
+
     for (int i = -count; i < count; ++i) {
         [startLocations addObject: @(i / (count - 1.0))];
+        [endLocations addObject: @((i + count) / (count - 1.0))];
     }
-    
-    NSMutableArray* endLocations = [NSMutableArray arrayWithCapacity:count * 2];
-    for (int i = 0; i < count * 2; ++i) {
-        [endLocations addObject: @(i / (count - 1.0))];
-    }
-    
+
     effectLocations = startLocations;
+    
+    CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"locations"];
     animation.fromValue = startLocations;
     animation.toValue = endLocations;
     animation.duration = 7.5;
     animation.repeatCount = HUGE_VALF;
     [self addAnimation:animation forKey:nil];
+    
+    NSLog(@"???\n");
 }
 
 - (void)setEffect:(SWGradientEffect)effect {
