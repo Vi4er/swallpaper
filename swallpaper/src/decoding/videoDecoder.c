@@ -3,7 +3,7 @@
 enum AVPixelFormat getHardwareDecoderFormat(AVCodecContext* context, const enum AVPixelFormat* formats) {
     VideoDecoder* decoder = (VideoDecoder*)context->opaque;
 
-    for (const enum AVPixelFormat* p = formats; *p != -1; p++) {
+    for (const enum AVPixelFormat* p = formats; *p != -1; ++p) {
         if (*p == decoder->hardwarePixelFormat)
             return *p;
     }
@@ -12,7 +12,6 @@ enum AVPixelFormat getHardwareDecoderFormat(AVCodecContext* context, const enum 
     return AV_PIX_FMT_NONE;
 }
 
-// TODO: Make it so you can reset a video decoder with a new context or just make a set_context method and remove it from the constructor
 VideoDecoder* video_decoder_new(SceneAVIOContext* context, int enableHardwareDecoding) {
     VideoDecoder* decoder = (VideoDecoder*)calloc(1, sizeof(VideoDecoder));
     decoder->sceneContext = context;
@@ -60,7 +59,7 @@ VideoDecoder* video_decoder_new(SceneAVIOContext* context, int enableHardwareDec
     }
 
     if (decoder->enableHardwareDecoding) {
-        for (int i = 0;; i++) {
+        for (int i = 0;; ++i) {
             const AVCodecHWConfig* config = avcodec_get_hw_config(codec, i);
 
             if (!config) {
@@ -113,9 +112,6 @@ VideoDecoder* video_decoder_new(SceneAVIOContext* context, int enableHardwareDec
         video_decoder_free(decoder);
         return 0;
     }
-
-    decoder->width = decoder->codecContext->width;
-    decoder->height = decoder->codecContext->height;
 
     // Frame
 

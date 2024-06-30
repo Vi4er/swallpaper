@@ -4,8 +4,9 @@
 #import <SWMenuBar.h>
 #import <elements/SWElement.h>
 #import <rendering/SWRenderer.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface SWWallpaper : SWElement
+@interface SWWallpaper<CAMetalDisplayLinkDelegate> : SWElement
 
 @property (readonly) SWNonConstrainedWindow* window;
 @property (readonly) SWMenuBar* menuBar;

@@ -119,10 +119,8 @@
         };
 
         self.viewport = viewport;
-        
-        NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
-        NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
-        [wallpaper.menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
+
+        [wallpaper.menuBar updatePositionAndSize];
     }
     
     return self;
@@ -142,6 +140,7 @@
     return device;
 }
 
+// TODO: Menu bar synchronization
 - (void)render {
     id<CAMetalDrawable> mainDrawable = [self.info nextDrawable], menuBarDrawable = [self.menuBarInfo nextDrawable];
     

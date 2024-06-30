@@ -9,6 +9,12 @@
     return self.screen.frame.size.height - self.screen.visibleFrame.size.height - (self.screen.visibleFrame.origin.y - self.screen.frame.origin.y) - 1;
 }
 
+-(void)updatePositionAndSize {
+    NSRect left = [SWMenuBar getLeftMenuBarRect];
+    NSRect right = [SWMenuBar getRightMenuBarRect];
+    [self updatePositionAndSize:&left rightRect:&right];
+}
+
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
     CGFloat menuBarHeight = [self getMenuBarHeight];
 
@@ -56,9 +62,7 @@
 
         self.contentView.layer = [SWGradientLayer layer];
 
-        NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
-        NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
-        [self updatePositionAndSize: &leftMenuBarRect rightRect: &rightMenuBarRect];
+        [self updatePositionAndSize];
         [self orderFront: nil];
     }
 

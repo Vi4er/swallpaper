@@ -99,12 +99,12 @@ NSTimer* timer;
 }
 
 - (void)renderLoop {
-    video_decoder_decode_next_frame(self.renderer.videoDecoder);
     [self.renderer render];
 }
 
 - (void)renderThreadEntryPoint:(id)object {
     @autoreleasepool {
+        // TODO: Possibly switch to CAMetalDisplayLink
         runLoop = [NSRunLoop currentRunLoop];
         timer = [NSTimer timerWithTimeInterval:1.0 / _fps
                                         target:self

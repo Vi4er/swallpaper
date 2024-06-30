@@ -66,7 +66,7 @@ lua_State* L;
 //    [self reloadWidget];
 
     [wallpaper setScene: @"scene.swal"];
-    [wallpaper setFps:30];
+    [wallpaper setFps:60];
     [wallpaper start];
 
 //    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"];

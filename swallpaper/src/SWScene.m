@@ -1,55 +1,46 @@
 #import <SWScene.h>
 #import <SWColorUtils.h>
+#import <objc/runtime.h>
 
-@implementation SWDataReader
+@implementation NSData (SWDataReader)
 
 #define READ_TYPE(type) type result; \
 int size = sizeof(result); \
-if (self.location + size > self.data.length) { return 0; } \
-[self.data getBytes:&result range:NSMakeRange(self.location, size)]; \
-_location += size; \
+if (self.location + size > self.length) { return 0; } \
+[self getBytes:&result range:NSMakeRange(self.location, size)]; \
+self.location += size; \
 return result;
 
-- (instancetype)initWithData:(NSData*)data {
-    self = [super init];
-    
-    if (self) {
-        _data = data;
-    }
-    
-    return self;
-}
-
 - (void)skip:(int)amount {
-    if (self.location + amount > self.data.length) {
+    if (self.location + amount > self.length) {
         return;
     }
     
-    _location += amount;
+    self.location += amount;
 }
 
 - (NSUInteger)readNextBytes:(unsigned char*)buffer length:(NSUInteger)length {
-    NSUInteger readLength = MIN(length, self.data.length - self.location);
+    NSUInteger readLength = MIN(length, self.length - self.location);
     
     if (readLength > 0) {
-        [self.data getBytes:buffer range:NSMakeRange(self.location, readLength)];
-        _location += readLength;
+        [self getBytes:buffer range:NSMakeRange(self.location, readLength)];
+        self.location += readLength;
     }
     
     return readLength;
 }
 
 - (NSString*)readNextString {
-    if (self.location >= self.data.length) {
+    if (self.location >= self.length) {
         return nil;
     }
 
-    const char* bytes = self.data.bytes + self.location;
-    unsigned long strLength = strlen(bytes);
+    const char* bytes = self.bytes + self.location;
+    size_t strLength = strlen(bytes);
     
-    if (strLength < self.data.length - self.location) {
+    if (strLength < self.length - self.location) {
         NSString* string = [[NSString alloc] initWithBytes:bytes length:strLength encoding:NSUTF8StringEncoding];
-        _location += strLength + 1;
+        self.location += strLength + 1;
         
         return string;
     }
@@ -73,39 +64,37 @@ return result;
     return SWColorDecode([self readNextUInt]);
 }
 
-@end
-
-@implementation SWDataWriter
-
-- (instancetype)initWithData:(NSMutableData*)data {
-    self = [super init];
-    
-    if (self) {
-        _data = data;
-    }
-    
-    return self;
+- (unsigned long)location {
+    return ((NSNumber*)objc_getAssociatedObject(self, @selector(location))).unsignedLongValue;
 }
 
+- (void)setLocation:(unsigned long)location {
+    objc_setAssociatedObject(self, @selector(location), [NSNumber numberWithUnsignedLong: location], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+@implementation NSMutableData (SWDataWriter)
+
 - (void)writeBytes:(unsigned char*)buffer length:(NSUInteger)length {
-    [self.data appendBytes:buffer length:length];
+    [self appendBytes:buffer length:length];
 }
 
 - (void)writeString:(NSString*)string {
-    [self.data appendData: [string dataUsingEncoding: NSUTF8StringEncoding]];
-    [self.data appendBytes:"\0" length:1];
+    [self appendData: [string dataUsingEncoding: NSUTF8StringEncoding]];
+    [self appendBytes:"\0" length:1];
 }
 
 - (void)writeInt:(int)value {
-    [self.data appendBytes:&value length:sizeof(value)];
+    [self appendBytes:&value length:sizeof(value)];
 }
 
 - (void)writeUInt:(unsigned int)value {
-    [self.data appendBytes:&value length:sizeof(value)];
+    [self appendBytes:&value length:sizeof(value)];
 }
 
 - (void)writeFloat:(float)value {
-    [self.data appendBytes:&value length:sizeof(value)];
+    [self appendBytes:&value length:sizeof(value)];
 }
 
 - (void)writeColor:(NSColor*)color {
@@ -124,11 +113,9 @@ return result;
         NSLog(@"Could not open scene file '%@'\n", path);
         return nil;
     }
-    
-    SWDataReader* reader = [[SWDataReader alloc] initWithData:data];
-    
+
     char header[4];
-    [reader readNextBytes:(unsigned char*)header length:4];
+    [data readNextBytes:(unsigned char*)header length:4];
     
     if (strncmp(header, "SWAL", 4)) {
         NSLog(@"Invalid scene file\n");
@@ -137,19 +124,19 @@ return result;
     
     // Read info
 
-    scene.name = [reader readNextString];
-    scene.desc = [reader readNextString];
+    scene.name = [data readNextString];
+    scene.desc = [data readNextString];
     
     // Read video
 
     SWSceneVideo video;
 
-    if ((video.dataLength = [reader readNextUInt])) {
+    if ((video.dataLength = [data readNextUInt])) {
         video.filePath = [path cStringUsingEncoding: NSUTF8StringEncoding];
-        video.dataLocation = reader.location;
-        [reader skip:video.dataLength];
-        video.fps = [reader readNextUInt];
-        video.playbackSpeed = [reader readNextFloat];
+        video.dataLocation = (unsigned int)data.location;
+        [data skip:video.dataLength];
+        video.fps = [data readNextUInt];
+        video.playbackSpeed = [data readNextFloat];
     }
     
     scene.video = video;
@@ -157,17 +144,17 @@ return result;
     // Read menu bar info
 
     SWSceneMenuBarInfo menuBarInfo;
-    menuBarInfo.enabled = [reader readNextInt];
+    menuBarInfo.enabled = [data readNextInt];
     
-    int colorsLength = [reader readNextUInt];
+    int colorsLength = [data readNextUInt];
     NSMutableArray* colors = [NSMutableArray array];
     
     for (int i = 0; i < colorsLength; ++i) {
-        [colors addObject: [reader readNextColor]];
+        [colors addObject: [data readNextColor]];
     }
     
     menuBarInfo.colors = colors;
-    menuBarInfo.effect = [reader readNextInt];
+    menuBarInfo.effect = [data readNextInt];
     scene.menuBarInfo = menuBarInfo;
     
     return scene;
@@ -175,15 +162,14 @@ return result;
 
 - (void)export:(NSString*)path {
     NSMutableData* data = [NSMutableData data];
-    SWDataWriter* writer = [[SWDataWriter alloc] initWithData:data];
     
     char* header = "SWAL";
-    [writer writeBytes:(unsigned char*)header length:strlen(header)];
+    [data writeBytes:(unsigned char*)header length:strlen(header)];
     
     // Write info
 
-    [writer writeString:self.name];
-    [writer writeString:self.desc];
+    [data writeString:self.name];
+    [data writeString:self.desc];
 
     // Write video
     
@@ -192,13 +178,13 @@ return result;
     if (!self.video.dataLocation) {
         // Importing from a video file
         NSData* videoData = [NSData dataWithContentsOfFile: [NSString stringWithCString:self.video.filePath encoding: NSUTF8StringEncoding]];
-        [writer writeUInt:(unsigned int)videoData.length];
+        [data writeUInt:(unsigned int)videoData.length];
         [data appendData: videoData];
     }
     else if (self.video.dataLength) {
         // Importing from the existing scene
         NSData* videoData = [NSData dataWithContentsOfFile: [NSString stringWithCString:self.video.filePath encoding: NSUTF8StringEncoding]];
-        [writer writeUInt:self.video.dataLength];
+        [data writeUInt:self.video.dataLength];
         [data appendData: [videoData subdataWithRange:NSMakeRange(self.video.dataLocation, self.video.dataLength)]];
     }
     else {
@@ -206,20 +192,20 @@ return result;
     }
 
     if (hasVideo) {
-        [writer writeUInt:self.video.fps];
-        [writer writeFloat:self.video.playbackSpeed];
+        [data writeUInt:self.video.fps];
+        [data writeFloat:self.video.playbackSpeed];
     }
 
     // Write menu bar info
     
-    [writer writeInt:self.menuBarInfo.enabled];
-    [writer writeUInt:(int)self.menuBarInfo.colors.count];
+    [data writeInt:self.menuBarInfo.enabled];
+    [data writeUInt:(int)self.menuBarInfo.colors.count];
     
     for (NSColor* color in self.menuBarInfo.colors) {
-        [writer writeColor: color];
+        [data writeColor: color];
     }
     
-    [writer writeInt:self.menuBarInfo.effect];
+    [data writeInt:self.menuBarInfo.effect];
 
     if ([data writeToFile:path atomically:YES] == NO) {
         NSLog(@"Failed to export scene to %@\n", path);

@@ -30,12 +30,9 @@
 
  */
 
-@interface SWDataReader : NSObject
+@interface NSData (SWDataReader)
 
-@property (readonly) NSData* data;
-@property (readonly) int location;
-
-- (instancetype)initWithData:(NSData*)data;
+@property unsigned long location;
 
 - (void)skip:(int)amount;
 - (NSUInteger)readNextBytes:(unsigned char*)buffer length:(NSUInteger)length;
@@ -47,11 +44,7 @@
 
 @end
 
-@interface SWDataWriter : NSObject
-
-@property (readonly) NSMutableData* data;
-
-- (instancetype)initWithData:(NSMutableData*)data;
+@interface NSMutableData (SWDataWriter)
 
 - (void)writeBytes:(unsigned char*)buffer length:(NSUInteger)length;
 - (void)writeString:(NSString*)string;

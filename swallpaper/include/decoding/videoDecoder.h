@@ -8,7 +8,6 @@
 
 typedef struct VideoDecoder {
     SceneAVIOContext* sceneContext;
-    int width, height;
     int videoStreamIndex;
     AVFormatContext* formatContext;
     AVCodecContext* codecContext;
