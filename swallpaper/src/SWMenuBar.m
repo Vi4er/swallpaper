@@ -14,14 +14,15 @@
 
     CGFloat capsuleHeight = menuBarHeight / 1.75;
     CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
+    CGFloat cornerRadius = capsuleHeight / 2;
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight)
-                                                         xRadius:capsuleHeight / 2
-                                                         yRadius:capsuleHeight / 2];
+                                                         xRadius:cornerRadius
+                                                         yRadius:cornerRadius];
 
     [path appendBezierPath: [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(rightRect->origin.x, centerY, rightRect->size.width, capsuleHeight)
-                                                            xRadius:capsuleHeight / 2
-                                                            yRadius:capsuleHeight / 2]];
+                                                            xRadius:cornerRadius
+                                                            yRadius:cornerRadius]];
 
     CAShapeLayer* maskLayer = [CAShapeLayer layer];
     maskLayer.path = [[NSBezierPath bezierPathWithRect: NSMakeRect(0, 0, self.screen.frame.size.width, menuBarHeight)] CGPath];
@@ -70,11 +71,13 @@
 
 + (NSRect)getLeftMenuBarRect {
     NSRunningApplication* frontApp = [NSWorkspace.sharedWorkspace frontmostApplication];
-    AXUIElementRef appMenuBar;
+    
+    AXUIElementRef app = AXUIElementCreateApplication(frontApp.processIdentifier);
+    AXUIElementRef menuBar;
 
-    if (AXUIElementCopyAttributeValue(AXUIElementCreateApplication(frontApp.processIdentifier), kAXMenuBarAttribute, (CFTypeRef*)&appMenuBar) == kAXErrorSuccess) {
+    if (AXUIElementCopyAttributeValue(app, kAXMenuBarAttribute, (CFTypeRef*)&menuBar) == kAXErrorSuccess) {
         CFArrayRef objectChildren;
-        AXUIElementCopyAttributeValue(appMenuBar, kAXChildrenAttribute, (CFTypeRef*)&objectChildren);
+        AXUIElementCopyAttributeValue(menuBar, kAXChildrenAttribute, (CFTypeRef*)&objectChildren);
 
         AXValueRef valueRef;
         CGSize rightSize;
@@ -86,7 +89,7 @@
             AXValueGetValue(valueRef, kAXValueCGPointType, &leftPos);
             CFRelease(valueRef);
         }
-        
+
         menuItem = CFArrayGetValueAtIndex(objectChildren, CFArrayGetCount(objectChildren) - 1);
 
         if (menuItem && AXUIElementCopyAttributeValue(menuItem, kAXPositionAttribute, (CFTypeRef*)&valueRef) == kAXErrorSuccess) {
@@ -100,10 +103,13 @@
         }
         
         CFRelease(objectChildren);
-        CFRelease(appMenuBar);
+        CFRelease(menuBar);
+        CFRelease(app);
 
         return NSMakeRect(leftPos.x, 0, rightPos.x - leftPos.x + rightSize.width, 0);
     }
+    
+    CFRelease(app);
 
     return NSMakeRect(-1, -1, -1, -1);
 }
@@ -138,6 +144,9 @@
             }
         }
     }
+    
+    CFRelease(windowInfoArray);
+    CFRelease(windowList);
     
     return NSMakeRect(leftX, 0, rightX - leftX - 10, 0);
 }

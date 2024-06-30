@@ -3,20 +3,33 @@
 #import <MetalKit/MetalKit.h>
 #import <decoding/videoDecoder.h>
 
+@class SWRenderer;
 @class SWWallpaper;
 extern NSString* RendererDevice;
 
+@interface SWTextureCache : NSObject
+
+@property SWRenderer* renderer;
+@property int plane;
+@property MTLTextureDescriptor* textureDescriptor;
+@property NSMutableDictionary* textures;
+
+- (instancetype)initWithRenderer:(SWRenderer*)renderer plane:(int)plane;
+- (id<MTLTexture>)get: (IOSurfaceRef)surface;
+- (void)reset;
+
+@end
+
 @interface SWRendererInfo : NSObject
 
-@property NSWindow* window;
 @property CAMetalLayer* layer;
-@property id<MTLCommandQueue> commandQueue;
 @property MTLRenderPassDescriptor* renderPassDescriptor;
 @property MTLRenderPassColorAttachmentDescriptor* colorAttachmentDescriptor;
-@property id<MTLRenderCommandEncoder> encoder;
 
 - (instancetype)initWithWindow:(NSWindow*)window;
 + (instancetype)newWithWindow:(NSWindow*)window;
+
+- (id<CAMetalDrawable>)nextDrawable;
 
 @end
 
@@ -24,8 +37,12 @@ extern NSString* RendererDevice;
 
 @property SWRendererInfo* info;
 @property SWRendererInfo* menuBarInfo;
-@property (nonatomic) VideoDecoder* videoDecoder;
 @property MTLViewport viewport;
+@property id<MTLCommandQueue> commandQueue;
+
+@property (nonatomic) VideoDecoder* videoDecoder;
+@property SWTextureCache* luminanceTextureCache;
+@property SWTextureCache* chrominanceTextureCache;
 
 - (instancetype)initWithWallpaper:(SWWallpaper*)wallpaper;
 + (instancetype)newWithWallpaper:(SWWallpaper*)wallpaper;

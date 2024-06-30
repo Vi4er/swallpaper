@@ -40,8 +40,6 @@ NSArray* effectLocations;
     animation.duration = 7.5;
     animation.repeatCount = HUGE_VALF;
     [self addAnimation:animation forKey:nil];
-    
-    NSLog(@"???\n");
 }
 
 - (void)setEffect:(SWGradientEffect)effect {

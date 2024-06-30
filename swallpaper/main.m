@@ -1,6 +1,5 @@
 #import <SWApplicationDelegate.h>
 #import <SWScene.h>
-#import "swallpaper-Swift.h"
 #import <scripting/types/SWElement.h>
 #import <elements/SWTextElement.h>
 #import <scripting/lua.h>
@@ -12,6 +11,8 @@ int main(int argc, const char* argv[]) {
         NSApp.activationPolicy = NSApplicationActivationPolicyAccessory;
 
         SWInitLua();
+        
+        // TODO: Make menu bar completely fluent before moving back to widgets
         
 //        SWScene* scene = [[SWScene alloc] init];
 //        scene.name = @"Test";

@@ -69,20 +69,13 @@ lua_State* L;
     [wallpaper setFps:30];
     [wallpaper start];
 
-    // THE LINE FIX, DO NOT REMOVE
-    CIFilter* filter = [CIFilter filterWithName:@"CIHueAdjust" withInputParameters:@{}];
-    wallpaper.layer.backgroundFilters = @[filter];
-
 //    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.xml"];
 //    [self monitorFile:@"/Users/user/Documents/swallpaper/swallpaper/Widget.lua"];
 
-    [SWEventHandler init];
-    [UI setup];
+//    [SWEventHandler init];
 }
 
-- (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {
-//    [UI.window deminiaturize: nil];
-    
+- (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {    
     return true;
 }
 

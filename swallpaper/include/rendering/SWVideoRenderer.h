@@ -1,14 +1,19 @@
+#pragma once
 #import <decoding/videoDecoder.h>
-#import <rendering/SWRenderer.h>
 #import <MetalKit/MetalKit.h>
+#import <rendering/SWRenderer.h>
 
-@interface SWVideoRenderer : NSObject
+@interface SWRenderer ()
 
-+ (id<MTLRenderPipelineState>)pipelineState;
-+ (id<MTLBuffer>)vertexBuffer;
+@property id<MTLTexture> luminanceTexture;
+@property id<MTLTexture> chrominanceTexture;
 
-+ (void)drawTextureWithEncoder:(id<MTLRenderCommandEncoder>)encoder luminanceTexture:(id<MTLTexture>)luminanceTexture chrominanceTexture:(id<MTLTexture>)chrominanceTexture viewport:(MTLViewport)viewport;
+@end
 
-+ (void)render:(SWRenderer*)renderer;
+@interface SWRenderer (SWVideoRenderer)
+
+- (void)decodeNextFrame;
+
+- (void)drawWithEncoder:(id<MTLRenderCommandEncoder>)encoder ;
 
 @end

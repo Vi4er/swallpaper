@@ -12,6 +12,7 @@ enum AVPixelFormat getHardwareDecoderFormat(AVCodecContext* context, const enum 
     return AV_PIX_FMT_NONE;
 }
 
+// TODO: Make it so you can reset a video decoder with a new context or just make a set_context method and remove it from the constructor
 VideoDecoder* video_decoder_new(SceneAVIOContext* context, int enableHardwareDecoding) {
     VideoDecoder* decoder = (VideoDecoder*)calloc(1, sizeof(VideoDecoder));
     decoder->sceneContext = context;

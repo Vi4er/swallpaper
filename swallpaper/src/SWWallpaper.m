@@ -3,7 +3,6 @@
 #import <SWFlippedView.h>
 #import <rendering/SWRenderer.h>
 #import <SWScene.h>
-#include "swallpaper-Swift.h"
 
 @implementation SWWallpaper
 
@@ -35,10 +34,37 @@ NSTimer* timer;
                                                  selector:@selector(screenUpdate:)
                                                      name:NSApplicationDidChangeScreenParametersNotification
                                                    object:nil];
+        
+        // TOOD: Make this do stuff
+        /*AXObserverRef observer;
+        if (AXObserverCreate(37544, accessibilityCallback, &observer) != kAXErrorSuccess) {
+            NSLog(@"???\n");
+        }
+        else {
+            AXObserverAddNotification(observer, AXUIElementCreateApplication(37544), kAXWindowCreatedNotification, NULL);
+            CFRunLoopAddSource(CFRunLoopGetMain(), AXObserverGetRunLoopSource(observer), kCFRunLoopDefaultMode);
+        }*/
     }
     
     return wallpapers;
 }
+
+/*static void accessibilityCallback(AXObserverRef observer, AXUIElementRef element, CFStringRef notificationName, void *context) {
+    // Check for window creation event
+    if (CFStringCompare(notificationName, kAXWindowCreatedNotification, 0) == kCFCompareEqualTo) {
+        NSLog(@"Window created");
+        NSRect leftMenuBarRect = [SWMenuBar getLeftMenuBarRect];
+        NSRect rightMenuBarRect = [SWMenuBar getRightMenuBarRect];
+
+        if (leftMenuBarRect.origin.x == -1) {
+            return;
+        }
+
+        for (SWWallpaper* wallpaper in [SWWallpaper wallpapers]) {
+            [wallpaper.menuBar updatePositionAndSize:&leftMenuBarRect rightRect:&rightMenuBarRect];
+        }
+    }
+}*/
 
 - (void)setScene:(NSString*)path {
     path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];

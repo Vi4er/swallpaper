@@ -34,9 +34,12 @@
         
         int layer;
         if (CFNumberGetValue(CFDictionaryGetValue(info, kCGWindowLayer), kCFNumberIntType, &layer) && layer == kCGDesktopIconWindowLevel) {
+            CFRelease(infoArray);
             return 1;
         }
     }
+    
+    CFRelease(infoArray);
     
     return 0;
 }

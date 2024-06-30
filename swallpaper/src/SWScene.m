@@ -174,7 +174,7 @@ return result;
 }
 
 - (void)export:(NSString*)path {
-    NSMutableData* data = [[NSMutableData alloc] init];
+    NSMutableData* data = [NSMutableData data];
     SWDataWriter* writer = [[SWDataWriter alloc] initWithData:data];
     
     char* header = "SWAL";

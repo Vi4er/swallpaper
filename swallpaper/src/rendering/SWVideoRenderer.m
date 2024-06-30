@@ -6,7 +6,7 @@ typedef struct {
     simd_packed_float2 texCoord;
 } VertexIn;
 
-@implementation SWVideoRenderer
+@implementation SWRenderer (SWVideoRenderer)
 
 + (id<MTLRenderPipelineState>)pipelineState {
     static id<MTLRenderPipelineState> pipelineState = nil;
@@ -67,40 +67,27 @@ typedef struct {
     return vertexBuffer;
 }
 
-+ (void)drawTextureWithEncoder:(id<MTLRenderCommandEncoder>)encoder luminanceTexture:(id<MTLTexture>)luminanceTexture chrominanceTexture:(id<MTLTexture>)chrominanceTexture viewport:(MTLViewport)viewport {
-    [encoder setViewport:viewport];
-    [encoder setRenderPipelineState:[SWVideoRenderer pipelineState]];
-    [encoder setVertexBuffer:[SWVideoRenderer vertexBuffer] offset:0 atIndex:0];
-    [encoder setFragmentTexture:luminanceTexture atIndex:0];
-    [encoder setFragmentTexture:chrominanceTexture atIndex:1];
-    [encoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
-}
+- (void)decodeNextFrame {
+    video_decoder_decode_next_frame(self.videoDecoder);
 
-+ (void)render:(SWRenderer*)renderer {
-    CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)renderer.videoDecoder->frame->data[3];
+    CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)self.videoDecoder->frame->data[3];
     IOSurfaceRef surface = CVPixelBufferGetIOSurface(pixelBuffer);
     
     if (surface == nil) {
         return;
     }
-    
-    MTLTextureDescriptor* luminanceTextureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm
-                                                                                                          width:renderer.videoDecoder->frame->width
-                                                                                                         height:renderer.videoDecoder->frame->height
-                                                                                                      mipmapped:NO];
-    luminanceTextureDescriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageRenderTarget;
-    
-    MTLTextureDescriptor* chrominanceTextureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRG8Unorm
-                                                                                                            width:renderer.videoDecoder->frame->width / 2
-                                                                                                           height:renderer.videoDecoder->frame->height / 2
-                                                                                                        mipmapped:NO];
-    chrominanceTextureDescriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageRenderTarget;
-    
-    id<MTLTexture> luminanceTexture = [[SWRenderer device] newTextureWithDescriptor:luminanceTextureDescriptor iosurface:surface plane:0];
-    id<MTLTexture> chrominanceTexture = [[SWRenderer device] newTextureWithDescriptor:chrominanceTextureDescriptor iosurface:surface plane:1];
-    
-    [self drawTextureWithEncoder:renderer.info.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.viewport];
-    [self drawTextureWithEncoder:renderer.menuBarInfo.encoder luminanceTexture:luminanceTexture chrominanceTexture:chrominanceTexture viewport:renderer.viewport];
+
+    self.luminanceTexture = [self.luminanceTextureCache get:surface];
+    self.chrominanceTexture = [self.chrominanceTextureCache get:surface];
+}
+
+- (void)drawWithEncoder:(id<MTLRenderCommandEncoder>)encoder {
+    [encoder setViewport:self.viewport];
+    [encoder setRenderPipelineState:[[self class] pipelineState]];
+    [encoder setVertexBuffer:[[self class] vertexBuffer] offset:0 atIndex:0];
+    [encoder setFragmentTexture:self.luminanceTexture atIndex:0];
+    [encoder setFragmentTexture:self.chrominanceTexture atIndex:1];
+    [encoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
 }
 
 @end
