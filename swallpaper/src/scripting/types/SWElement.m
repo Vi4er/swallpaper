@@ -34,20 +34,20 @@ static int l_addEventListener(lua_State* L) {
     return 1;
 }
 
-static int l_removeEventListener(lua_State* L) {
-    SWElement* element = lua_toSWElement(L, 1);
-    NSString* eventName = [NSString stringWithUTF8String:luaL_checkstring(L, 2)];
-    SWEventType eventType = [SWEnumParser parseSWEvent:eventName];
-    
-    if (eventType == kSWEventTypeInvalid) {
-        NSLog(@"Invalid event name '%@'\n", eventName);
-        return 0;
-    }
-    
-    [element removeEventListener:eventType ref:(int)luaL_checkinteger(L, 3)];
-    
-    return 0;
-}
+//static int l_removeEventListener(lua_State* L) {
+//    SWElement* element = lua_toSWElement(L, 1);
+//    NSString* eventName = [NSString stringWithUTF8String:luaL_checkstring(L, 2)];
+//    SWEventType eventType = [SWEnumParser parseSWEvent:eventName];
+//    
+//    if (eventType == kSWEventTypeInvalid) {
+//        NSLog(@"Invalid event name '%@'\n", eventName);
+//        return 0;
+//    }
+//    
+//    [element removeEventListener:eventType ref:(int)luaL_checkinteger(L, 3)];
+//    
+//    return 0;
+//}
 
 static int __index(lua_State* L) {
     SWElement* element = lua_toSWElement(L, 1);

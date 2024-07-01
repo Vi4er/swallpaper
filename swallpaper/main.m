@@ -15,6 +15,7 @@ int main(int argc, const char* argv[]) {
         // TODO: Make menu bar completely fluent before moving back to widgets
         // TODO: Dynamic island widget
         // TODO: Test texture cache with longer videos
+        // TODO: Fix green flash on initial frame
 //        SWScene* scene = [[SWScene alloc] init];
 //        scene.name = @"Test";
 //        scene.desc = @"Test Video";

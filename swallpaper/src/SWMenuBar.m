@@ -17,30 +17,48 @@
 
 - (void)updatePositionAndSize:(NSRect*)leftRect rightRect:(NSRect*)rightRect {
     CGFloat menuBarHeight = [self getMenuBarHeight];
-
     CGFloat capsuleHeight = menuBarHeight / 1.75;
-    CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
     CGFloat cornerRadius = capsuleHeight / 2;
-    
-    NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight)
-                                                         xRadius:cornerRadius
-                                                         yRadius:cornerRadius];
+    CGFloat centerY = (menuBarHeight - capsuleHeight) / 2;
 
-    [path appendBezierPath: [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(rightRect->origin.x, centerY, rightRect->size.width, capsuleHeight)
-                                                            xRadius:cornerRadius
-                                                            yRadius:cornerRadius]];
-
-    CAShapeLayer* maskLayer = [CAShapeLayer layer];
-    maskLayer.path = [[NSBezierPath bezierPathWithRect: NSMakeRect(0, 0, self.screen.frame.size.width, menuBarHeight)] CGPath];
+    // Reset
+    CALayer* metalLayer = self.contentView.layer.sublayers.firstObject;
+    CAShapeLayer* maskLayer = metalLayer.mask;
+    CAShapeLayer* bezierLayer;
     
-    CAShapeLayer* bezierLayer = [CAShapeLayer layer];
-    bezierLayer.path = [path CGPath];
-    bezierLayer.compositingFilter = @"xor";
-    [maskLayer addSublayer: bezierLayer];
-
-    self.contentView.layer.sublayers[0].mask = maskLayer;
-    self.contentView.layer.sublayers[0].frame = self.contentView.layer.frame;
+    CGMutablePathRef capsulePath = CGPathCreateMutable();
     
+    CGPathRef leftPath = CGPathCreateWithRoundedRect(NSMakeRect(leftRect->origin.x, centerY, leftRect->size.width, capsuleHeight), cornerRadius, cornerRadius, NULL);
+    CGPathAddPath(capsulePath, NULL, leftPath);
+    CGPathRelease(leftPath);
+    
+    CGPathRef rightPath = CGPathCreateWithRoundedRect(NSMakeRect(rightRect->origin.x, centerY, rightRect->size.width, capsuleHeight), cornerRadius, cornerRadius, NULL);
+    CGPathAddPath(capsulePath, NULL, rightPath);
+    CGPathRelease(rightPath);
+    
+    
+    if (!maskLayer) {
+        maskLayer = [CAShapeLayer layer];
+
+        bezierLayer = [CAShapeLayer layer];
+        bezierLayer.compositingFilter = @"xor";
+        [maskLayer addSublayer: bezierLayer];
+
+        metalLayer.mask = maskLayer;
+    }
+    else {
+        bezierLayer = maskLayer.sublayers.firstObject;
+    }
+    
+    metalLayer.frame = NSMakeRect(0, 0, self.screen.frame.size.width, menuBarHeight);
+    
+    CGPathRef maskPath = CGPathCreateWithRect(metalLayer.frame, NULL);
+    maskLayer.path = maskPath;
+    CGPathRelease(maskPath);
+    
+    bezierLayer.path = capsulePath;
+    CGPathRelease(capsulePath);
+
     [self setFrame: NSMakeRect(0, self.screen.frame.size.height - menuBarHeight, self.screen.frame.size.width, menuBarHeight) display:NO];
 }
 
